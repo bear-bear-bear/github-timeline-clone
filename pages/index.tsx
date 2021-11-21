@@ -1,21 +1,47 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { AUTHORIZATION_URI } from '@lib/constant';
-import { useEffect } from 'react';
+import type { GetServerSideProps, NextPage } from 'next';
+import cookie from 'cookie';
+import { LOGIN_PAGE } from '@lib/constant';
+import customAxios from '@lib/axios';
+import { useState } from 'react';
 
-const Home: NextPage = () => {
-  const router = useRouter();
+const Service: NextPage<{ userId: string }> = ({ userId }) => {
+  const [user, setUser] = useState<string>();
 
-  /* 쿼리 에러메세지 alert */
-  useEffect(() => {
-    const { error } = router.query;
-    if (error) {
-      console.error(decodeURIComponent(error.toString()));
-      router.push('/', undefined, { shallow: true });
-    }
-  });
+  const test = async () => {
+    await customAxios
+      .get('https://api.github.com/user')
+      .then(({ data }) => {
+        setUser(JSON.stringify(data, null, 2));
+      })
+      .catch((err) => console.error(err));
+  };
 
-  return <a href={AUTHORIZATION_URI}>깃허브로 로그인하기</a>;
+  return (
+    <div>
+      <p>유저 아이디: {userId}</p>
+      <button onClick={test}>API 테스트</button>
+      <pre>{user}</pre>
+    </div>
+  );
 };
 
-export default Home;
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { userId } = cookie.parse(req.headers.cookie || '');
+
+  if (!userId) {
+    return {
+      redirect: {
+        destination: LOGIN_PAGE,
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      userId,
+    },
+  };
+};
+
+export default Service;
