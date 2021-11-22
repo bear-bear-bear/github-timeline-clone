@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import type { AxiosRequestConfig, AxiosResponseHeaders } from 'axios';
-import type { AuthInfo } from '@pages/api/auth';
+import type { AuthInfo } from '@lib/session';
 
 const oauth2Axios = axios.create();
 

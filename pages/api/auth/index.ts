@@ -2,23 +2,19 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { github } from '@lib/oauth';
 import { sessionOptions } from '@lib/session';
-
-export type AuthInfo = {
-  isLoggedIn: boolean;
-  accessToken?: string;
-  error?: string;
-};
+import type { AuthInfo } from '@lib/session';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
+  const { authInfo } = req.session;
+
   if (req.method !== 'GET') {
     res.status(405).json({
       error: 'Only GET requests allowed',
-      isLoggedIn: false,
+      isLoggedIn: authInfo?.isLoggedIn || false,
     });
     return;
   }
 
-  const authInfo = req.session.authInfo;
   if (authInfo?.accessToken === undefined) {
     res.status(404).json({
       error: 'accessToken이 존재하지 않습니다',
