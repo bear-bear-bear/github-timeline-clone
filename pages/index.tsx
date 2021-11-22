@@ -1,9 +1,12 @@
-import type { GetServerSideProps, NextPage } from 'next';
-import cookie from 'cookie';
+import type { GetServerSideProps, NextPage, Redirect } from 'next';
+import { withIronSessionSsr } from 'iron-session/next';
 import customAxios from '@lib/axios';
 import { useState } from 'react';
+import { sessionOptions } from '@lib/session';
+import { github } from '@lib/oauth';
+import { AxiosError } from 'axios';
 
-const Service: NextPage<{ userId: string }> = ({ userId }) => {
+const Service: NextPage = () => {
   const [user, setUser] = useState<string>();
 
   const test = async () => {
@@ -17,30 +20,41 @@ const Service: NextPage<{ userId: string }> = ({ userId }) => {
 
   return (
     <div>
-      <p>유저 아이디: {userId}</p>
+      <h1>서비스 페이지</h1>
       <button onClick={test}>API 테스트</button>
       <pre>{user}</pre>
     </div>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { userId } = cookie.parse(req.headers.cookie || '');
+export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
+  const { authInfo } = req.session;
+  const redirect: Redirect = {
+    destination: '/login',
+    permanent: false,
+  };
 
-  if (!userId) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
+  if (authInfo?.accessToken === undefined) {
+    return { redirect };
+  }
+
+  try {
+    const isTokenValid = await github.ACCESS_TOKEN_CHECK_REQUEST(
+      authInfo.accessToken,
+    );
+    if (!isTokenValid) {
+      req.session.destroy();
+      return { redirect };
+    }
+  } catch (err) {
+    console.error(err);
+    req.session.destroy();
+    return { redirect };
   }
 
   return {
-    props: {
-      userId,
-    },
+    props: {},
   };
-};
+}, sessionOptions);
 
 export default Service;

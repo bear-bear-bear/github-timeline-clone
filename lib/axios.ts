@@ -1,12 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import type { AxiosRequestConfig, AxiosResponseHeaders } from 'axios';
+import type { AuthInfo } from '@pages/api/auth';
 
-const customAxios = axios.create();
+const oauth2Axios = axios.create();
 
 const setAccessToken = async (config: AxiosRequestConfig) => {
   try {
     const { accessToken } = await axios
-      .get('/api/auth/access-token')
+      .get<AuthInfo>('/api/auth')
       .then(({ data }) => data);
 
     const headers = config.headers as AxiosResponseHeaders;
@@ -14,18 +15,18 @@ const setAccessToken = async (config: AxiosRequestConfig) => {
 
     return config;
   } catch (err) {
-    console.error(err);
+    console.error((err as AxiosError).response?.data);
 
     const { CancelToken } = axios;
     return {
       ...config,
       cancelToken: new CancelToken((cancel) =>
-        cancel('accessToken 세팅 중 문제가 생겼습니다.'),
+        cancel('accessToken 세팅 중 문제가 생겨 axios 요청이 취소되었습니다.'),
       ),
     };
   }
 };
 
-customAxios.interceptors.request.use(setAccessToken);
+oauth2Axios.interceptors.request.use(setAccessToken);
 
-export default customAxios;
+export default oauth2Axios;

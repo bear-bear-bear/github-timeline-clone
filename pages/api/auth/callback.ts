@@ -1,14 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withIronSessionApiRoute } from 'iron-session/next';
 import type { AxiosError } from 'axios';
-import axios from 'axios';
-import { serialize } from 'cookie';
-import { github } from '@lib/constant';
-import qs from 'qs';
+import { github } from '@lib/oauth';
+import { sessionOptions } from '@lib/session';
 
-type AccessToken = string;
-export const tempSession: { [userId: string]: AccessToken } = {};
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const githubOauth2CallbackRoute = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
   const redirectWithErrorQuery = (status: number, errorMessage: string) => {
     const errorQuery = `callbackError=${encodeURIComponent(
       `${status}_${errorMessage}`,
@@ -22,47 +21,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const { access_token, error } = await axios({
-      method: 'post',
-      url: github.ACCESS_TOKEN_GET_URI,
-      data: {
-        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
-        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
-        code: req.query.code,
-      },
-    }).then(({ data }) => qs.parse(data));
+    const code = req.query.code as string;
+    const { access_token, error } = await github.ACCESS_TOKEN_GET_REQUEST(code);
 
     if (error) {
       redirectWithErrorQuery(401, error.toString());
       return;
     }
 
-    const user = await axios({
-      method: 'GET',
-      url: 'https://api.github.com/user',
-      headers: {
-        Authorization: `token ${access_token}`,
-      },
-    }).then(({ data }) => data);
+    req.session.authInfo = {
+      accessToken: access_token as string,
+      isLoggedIn: true,
+    };
+    await req.session.save();
 
-    const userId = user.id.toString();
-    tempSession[userId] = `${access_token}`;
-    console.log('userId 세팅 완료', tempSession);
-
-    res.setHeader(
-      'Set-Cookie',
-      serialize('userId', userId, {
-        httpOnly: true,
-        path: '/',
-      }),
-    );
-
-    res.redirect('/');
+    await res.redirect('/');
   } catch (err) {
     const error = err as AxiosError;
-
-    console.log(error.response?.data);
+    console.error(error);
 
     redirectWithErrorQuery(
       error.response?.status || 500,
@@ -71,4 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default handler;
+export default withIronSessionApiRoute(
+  githubOauth2CallbackRoute,
+  sessionOptions,
+);

@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { github } from '@lib/constant';
 import { useEffect } from 'react';
+import { github } from '@lib/oauth';
 
 const Home: NextPage = () => {
   const router = useRouter();
 
-  /* 쿼리 에러메세지 alert */
+  /* 쿼리 에러메세지 로깅 */
   useEffect(() => {
     const { callbackError } = router.query;
     if (callbackError) {
