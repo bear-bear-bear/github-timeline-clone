@@ -1,15 +1,18 @@
+import { useState } from 'react';
 import type { NextPage, Redirect } from 'next';
 import { withIronSessionSsr } from 'iron-session/next';
-import customAxios from '@lib/axios';
-import { useState } from 'react';
+import axios from 'axios';
+import oauth2Axios from '@lib/axios';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
+import { useRouter } from 'next/router';
 
 const Service: NextPage = () => {
+  const router = useRouter();
   const [user, setUser] = useState<string>();
 
   const test = async () => {
-    await customAxios
+    await oauth2Axios
       .get('https://api.github.com/user')
       .then(({ data }) => {
         setUser(JSON.stringify(data, null, 2));
@@ -17,10 +20,16 @@ const Service: NextPage = () => {
       .catch((err) => console.error(err));
   };
 
+  const logout = async () => {
+    await axios.get('/api/auth/sign-out');
+    router.replace('/login');
+  };
+
   return (
     <div>
       <h1>서비스 페이지</h1>
       <button onClick={test}>API 테스트</button>
+      <button onClick={logout}>로그아웃</button>
       <pre>{user}</pre>
     </div>
   );
