@@ -1,6 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import cookie from 'cookie';
-import { LOGIN_PAGE } from '@lib/constant';
 import customAxios from '@lib/axios';
 import { useState } from 'react';
 
@@ -31,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   if (!userId) {
     return {
       redirect: {
-        destination: LOGIN_PAGE,
+        destination: '/login',
         permanent: false,
       },
     };

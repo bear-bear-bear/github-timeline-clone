@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { AxiosError } from 'axios';
 import axios from 'axios';
 import { serialize } from 'cookie';
-import { ACCESS_TOKEN_URI, LOGIN_PAGE, SERVICE_PAGE } from '@lib/constant';
+import { github } from '@lib/constant';
 import qs from 'qs';
 
 type AccessToken = string;
@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const errorQuery = `callbackError=${encodeURIComponent(
       `${status}_${errorMessage}`,
     )}`;
-    res.redirect(`${LOGIN_PAGE}?${errorQuery}`);
+    res.redirect(`/login?${errorQuery}`);
   };
 
   if (req.method !== 'GET') {
@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { access_token, error } = await axios({
       method: 'post',
-      url: ACCESS_TOKEN_URI,
+      url: github.ACCESS_TOKEN_GET_URI,
       data: {
         client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET,
@@ -58,7 +58,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }),
     );
 
-    res.redirect(SERVICE_PAGE);
+    res.redirect('/');
   } catch (err) {
     const error = err as AxiosError;
 

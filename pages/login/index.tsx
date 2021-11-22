@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AUTHORIZATION_URI } from '@lib/constant';
+import { github } from '@lib/constant';
 import { useEffect } from 'react';
 
 const Home: NextPage = () => {
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     }
   });
 
-  return <a href={AUTHORIZATION_URI}>깃허브로 로그인하기</a>;
+  return <a href={github.AUTHORIZATION_URI}>깃허브로 로그인하기</a>;
 };
 
 export default Home;
