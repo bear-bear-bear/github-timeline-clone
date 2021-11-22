@@ -13,6 +13,7 @@
     "sourceType": "module"
   },
   "plugins": [
+    "@emotion",
     "@typescript-eslint"
   ],
   "extends": [
@@ -20,5 +21,13 @@
     "plugin:@typescript-eslint/recommended",
     "next",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }

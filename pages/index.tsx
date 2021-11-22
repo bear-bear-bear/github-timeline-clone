@@ -1,10 +1,9 @@
-import type { GetServerSideProps, NextPage, Redirect } from 'next';
+import type { NextPage, Redirect } from 'next';
 import { withIronSessionSsr } from 'iron-session/next';
 import customAxios from '@lib/axios';
 import { useState } from 'react';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
-import { AxiosError } from 'axios';
 
 const Service: NextPage = () => {
   const [user, setUser] = useState<string>();
