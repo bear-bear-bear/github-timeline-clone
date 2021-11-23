@@ -1,12 +1,23 @@
 import { Theme, ThemeProvider as BaseThemeProvider } from '@emotion/react';
 
 export const theme: Theme = {
-  palette: {
-    headerBgColor: '#161B22',
-    headerFontColor: '#F0F6FC',
-    mainBgColor: '#010409',
-    mainFontColor: '#C9D1D9',
-    mainFontSubColor: '#8B9492',
+  color: {
+    // common
+    textColor: '#C9D1D9',
+    subTextColor: '#8B9492',
+    linkColor: '#58A6FF',
+
+    // page 'login'
+    loginBgColor: '#0D1117',
+    loginMainBgColor: '#161B22',
+    loginBorderColor: '#30363d',
+    loginButtonColor: '#2EA043',
+
+    // page '/service'
+    serviceHeaderBgColor: '#161B22',
+    serviceHeaderInputColor: '#F0F6FC',
+    serviceMainBgColor: '#010409',
+    serviceMainBorderColor: '#21262d',
   },
 };
 
