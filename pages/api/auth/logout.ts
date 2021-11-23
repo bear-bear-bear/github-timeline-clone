@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { AuthInfo, sessionOptions } from '@lib/session';
 import { withIronSessionApiRoute } from 'iron-session/next';
 
-const handler = (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
+const logoutRouter = (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
   const { authInfo } = req.session;
 
   if (req.method !== 'GET') {
@@ -19,4 +19,4 @@ const handler = (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
   });
 };
 
-export default withIronSessionApiRoute(handler, sessionOptions);
+export default withIronSessionApiRoute(logoutRouter, sessionOptions);

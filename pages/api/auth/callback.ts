@@ -4,7 +4,7 @@ import type { AxiosError } from 'axios';
 import { github } from '@lib/oauth';
 import { sessionOptions } from '@lib/session';
 
-const githubOauth2CallbackRoute = async (
+const oauth2CallbackRouter = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
@@ -47,7 +47,4 @@ const githubOauth2CallbackRoute = async (
   }
 };
 
-export default withIronSessionApiRoute(
-  githubOauth2CallbackRoute,
-  sessionOptions,
-);
+export default withIronSessionApiRoute(oauth2CallbackRouter, sessionOptions);

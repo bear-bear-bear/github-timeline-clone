@@ -4,7 +4,10 @@ import { github } from '@lib/oauth';
 import { sessionOptions } from '@lib/session';
 import type { AuthInfo } from '@lib/session';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
+const authorizeRouter = async (
+  req: NextApiRequest,
+  res: NextApiResponse<AuthInfo>,
+) => {
   const { authInfo } = req.session;
 
   if (req.method !== 'GET') {
@@ -51,4 +54,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<AuthInfo>) => {
   });
 };
 
-export default withIronSessionApiRoute(handler, sessionOptions);
+export default withIronSessionApiRoute(authorizeRouter, sessionOptions);

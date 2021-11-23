@@ -21,7 +21,7 @@ const Service: NextPage = () => {
   };
 
   const logout = async () => {
-    await axios.get('/api/auth/sign-out');
+    await axios.get('/api/auth/logout');
     router.replace('/login');
   };
 
