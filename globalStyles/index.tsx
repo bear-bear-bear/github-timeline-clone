@@ -1,7 +1,6 @@
 import { Global, css } from '@emotion/react';
 
 import Resets from './_Resets';
-import FontFace from './_FontFace';
 import media from './media';
 
 export const globalCSS = css`
@@ -46,15 +45,14 @@ export const globalCSS = css`
   }
 
   body {
-    font-family: 'Noto Sans KR', 'Roboto', 'HelveticaNeue', 'Helvetica Neue',
-      sans-serif;
+    font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica',
+      'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 `;
 
 const GlobalStyles = () => (
   <>
     <Global styles={Resets} />
-    <Global styles={FontFace} />
     <Global styles={globalCSS} />
   </>
 );
