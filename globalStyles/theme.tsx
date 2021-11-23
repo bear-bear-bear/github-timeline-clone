@@ -6,12 +6,13 @@ export const theme: Theme = {
     textColor: '#C9D1D9',
     subTextColor: '#8B9492',
     linkColor: '#58A6FF',
+    buttonBgColor: '#238636',
+    buttonTextColor: '#FFFFFF',
 
     // page 'login'
     loginBgColor: '#0D1117',
     loginMainBgColor: '#161B22',
     loginBorderColor: '#30363d',
-    loginButtonColor: '#2EA043',
 
     // page '/service'
     serviceHeaderBgColor: '#161B22',

@@ -7,12 +7,13 @@ declare module '@emotion/react' {
       textColor: string;
       subTextColor: string;
       linkColor: string;
+      buttonBgColor: string;
+      buttonTextColor: string;
 
       // page 'login'
       loginBgColor: string;
       loginMainBgColor: string;
       loginBorderColor: string;
-      loginButtonColor: string;
 
       // page '/service'
       serviceHeaderBgColor: string;
