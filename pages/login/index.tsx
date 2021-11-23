@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { github } from '@lib/oauth';
+import Layout from '@components/login/Layout';
+import GithubOauthLink from '@components/login/GithubOauthLink';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -16,7 +17,11 @@ const Home: NextPage = () => {
     }
   });
 
-  return <a href={github.AUTHORIZATION_URI}>깃허브로 로그인하기</a>;
+  return (
+    <Layout>
+      <GithubOauthLink />
+    </Layout>
+  );
 };
 
 export default Home;
