@@ -19,9 +19,10 @@ export const Container = styled.section`
 `;
 
 export const Header = styled.header`
-  text-align: center;
+  text-align: center; // for GitHubIcon
 
   h1 {
+    text-align: center;
     color: ${({ theme }) => theme.color.textColor};
     text-transform: capitalize;
     margin-top: 0.33rem;
