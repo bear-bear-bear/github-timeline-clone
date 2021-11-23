@@ -24,9 +24,8 @@ export const globalCSS = css`
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
-    ${media.xs} {
-      font-size: 14.5px;
-    }
+    font-size: 14.5px;
+
     ${media.sm} {
       font-size: 15px;
     }
@@ -35,12 +34,6 @@ export const globalCSS = css`
     }
     ${media.lg} {
       font-size: 15.5px;
-    }
-    ${media.xl} {
-      font-size: 16px;
-    }
-    ${media.xxl} {
-      font-size: 16px;
     }
   }
 
