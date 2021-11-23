@@ -2,18 +2,27 @@ import type { NextPage, Redirect } from 'next';
 import { withIronSessionSsr } from 'iron-session/next';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
+import Container from '@components/service/Container';
+import MainLayout from '@components/service/Main/Layout';
+import Header from '@components/service/Header';
+import Dashboard from '@components/service/Main/Dashboard';
+import Activity from '@components/service/Main/Activity';
+import Aside from '@components/service/Main/Aside';
+import Footer from '@components/service/Main/Footer';
 
 const Service: NextPage = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <h1>서비스 페이지</h1>
-    </div>
+    <Container>
+      <Header />
+      <MainLayout>
+        <Dashboard />
+        <MainLayout.CenterSection>
+          <Activity />
+          <Footer />
+        </MainLayout.CenterSection>
+        <Aside />
+      </MainLayout>
+    </Container>
   );
 };
 
