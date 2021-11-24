@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Layout from '@components/login/Layout';
 import GithubOauthLink from '@components/login/GithubOauthLink';
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   const router = useRouter();
 
   /* 쿼리 에러메세지 로깅 */
@@ -24,4 +24,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Login;
