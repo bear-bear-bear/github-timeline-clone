@@ -15,7 +15,11 @@ const SearchInput = () => {
   const handleSearch = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     const searchWord = e.target.value;
     setSearchWord(searchWord);
-    if (!searchWord) return;
+
+    if (!searchWord) {
+      setSearchResultItems([]);
+      return;
+    }
 
     try {
       const items = await github.SEARCH_REPOSITORY_REQUEST(
@@ -49,7 +53,7 @@ const SearchInput = () => {
         />
         {!isInputFocus && <Icon.KeySlash />}
       </S.Label>
-      {isInputFocus && (
+      {isInputFocus && searchWord && (
         <SearchResultList items={searchResultItems} searchWord={searchWord} />
       )}
     </S.Container>

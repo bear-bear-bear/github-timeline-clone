@@ -8,7 +8,7 @@ type SearchInfo = {
 
 const TopItem = ({ searchWord }: SearchInfo) => {
   return (
-    <S.SearchResultItem>
+    <S.Item>
       <S.LinkWrapper
         href={`https://github.com/search?q=${encodeURIComponent(searchWord)}`}
         rel="noopener noreferrer"
@@ -16,28 +16,26 @@ const TopItem = ({ searchWord }: SearchInfo) => {
         <S.IconWrapper>
           <Icon.Search />
         </S.IconWrapper>
-        <S.Content>{searchWord}</S.Content>
-        <S.TooltipWrapper>
-          <S.Tooltip>All Github</S.Tooltip>
-        </S.TooltipWrapper>
+        <S.Name className="repository-item__name">{searchWord}</S.Name>
+        <S.Tooltip className="repository-item__tooltip" alwaysOn>
+          All Github
+        </S.Tooltip>
       </S.LinkWrapper>
-    </S.SearchResultItem>
+    </S.Item>
   );
 };
 
 const RepositoryItem = ({ item }: { item: RepositoryInfo }) => {
   return (
-    <S.SearchResultItem>
+    <S.Item>
       <S.LinkWrapper href={item.html_url} rel="noopener noreferrer">
         <S.IconWrapper>
           <Icon.Repository />
         </S.IconWrapper>
-        <S.Content>{item.full_name}</S.Content>
-        <S.TooltipWrapper>
-          <S.Tooltip>Jump to</S.Tooltip>
-        </S.TooltipWrapper>
+        <S.Name className="repository-item__name">{item.full_name}</S.Name>
+        <S.Tooltip className="repository-item__tooltip">Jump to</S.Tooltip>
       </S.LinkWrapper>
-    </S.SearchResultItem>
+    </S.Item>
   );
 };
 

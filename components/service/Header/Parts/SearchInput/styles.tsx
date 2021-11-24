@@ -23,9 +23,10 @@ export const Input = styled.input`
   transition: width 0.2s ease-in-out;
 
   &:focus {
-    width: 25rem;
+    width: 33.875rem;
     border: 1px solid
       ${({ theme }) => theme.color.serviceHeaderInputFocusedBorderColor};
+    border-bottom: none;
   }
 
   &::placeholder {
