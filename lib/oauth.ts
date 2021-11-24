@@ -1,6 +1,17 @@
 import qs from 'qs';
 import axios from 'axios';
 
+type ParsedAccessTokenGetResponse =
+  | {
+      access_token: string;
+      token_type: string;
+    }
+  | {
+      error: string;
+      error_type: string;
+      error_description: string;
+    };
+
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const NEXT_PUBLIC_CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 const NEXT_PUBLIC_REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
@@ -24,7 +35,9 @@ export const github = {
         code,
       },
       withCredentials: true,
-    }).then(({ data }) => qs.parse(data));
+    }).then(({ data }) => {
+      return qs.parse(data) as ParsedAccessTokenGetResponse;
+    });
   },
 
   ACCESS_TOKEN_CHECK_REQUEST(accessToken: string) {

@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import type { AxiosError } from 'axios';
+import qs from 'qs';
 import { github } from '@lib/oauth';
 import { sessionOptions } from '@lib/session';
 
@@ -22,15 +23,15 @@ const oauth2CallbackRouter = async (
 
   try {
     const code = req.query.code as string;
-    const { access_token, error } = await github.ACCESS_TOKEN_GET_REQUEST(code);
+    const response = await github.ACCESS_TOKEN_GET_REQUEST(code);
 
-    if (error) {
-      redirectWithErrorQuery(401, error.toString());
+    if ('error' in response) {
+      redirectWithErrorQuery(401, qs.stringify(response).toString());
       return;
     }
 
     req.session.authInfo = {
-      accessToken: access_token as string,
+      accessToken: response.access_token,
       isLoggedIn: true,
     };
     await req.session.save();
