@@ -2,11 +2,12 @@ import * as S from './styles';
 import type { SVGAttributes } from 'react';
 
 export type Props = {
-  size?: SVGAttributes<HTMLOrSVGElement>['fontSize'];
+  color: SVGAttributes<HTMLOrSVGElement>['color'];
+  size: SVGAttributes<HTMLOrSVGElement>['fontSize'];
 };
 
-const GithubIcon = ({ size }: Props) => {
-  return <S.GithubIcon size={size} />;
+const GithubIcon = ({ color, size }: Props) => {
+  return <S.GithubIcon color={color} size={size} />;
 };
 
 export default GithubIcon;

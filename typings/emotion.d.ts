@@ -17,7 +17,11 @@ declare module '@emotion/react' {
 
       // page '/service'
       serviceHeaderBgColor: string;
-      serviceHeaderInputColor: string;
+      serviceHeaderTextColor: string;
+      serviceHeaderInputBorderColor: string;
+      serviceHeaderInputPlaceholderColor: string;
+      serviceHeaderInputFocusedBorderColor: string;
+      serviceHeaderInputIconColor: string;
       serviceMainBgColor: string;
       serviceMainBorderColor: string;
     };

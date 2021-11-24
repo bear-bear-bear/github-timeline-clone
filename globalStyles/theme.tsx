@@ -16,7 +16,11 @@ export const theme: Theme = {
 
     // page '/service'
     serviceHeaderBgColor: '#161B22',
-    serviceHeaderInputColor: '#F0F6FC',
+    serviceHeaderTextColor: '#F0F6FC',
+    serviceHeaderInputBorderColor: '#30363D',
+    serviceHeaderInputPlaceholderColor: '#C2C3BA',
+    serviceHeaderInputFocusedBorderColor: '#1f6feb',
+    serviceHeaderInputIconColor: '#979A9C',
     serviceMainBgColor: '#010409',
     serviceMainBorderColor: '#21262d',
   },
