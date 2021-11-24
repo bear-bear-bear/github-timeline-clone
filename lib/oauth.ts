@@ -1,7 +1,8 @@
 import qs from 'qs';
 import axios from 'axios';
+import oauth2Axios from '@lib/axios';
 
-type ParsedAccessTokenGetResponse =
+export type ParsedAccessTokenGetResponse =
   | {
       access_token: string;
       token_type: string;
@@ -11,6 +12,12 @@ type ParsedAccessTokenGetResponse =
       error_type: string;
       error_description: string;
     };
+
+export type RepositoryInfo = {
+  full_name: string;
+  html_url: string;
+};
+export type SearchRepositoryResponse = RepositoryInfo[];
 
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const NEXT_PUBLIC_CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -51,5 +58,14 @@ export const github = {
       // 인증이 유효할 때만 존재하는 헤더
       return res.headers['x-accepted-oauth-scopes'] !== undefined;
     });
+  },
+
+  SEARCH_REPOSITORY_REQUEST(searchWord: string, username: string) {
+    const queryString =
+      'q=' + encodeURIComponent(`${searchWord} in:name user:${username}`);
+    return oauth2Axios({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?${queryString}`,
+    }).then(({ data }) => data.items as SearchRepositoryResponse);
   },
 };
