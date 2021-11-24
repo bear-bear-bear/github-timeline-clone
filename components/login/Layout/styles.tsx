@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { AiFillGithub } from 'react-icons/ai';
 
 export const Layout = styled.section`
   width: 100%;
@@ -27,11 +26,6 @@ export const Header = styled.header`
     text-transform: capitalize;
     margin-top: 0.33rem;
   }
-`;
-
-export const GitHubIcon = styled(AiFillGithub)`
-  color: ${({ theme }) => theme.color.textColor};
-  font-size: 3.5rem;
 `;
 
 export const LoginBox = styled.main`
