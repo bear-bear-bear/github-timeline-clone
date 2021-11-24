@@ -4,7 +4,9 @@ import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
 import Container from '@components/service/Container';
 import MainLayout from '@components/service/Main/Layout';
-import Header from '@components/service/Header';
+import HeaderWrapper from '@components/service/Header/Wrapper';
+import DesktopHeader from '@components/service/Header/Desktop';
+import MobileHeader from '@components/service/Header/Mobile';
 import Dashboard from '@components/service/Main/Dashboard';
 import Activity from '@components/service/Main/Activity';
 import Aside from '@components/service/Main/Aside';
@@ -13,7 +15,10 @@ import Footer from '@components/service/Main/Footer';
 const Service: NextPage = () => {
   return (
     <Container>
-      <Header />
+      <HeaderWrapper>
+        <DesktopHeader />
+        <MobileHeader />
+      </HeaderWrapper>
       <MainLayout>
         <Dashboard />
         <MainLayout.CenterSection>
