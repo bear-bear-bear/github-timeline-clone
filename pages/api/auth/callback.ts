@@ -5,19 +5,25 @@ import qs from 'qs';
 import { github } from '@lib/oauth';
 import { sessionOptions } from '@lib/session';
 
+export const ERROR_MESSAGE = 'errorMessage';
+type ErrorInfo = {
+  [ERROR_MESSAGE]: string;
+  status: number | string;
+};
+
 const oauth2CallbackRouter = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
-  const redirectWithErrorQuery = (status: number, errorMessage: string) => {
-    const errorQuery = `callbackError=${encodeURIComponent(
-      `${status}_${errorMessage}`,
-    )}`;
-    res.redirect(`/login?${errorQuery}`);
+  const redirectWithErrorQuery = (errorInfo: ErrorInfo) => {
+    res.redirect(`/login?${qs.stringify(errorInfo)}`);
   };
 
   if (req.method !== 'GET') {
-    redirectWithErrorQuery(405, 'Only GET requests allowed');
+    redirectWithErrorQuery({
+      status: 405,
+      errorMessage: 'Only GET requests allowed',
+    });
     return;
   }
 
@@ -26,7 +32,10 @@ const oauth2CallbackRouter = async (
     const response = await github.ACCESS_TOKEN_GET_REQUEST(code);
 
     if ('error' in response) {
-      redirectWithErrorQuery(401, qs.stringify(response).toString());
+      redirectWithErrorQuery({
+        status: 401,
+        errorMessage: qs.stringify(response),
+      });
       return;
     }
 
@@ -36,15 +45,15 @@ const oauth2CallbackRouter = async (
     };
     await req.session.save();
 
-    await res.redirect('/');
+    res.redirect('/');
   } catch (err) {
     const error = err as AxiosError;
     console.error(error);
 
-    redirectWithErrorQuery(
-      error.response?.status || 500,
-      'access token 요청 중 에러가 발생했습니다.',
-    );
+    redirectWithErrorQuery({
+      status: error.response?.status || 500,
+      errorMessage: 'access token 요청 중 에러가 발생했습니다',
+    });
   }
 };
 
