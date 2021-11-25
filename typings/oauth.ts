@@ -1,5 +1,7 @@
-// import type { Endpoints } from '@octokit/types';
+import type { Endpoints } from '@octokit/types';
 import { components } from '@octokit/openapi-types';
+
+export type FetchState = 'init' | 'loading' | 'done' | 'error';
 
 export type ParsedGetAccessTokenResponseQuery =
   | {
@@ -12,8 +14,7 @@ export type ParsedGetAccessTokenResponseQuery =
       error_description: string;
     };
 
-export type RepositoryInfo = components['schemas']['repo-search-result-item'];
-export type RepositoryInfos =
-  components['schemas']['repo-search-result-item'][];
+export type RepositoryInfo = components['schemas']['minimal-repository'];
+export type RepositoryInfos = RepositoryInfo[];
 
 export type User = components['schemas']['private-user'];
