@@ -15,13 +15,21 @@ export interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   text: string;
   icon?: IconType | EmotionStyledIconType;
   fullWidth?: boolean;
+  loading?: boolean;
 }
 
-const ButtonLink: FC<Props> = ({ text, icon, fullWidth = false, ...rest }) => {
+const ButtonLink: FC<Props> = ({
+  text,
+  icon,
+  loading = false,
+  fullWidth = false,
+  ...rest
+}) => {
   return (
     <S.ButtonLink fullWidth={fullWidth} {...rest}>
       {icon}
       {text}
+      {loading && <S.Loading />}
     </S.ButtonLink>
   );
 };
