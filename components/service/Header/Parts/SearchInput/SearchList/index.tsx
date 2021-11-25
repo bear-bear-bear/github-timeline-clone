@@ -1,5 +1,5 @@
 import SearchItem from '../SearchItem';
-import { RepositoryInfo } from '@lib/oauth';
+import { RepositoryInfo } from '@typings/oauth';
 import * as S from './styles';
 
 type Props = {

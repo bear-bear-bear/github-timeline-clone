@@ -1,4 +1,4 @@
-import type { RepositoryInfo } from '@lib/oauth';
+import type { RepositoryInfo } from '@typings/oauth';
 import Icon from '../Icon';
 import * as S from './styles';
 

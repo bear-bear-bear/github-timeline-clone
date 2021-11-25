@@ -3,7 +3,7 @@ import Icon from './Icon';
 import SearchResultList from './SearchList';
 import * as S from './styles';
 import { github } from '@lib/oauth';
-import type { RepositoryInfo } from '@lib/oauth';
+import type { RepositoryInfo } from '@typings/oauth';
 
 const SearchInput = () => {
   const [searchResultItems, setSearchResultItems] = useState<RepositoryInfo[]>(
@@ -53,6 +53,7 @@ const SearchInput = () => {
         />
         {!isInputFocus && <Icon.KeySlash />}
       </S.Label>
+      {/*<SearchResultList items={searchResultItems} searchWord={searchWord} />*/}
       {isInputFocus && searchWord && (
         <SearchResultList items={searchResultItems} searchWord={searchWord} />
       )}
