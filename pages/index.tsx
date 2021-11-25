@@ -6,7 +6,6 @@ import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
 import Container from '@components/service/Container';
 import MainLayout from '@components/service/Main/Layout';
-import HeaderWrapper from '@components/service/Header/Wrapper';
 import DesktopHeader from '@components/service/Header/Desktop';
 import MobileHeader from '@components/service/Header/Mobile';
 import Dashboard from '@components/service/Main/Dashboard';
@@ -21,10 +20,10 @@ const Service = observer<{ user: User }>(({ user }) => {
   return (
     <UserContext.Provider value={user}>
       <Container>
-        <HeaderWrapper>
-          <DesktopHeader />
+        <>
           <MobileHeader />
-        </HeaderWrapper>
+          <DesktopHeader />
+        </>
         <MainLayout.Container>
           <Dashboard />
           <MainLayout.CenterSection>
