@@ -11,8 +11,10 @@ import Dashboard from '@components/service/Main/Dashboard';
 import Activity from '@components/service/Main/Activity';
 import Aside from '@components/service/Main/Aside';
 import Footer from '@components/service/Main/Footer';
+import type { User } from '@typings/oauth';
 
-const Service: NextPage = () => {
+const Service: NextPage<{ user: User }> = ({ user }) => {
+  console.log(user);
   return (
     <Container>
       <HeaderWrapper>
@@ -43,22 +45,16 @@ export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
   }
 
   try {
-    const isTokenValid = await github.ACCESS_TOKEN_CHECK_REQUEST(
-      authInfo.accessToken,
-    );
-    if (!isTokenValid) {
-      req.session.destroy();
-      return { redirect };
-    }
+    const user = await github.USER_GET_REQUEST(authInfo.accessToken);
+
+    return {
+      props: { user },
+    };
   } catch (err) {
     console.error(err);
     req.session.destroy();
     return { redirect };
   }
-
-  return {
-    props: {},
-  };
 }, sessionOptions);
 
 export default Service;
