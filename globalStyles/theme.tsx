@@ -1,6 +1,6 @@
 import { Theme, ThemeProvider as BaseThemeProvider } from '@emotion/react';
 
-export const theme: Theme = {
+const theme: Theme = {
   color: {
     // common
     textColor: '#C9D1D9',
