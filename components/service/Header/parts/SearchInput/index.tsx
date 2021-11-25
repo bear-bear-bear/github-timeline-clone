@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
 import Icon from './Icon';
-import SearchResult from './SearchList';
+import SearchResultList from './SearchResultList';
 import * as S from './styles';
 
 const SearchInput = observer(() => {
@@ -43,7 +43,7 @@ const SearchInput = observer(() => {
         />
         {!isInputFocus && <Icon.KeySlash />}
       </S.Label>
-      {isInputFocus && <SearchResult searchWord={searchWord} />}
+      {isInputFocus && <SearchResultList searchWord={searchWord} />}
     </S.Container>
   );
 });

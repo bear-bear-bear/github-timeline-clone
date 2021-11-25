@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
-import SearchItem from '../SearchItem';
+import SearchResultItem from '../SearchResultItem';
 import * as S from './styles';
 
 type Props = {
@@ -14,13 +14,13 @@ const SearchResultItems = observer(({ searchWord }: Props) => {
     <>
       {!searchWord &&
         myRepository.recentRepos.map((repo) => (
-          <SearchItem.RepositoryItem item={repo} key={repo.html_url} />
+          <SearchResultItem.Repository item={repo} key={repo.html_url} />
         ))}
       {searchWord && (
         <>
-          <SearchItem.TopItem searchWord={searchWord} />
+          <SearchResultItem.Top searchWord={searchWord} />
           {myRepository.findRepos(searchWord).map((repo) => (
-            <SearchItem.RepositoryItem item={repo} key={repo.html_url} />
+            <SearchResultItem.Repository item={repo} key={repo.html_url} />
           ))}
         </>
       )}
@@ -28,7 +28,7 @@ const SearchResultItems = observer(({ searchWord }: Props) => {
   );
 });
 
-const SearchResult = observer((props: Props) => {
+const SearchResultList = observer((props: Props) => {
   const { myRepository } = useStore();
 
   return (
@@ -39,4 +39,4 @@ const SearchResult = observer((props: Props) => {
   );
 });
 
-export default SearchResult;
+export default SearchResultList;

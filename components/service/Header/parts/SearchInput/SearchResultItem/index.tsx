@@ -40,9 +40,9 @@ const RepositoryItem = observer(({ item }: { item: RepositoryInfo }) => {
   );
 });
 
-const SearchItem = {
-  TopItem,
-  RepositoryItem,
+const SearchResultItem = {
+  Top: TopItem,
+  Repository: RepositoryItem,
 };
 
-export default SearchItem;
+export default SearchResultItem;
