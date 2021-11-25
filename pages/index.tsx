@@ -1,4 +1,6 @@
-import type { NextPage, Redirect } from 'next';
+import type { Redirect } from 'next';
+import { createContext } from 'react';
+import { observer } from 'mobx-react-lite';
 import { withIronSessionSsr } from 'iron-session/next';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
@@ -13,25 +15,28 @@ import Aside from '@components/service/Main/Aside';
 import Footer from '@components/service/Main/Footer';
 import type { User } from '@typings/oauth';
 
-const Service: NextPage<{ user: User }> = ({ user }) => {
-  console.log(user);
+export const UserContext = createContext<User>({} as User);
+
+const Service = observer<{ user: User }>(({ user }) => {
   return (
-    <Container>
-      <HeaderWrapper>
-        <DesktopHeader />
-        <MobileHeader />
-      </HeaderWrapper>
-      <MainLayout>
-        <Dashboard />
-        <MainLayout.CenterSection>
-          <Activity />
-          <Footer />
-        </MainLayout.CenterSection>
-        <Aside />
-      </MainLayout>
-    </Container>
+    <UserContext.Provider value={user}>
+      <Container>
+        <HeaderWrapper>
+          <DesktopHeader />
+          <MobileHeader />
+        </HeaderWrapper>
+        <MainLayout>
+          <Dashboard />
+          <MainLayout.CenterSection>
+            <Activity />
+            <Footer />
+          </MainLayout.CenterSection>
+          <Aside />
+        </MainLayout>
+      </Container>
+    </UserContext.Provider>
   );
-};
+});
 
 export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
   const { authInfo } = req.session;
@@ -53,6 +58,7 @@ export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
   } catch (err) {
     console.error(err);
     req.session.destroy();
+
     return { redirect };
   }
 }, sessionOptions);
