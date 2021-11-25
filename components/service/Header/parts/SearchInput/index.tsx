@@ -12,8 +12,6 @@ const SearchInput = observer(() => {
   const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
 
-  // TODO: 검색 디바운싱 적용
-
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchWord(e.target.value);
   }, []);
