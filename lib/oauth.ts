@@ -1,11 +1,7 @@
 import qs from 'qs';
 import axios from 'axios';
 import oauth2Axios from '@lib/axios';
-import type {
-  ParsedGetAccessTokenResponseQuery,
-  RepositoryInfo,
-  User,
-} from '@typings/oauth';
+import type { ParsedGetAccessTokenResponseQuery, User } from '@typings/oauth';
 
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const NEXT_PUBLIC_CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
@@ -56,14 +52,5 @@ export const github = {
         Authorization: `token ${accessToken}`,
       },
     }).then((res) => res.data as User);
-  },
-
-  SEARCH_REPOSITORY_REQUEST(searchWord: string, username: string) {
-    const queryString =
-      'q=' + encodeURIComponent(`${searchWord} in:name user:${username}`);
-    return oauth2Axios({
-      method: 'GET',
-      url: `https://api.github.com/search/repositories?${queryString}`,
-    }).then(({ data }) => data.items as RepositoryInfo[]);
   },
 };
