@@ -1,5 +1,6 @@
+import { observer } from 'mobx-react-lite';
+import type { RepositoryInfo } from '@typings/oauth';
 import SearchItem from '../SearchItem';
-import { RepositoryInfo } from '@typings/oauth';
 import * as S from './styles';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   searchWord: string;
 };
 
-const SearchList = ({ items, searchWord }: Props) => {
+const SearchList = observer(({ items, searchWord }: Props) => {
   return (
     <S.SearchList>
       {searchWord && <SearchItem.TopItem searchWord={searchWord} />}
@@ -16,6 +17,6 @@ const SearchList = ({ items, searchWord }: Props) => {
       ))}
     </S.SearchList>
   );
-};
+});
 
 export default SearchList;

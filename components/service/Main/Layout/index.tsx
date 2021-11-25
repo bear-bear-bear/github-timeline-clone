@@ -1,14 +1,17 @@
+import { observer } from 'mobx-react-lite';
 import * as S from './styles';
-import type { ReactNode } from 'react';
 
-type Props = {
-  children?: ReactNode;
-};
+const CenterSection = observer(({ children }) => {
+  return <S.CenterSection>{children}</S.CenterSection>;
+});
 
-const Layout = ({ children }: Props) => {
+const Container = observer(({ children }) => {
   return <S.Layout>{children}</S.Layout>;
-};
+});
 
-Layout.CenterSection = S.CenterSection;
+const Layout = {
+  CenterSection,
+  Container,
+};
 
 export default Layout;

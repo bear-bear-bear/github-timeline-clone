@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, FC } from 'react';
 import type { IconBaseProps, IconType } from 'react-icons';
+import { observer } from 'mobx-react-lite';
 import type { StyledComponent } from '@emotion/styled';
 import { Theme } from '@emotion/react';
 import * as S from './styles';
@@ -18,20 +19,14 @@ export interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   loading?: boolean;
 }
 
-const ButtonLink: FC<Props> = ({
-  text,
-  icon,
-  loading = false,
-  fullWidth = false,
-  ...rest
-}) => {
-  return (
+const ButtonLink = observer<Props>(
+  ({ text, icon, loading = false, fullWidth = false, ...rest }) => (
     <S.ButtonLink fullWidth={fullWidth} {...rest}>
       {icon}
       {text}
       {loading && <S.Loading />}
     </S.ButtonLink>
-  );
-};
+  ),
+);
 
 export default ButtonLink;

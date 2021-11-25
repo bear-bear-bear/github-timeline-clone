@@ -1,11 +1,12 @@
 import { ChangeEvent, useCallback, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { github } from '@lib/oauth';
+import type { RepositoryInfo } from '@typings/oauth';
 import Icon from './Icon';
 import SearchResultList from './SearchList';
 import * as S from './styles';
-import { github } from '@lib/oauth';
-import type { RepositoryInfo } from '@typings/oauth';
 
-const SearchInput = () => {
+const SearchInput = observer(() => {
   const [searchResultItems, setSearchResultItems] = useState<RepositoryInfo[]>(
     [],
   );
@@ -59,6 +60,6 @@ const SearchInput = () => {
       )}
     </S.Container>
   );
-};
+});
 
 export default SearchInput;

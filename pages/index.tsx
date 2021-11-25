@@ -25,14 +25,14 @@ const Service = observer<{ user: User }>(({ user }) => {
           <DesktopHeader />
           <MobileHeader />
         </HeaderWrapper>
-        <MainLayout>
+        <MainLayout.Container>
           <Dashboard />
           <MainLayout.CenterSection>
             <Activity />
             <Footer />
           </MainLayout.CenterSection>
           <Aside />
-        </MainLayout>
+        </MainLayout.Container>
       </Container>
     </UserContext.Provider>
   );

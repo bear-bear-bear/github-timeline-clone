@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import type { RepositoryInfo } from '@typings/oauth';
 import Icon from '../Icon';
 import * as S from './styles';
@@ -6,7 +7,7 @@ type SearchInfo = {
   searchWord: string;
 };
 
-const TopItem = ({ searchWord }: SearchInfo) => {
+const TopItem = observer(({ searchWord }: SearchInfo) => {
   return (
     <S.Item>
       <S.LinkWrapper
@@ -23,9 +24,9 @@ const TopItem = ({ searchWord }: SearchInfo) => {
       </S.LinkWrapper>
     </S.Item>
   );
-};
+});
 
-const RepositoryItem = ({ item }: { item: RepositoryInfo }) => {
+const RepositoryItem = observer(({ item }: { item: RepositoryInfo }) => {
   return (
     <S.Item>
       <S.LinkWrapper href={item.html_url} rel="noopener noreferrer">
@@ -37,7 +38,7 @@ const RepositoryItem = ({ item }: { item: RepositoryInfo }) => {
       </S.LinkWrapper>
     </S.Item>
   );
-};
+});
 
 const SearchItem = {
   TopItem,
