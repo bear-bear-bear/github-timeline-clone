@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@emotion/eslint-plugin": "^11.5.0",
+    "@octokit/types": "^6.34.0",
     "@types/cookie": "^0.4.1",
     "@types/cors": "^2.8.12",
     "@types/node": "16.11.9",
