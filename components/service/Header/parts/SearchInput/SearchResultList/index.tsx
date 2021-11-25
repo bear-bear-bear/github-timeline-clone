@@ -2,6 +2,8 @@ import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import SearchResultItem from '../SearchResultItem';
 import * as S from './styles';
+import Loading from '@components/common/Loading';
+import { useTheme } from '@emotion/react';
 
 type Props = {
   searchWord: string;
@@ -30,10 +32,15 @@ const SearchResultItems = observer(({ searchWord }: Props) => {
 
 const SearchResultList = observer((props: Props) => {
   const { myRepository } = useStore();
+  const theme = useTheme();
 
   return (
     <S.SearchList>
-      {myRepository.isNotFetched && <div>로딩 중</div>}
+      {myRepository.isNotFetched && (
+        <S.LoadingWrapper>
+          <Loading size="1.66rem" />
+        </S.LoadingWrapper>
+      )}
       {myRepository.state === 'done' && <SearchResultItems {...props} />}
     </S.SearchList>
   );

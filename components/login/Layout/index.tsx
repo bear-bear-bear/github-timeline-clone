@@ -1,9 +1,11 @@
 import type { FC } from 'react';
 import * as S from './styles';
 import GithubIcon from '@components/common/GithubIcon';
-import { theme } from '@globalStyles/theme';
+import { useTheme } from '@emotion/react';
 
 const Layout: FC = ({ children }) => {
+  const theme = useTheme();
+
   return (
     <S.Layout>
       <S.Container>
