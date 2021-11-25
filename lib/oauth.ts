@@ -48,6 +48,16 @@ export const github = {
     });
   },
 
+  USER_GET_REQUEST(accessToken: string) {
+    return axios({
+      method: 'GET',
+      url: 'https://api.github.com/user',
+      headers: {
+        Authorization: `token ${accessToken}`,
+      },
+    }).then((res) => res.data as User);
+  },
+
   SEARCH_REPOSITORY_REQUEST(searchWord: string, username: string) {
     const queryString =
       'q=' + encodeURIComponent(`${searchWord} in:name user:${username}`);
