@@ -22,7 +22,8 @@
       "@hooks/*": ["./hooks/*"],
       "@pages/*":  ["./pages/*"],
       "@lib/*":  ["./lib/*"],
-      "@globalStyles/*":  ["./globalStyles/*"]
+      "@globalStyles/*":  ["./globalStyles/*"],
+      "@typings/*":  ["./typings/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
