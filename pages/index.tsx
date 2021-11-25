@@ -13,27 +13,30 @@ import Activity from '@components/service/Main/Activity';
 import Aside from '@components/service/Main/Aside';
 import Footer from '@components/service/Main/Footer';
 import type { User } from '@typings/oauth';
+import { StoreProvider } from '../stores';
 
 export const UserContext = createContext<User>({} as User);
 
 const Service = observer<{ user: User }>(({ user }) => {
   return (
-    <UserContext.Provider value={user}>
-      <Container>
-        <>
-          <MobileHeader />
-          <DesktopHeader />
-        </>
-        <MainLayout.Container>
-          <Dashboard />
-          <MainLayout.CenterSection>
-            <Activity />
-            <Footer />
-          </MainLayout.CenterSection>
-          <Aside />
-        </MainLayout.Container>
-      </Container>
-    </UserContext.Provider>
+    <StoreProvider>
+      <UserContext.Provider value={user}>
+        <Container>
+          <>
+            <MobileHeader />
+            <DesktopHeader />
+          </>
+          <MainLayout.Container>
+            <Dashboard />
+            <MainLayout.CenterSection>
+              <Activity />
+              <Footer />
+            </MainLayout.CenterSection>
+            <Aside />
+          </MainLayout.Container>
+        </Container>
+      </UserContext.Provider>
+    </StoreProvider>
   );
 });
 
