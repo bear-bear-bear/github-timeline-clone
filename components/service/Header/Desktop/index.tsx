@@ -1,19 +1,22 @@
 import { observer } from 'mobx-react-lite';
 import GithubIcon from '@components/common/GithubIcon';
 import { useTheme } from '@emotion/react';
-import parts from '../parts';
+import HeaderWrapper from '../parts/common/HeaderWrapper';
+import SearchInput from '../parts/common/SearchInput';
+import Navigation from '../parts/desktop/Navigation';
 import * as S from './styles';
 
 const DesktopHeader = observer(() => {
   const theme = useTheme();
 
   return (
-    <parts.HeaderWrapper>
+    <HeaderWrapper>
       <S.DesktopHeader>
         <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
-        <parts.SearchInput />
+        <SearchInput />
+        <Navigation />
       </S.DesktopHeader>
-    </parts.HeaderWrapper>
+    </HeaderWrapper>
   );
 });
 

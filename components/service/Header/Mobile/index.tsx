@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import parts from '../parts';
+import HeaderWrapper from '../parts/common/HeaderWrapper';
 import * as S from './styles';
 
 const MobileHeader = observer(() => {
   return (
-    <parts.HeaderWrapper>
+    <HeaderWrapper>
       <S.MobileHeader>모바일 헤더</S.MobileHeader>
-    </parts.HeaderWrapper>
+    </HeaderWrapper>
   );
 });
 

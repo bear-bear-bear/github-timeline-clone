@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const Container = styled.article`
   position: relative;
-  margin-left: 1rem;
 `;
 
 export const Label = styled.label`

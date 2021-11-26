@@ -7,7 +7,8 @@ export const DesktopHeader = styled.header`
   ${media.md} {
     display: flex;
     align-items: center;
-    padding: 1rem 1.5rem;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
   }
 
   ${media.lg} {
