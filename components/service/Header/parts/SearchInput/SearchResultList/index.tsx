@@ -32,7 +32,6 @@ const SearchResultItems = observer(({ searchWord }: Props) => {
 
 const SearchResultList = observer((props: Props) => {
   const { myRepository } = useStore();
-  const theme = useTheme();
 
   return (
     <S.SearchList>
