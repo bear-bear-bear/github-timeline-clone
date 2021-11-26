@@ -24,3 +24,4 @@ const DropDown = observer<Props>(
 );
 
 export default DropDown;
+export const recommendedItemStyle = S.recommendedItemItemStyle;

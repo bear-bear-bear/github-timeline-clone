@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { MdArrowDropDown } from 'react-icons/md';
 import type { Props } from './index';
+import { css, Theme } from '@emotion/react';
 
 export const Details = styled.details`
   position: relative;
@@ -50,4 +51,20 @@ export const DropdownIcon = styled(MdArrowDropDown)`
   font-size: 1.3rem;
   vertical-align: middle;
   margin-left: -2px;
+`;
+
+export const recommendedItemItemStyle = ({ theme }: { theme: Theme }) => css`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: ${theme.color.textColor};
+  line-height: 1.5;
+  font-size: 0.92rem;
+  padding: 4px 8px 4px 16px;
+
+  &:hover,
+  &:focus {
+    color: ${theme.color.serviceHeaderTextColor};
+    background-color: ${theme.color.serviceHeaderInputFocusedBorderColor};
+  }
 `;

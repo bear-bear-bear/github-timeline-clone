@@ -1,22 +1,11 @@
 import styled from '@emotion/styled';
 import { HiOutlinePlusSm } from 'react-icons/hi';
+import { recommendedItemStyle } from '@components/common/DropDown';
 
 export const LinkItems = styled.a`
   display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: ${({ theme }) => theme.color.textColor};
-  line-height: 1.5;
-  font-size: 0.92rem;
-  padding: 4px 8px 4px 16px;
 
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.color.serviceHeaderTextColor};
-    background-color: ${({ theme }) =>
-      theme.color.serviceHeaderInputFocusedBorderColor};
-  }
+  ${recommendedItemStyle}
 `;
 
 export const MoreIcon = styled(HiOutlinePlusSm)`
