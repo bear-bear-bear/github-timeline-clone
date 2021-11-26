@@ -2,6 +2,7 @@ import type { Redirect } from 'next';
 import { createContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { withIronSessionSsr } from 'iron-session/next';
+import { StoreProvider } from '@root/stores';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
 import Container from '@components/service/Container';
@@ -13,7 +14,6 @@ import Activity from '@components/service/Main/Activity';
 import Aside from '@components/service/Main/Aside';
 import Footer from '@components/service/Main/Footer';
 import type { User } from '@typings/oauth';
-import { StoreProvider } from '../stores';
 
 export const UserContext = createContext<User>({} as User);
 
