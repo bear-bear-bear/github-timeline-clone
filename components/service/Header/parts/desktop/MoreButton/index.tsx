@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { github } from '@lib/oauth';
 import DropDown from '@components/common/DropDown';
+import type { DropDownChildProps } from '@components/service/Header/Desktop';
 import * as S from './styles';
 
 const moreItems = [
@@ -26,14 +27,28 @@ const moreItems = [
   },
 ];
 
-const MoreButton = observer(() => (
-  <DropDown SvgIcon={S.MoreIcon} menuFixedWidth="160px">
-    {moreItems.map((item) => (
-      <S.LinkItems key={item.url} href={item.url}>
-        {item.label}
-      </S.LinkItems>
-    ))}
-  </DropDown>
-));
+const MoreButton = observer<DropDownChildProps>(
+  ({ isOpen, toggleDropDownState }) => {
+    const handleClick = (e: React.MouseEvent<HTMLDetailsElement>) => {
+      e.preventDefault();
+      toggleDropDownState('moreButton');
+    };
+
+    return (
+      <DropDown
+        SvgIcon={S.MoreIcon}
+        menuFixedWidth="160px"
+        open={isOpen}
+        onClick={handleClick}
+      >
+        {moreItems.map((item) => (
+          <S.LinkItems key={item.url} href={item.url}>
+            {item.label}
+          </S.LinkItems>
+        ))}
+      </DropDown>
+    );
+  },
+);
 
 export default MoreButton;

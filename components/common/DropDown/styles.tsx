@@ -17,7 +17,7 @@ export const Details = styled.details`
 
 type StyleProps = Pick<Props, 'menuFixedWidth'>;
 export const DropdownMenu = styled.div<StyleProps>`
-  width: ${({ menuFixedWidth }) => menuFixedWidth || 'initial'};
+  width: ${({ menuFixedWidth }) => menuFixedWidth || 'auto'};
   position: absolute;
   right: 6px;
   z-index: 999;
