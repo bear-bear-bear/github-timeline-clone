@@ -17,9 +17,11 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
+      "@root/*": ["./*"],
       "@public/*":  ["./public/*"],
       "@components/*": ["./components/*"],
       "@hooks/*": ["./hooks/*"],
+      "@stores/*": ["./stores/*"],
       "@pages/*":  ["./pages/*"],
       "@lib/*":  ["./lib/*"],
       "@globalStyles/*":  ["./globalStyles/*"],
