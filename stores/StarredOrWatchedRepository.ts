@@ -69,13 +69,17 @@ export default class StarredOrWatchedRepositoryStore {
         .then(({ data }) => data);
 
     try {
+      const uniqueBy = (arr: any[]) =>
+        arr.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
+
       this.repos = yield Promise.all([
-        getReposRequest('/starred'), // Sort by latest
-        getReposRequest('/subscriptions'), // Sort by oldest
-      ]).then(([starredRefos, watchedRefos]) => {
-        return [...starredRefos, ...watchedRefos.reverse()].filter(
-          (v, i, a) => a.findIndex((t) => t.id === v.id) === i, // deduplicate
-        );
+        getReposRequest('/starred'),
+        getReposRequest('/subscriptions'),
+      ]).then(([starredRefositoriesByLatest, watchedRefositoriesByOldest]) => {
+        return uniqueBy([
+          ...starredRefositoriesByLatest,
+          ...watchedRefositoriesByOldest.reverse(),
+        ]);
       });
       this.state = 'done';
     } catch (error) {
