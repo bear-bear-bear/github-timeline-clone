@@ -43,18 +43,23 @@ const DesktopHeader = observer(() => {
   return (
     <HeaderWrapper>
       <S.DesktopHeader>
-        <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
-        <SearchInput />
-        <Navigation />
-        <MoreButton
-          isOpen={dropDownState.moreButton}
-          toggleDropDownState={toggleDropDownState}
-        />
-        <NotificationBell />
-        <Profile
-          isOpen={dropDownState.profile}
-          toggleDropDownState={toggleDropDownState}
-        />
+        <S.LeftSection>
+          <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
+          <SearchInput />
+          <Navigation />
+        </S.LeftSection>
+
+        <S.RightSection>
+          <NotificationBell />
+          <MoreButton
+            isOpen={dropDownState.moreButton}
+            toggleDropDownState={toggleDropDownState}
+          />
+          <Profile
+            isOpen={dropDownState.profile}
+            toggleDropDownState={toggleDropDownState}
+          />
+        </S.RightSection>
       </S.DesktopHeader>
     </HeaderWrapper>
   );

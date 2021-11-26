@@ -6,6 +6,7 @@ export const Details = styled.details`
   position: relative;
 
   summary {
+    display: flex;
     cursor: pointer;
     list-style: none;
 

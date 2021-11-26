@@ -5,8 +5,8 @@ import type { Props } from './index';
 const sizeStyle = ({ size }: Props) => {
   if (!size) {
     return css`
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
     `;
   }
   return css`

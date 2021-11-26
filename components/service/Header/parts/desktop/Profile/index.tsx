@@ -16,7 +16,8 @@ const Profile = observer<DropDownChildProps>(
 
     return (
       <DropDown
-        SvgIcon={() => <Avatar avatarUrl={user.avatar_url} />}
+        SvgIcon={() => <Avatar avatarUrl={user.avatar_url} size="20px" />}
+        menuFixedWidth={160}
         open={isOpen}
         onClick={handleClick}
       >

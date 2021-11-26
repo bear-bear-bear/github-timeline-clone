@@ -4,7 +4,7 @@ import * as S from './styles';
 
 const navItems = [
   {
-    label: 'Pull requests',
+    label: 'Pull',
     endpoint: '/pulls',
   },
   {
@@ -27,7 +27,9 @@ const Navigation = observer(() => {
       <ul>
         {navItems.map((item) => (
           <li key={item.endpoint}>
-            <a href={`${github.HOST}/${item.endpoint}`}>{item.label}</a>
+            <a href={`${github.HOST}/${item.endpoint}`} title={item.label}>
+              {item.label}
+            </a>
           </li>
         ))}
       </ul>
