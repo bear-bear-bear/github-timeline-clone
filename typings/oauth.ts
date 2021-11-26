@@ -17,4 +17,6 @@ export type ParsedGetAccessTokenResponseQuery =
 export type RepositoryInfo = components['schemas']['minimal-repository'];
 export type RepositoryInfos = RepositoryInfo[];
 
+export type Notification = components['schemas']['thread'];
+
 export type User = components['schemas']['private-user'];
