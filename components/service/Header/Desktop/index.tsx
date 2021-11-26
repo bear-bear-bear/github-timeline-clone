@@ -5,6 +5,7 @@ import HeaderWrapper from '../parts/common/HeaderWrapper';
 import SearchInput from '../parts/common/SearchInput';
 import Navigation from '../parts/desktop/Navigation';
 import * as S from './styles';
+import MoreButton from '@components/service/Header/parts/desktop/MoreButton';
 
 const DesktopHeader = observer(() => {
   const theme = useTheme();
@@ -15,6 +16,7 @@ const DesktopHeader = observer(() => {
         <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
         <SearchInput />
         <Navigation />
+        <MoreButton />
       </S.DesktopHeader>
     </HeaderWrapper>
   );

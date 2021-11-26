@@ -4,7 +4,8 @@ import { css } from '@emotion/react';
 export const Item = styled.li`
   position: relative;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: ${({ theme }) =>
       theme.color.serviceHeaderInputFocusedBorderColor};
 
