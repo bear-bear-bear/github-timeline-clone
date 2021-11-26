@@ -2,7 +2,11 @@ import axios, { AxiosError } from 'axios';
 import type { AxiosRequestConfig, AxiosResponseHeaders } from 'axios';
 import type { AuthInfo } from '@lib/session';
 
-const oauth2Axios = axios.create();
+const oauth2Axios = axios.create({
+  headers: {
+    accept: 'application/vnd.github.v3+json',
+  },
+});
 
 const setAccessToken = async (config: AxiosRequestConfig) => {
   try {
