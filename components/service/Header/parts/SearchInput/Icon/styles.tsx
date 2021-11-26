@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const KeySlashSvg = styled.svg`
   position: absolute;
-  right: 0.25rem;
+  right: 0.3rem;
   width: 1.33rem;
   height: 1.33rem;
 `;
