@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite';
+import { github } from '@lib/oauth';
 import * as S from './styles';
 
 const navItems = [
@@ -26,7 +27,7 @@ const Navigation = observer(() => {
       <ul>
         {navItems.map((item) => (
           <li key={item.endpoint}>
-            <a href={`https://github.com/${item.endpoint}`}>{item.label}</a>
+            <a href={`${github.HOST}/${item.endpoint}`}>{item.label}</a>
           </li>
         ))}
       </ul>

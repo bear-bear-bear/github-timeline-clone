@@ -1,14 +1,15 @@
 import { observer } from 'mobx-react-lite';
+import { github } from '@lib/oauth';
 import * as S from './styles';
 
 const moreItems = [
   {
     label: 'New repository',
-    url: 'https://github.com/new',
+    url: `${github.HOST}/new`,
   },
   {
     label: 'Import repository',
-    url: 'https://github.com/new/import',
+    url: `${github.HOST}/new/import`,
   },
   {
     label: 'New gist',
@@ -16,11 +17,11 @@ const moreItems = [
   },
   {
     label: 'New organization',
-    url: 'https://github.com/organiztions/new',
+    url: `${github.HOST}/organizations/new`,
   },
   {
     label: 'New Project',
-    url: 'https://github.com/new/project',
+    url: `${github.HOST}/new/project`,
   },
 ];
 

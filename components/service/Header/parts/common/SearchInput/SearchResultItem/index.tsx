@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import type { RepositoryInfo } from '@typings/oauth';
+import { github } from '@lib/oauth';
 import Icon from '../Icon';
 import * as S from './styles';
 
@@ -11,7 +12,7 @@ const TopItem = observer(({ searchWord }: SearchInfo) => {
   return (
     <S.Item>
       <S.LinkWrapper
-        href={`https://github.com/search?q=${encodeURIComponent(searchWord)}`}
+        href={`${github.HOST}/search?q=${encodeURIComponent(searchWord)}`}
         rel="noopener noreferrer"
       >
         <S.IconWrapper>

@@ -6,7 +6,6 @@ import type { Theme } from '@emotion/react';
 
 export const Details = styled.details`
   position: relative;
-  color: white;
 
   summary {
     list-style: none;

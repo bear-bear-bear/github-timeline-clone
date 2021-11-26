@@ -19,7 +19,7 @@ const Test: NextPage = () => {
     if (!inputRef.current) return;
     const api = inputRef.current.value;
     await oauth2Axios
-      .get(`https://api.github.com${api}`)
+      .get(`${github.API_HOST}${api}`)
       .then(({ data }) => {
         setRes({
           data: JSON.stringify(data, null, 2),
