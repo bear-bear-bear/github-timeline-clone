@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { github } from '@lib/oauth';
+import DropDown from '@components/common/DropDown';
 import * as S from './styles';
 
 const moreItems = [
@@ -26,19 +27,13 @@ const moreItems = [
 ];
 
 const MoreButton = observer(() => (
-  <S.Details>
-    <summary>
-      <S.MoreIcon />
-      <S.DropdownIcon />
-    </summary>
-    <S.DropdownMenu>
-      {moreItems.map((item) => (
-        <a key={item.url} href={item.url}>
-          {item.label}
-        </a>
-      ))}
-    </S.DropdownMenu>
-  </S.Details>
+  <DropDown SvgIcon={S.MoreIcon} menuFixedWidth="160px">
+    {moreItems.map((item) => (
+      <S.LinkItems key={item.url} href={item.url}>
+        {item.label}
+      </S.LinkItems>
+    ))}
+  </DropDown>
 ));
 
 export default MoreButton;
