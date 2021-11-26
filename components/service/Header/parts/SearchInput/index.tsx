@@ -21,9 +21,7 @@ const SearchInput = observer(() => {
   }, []);
 
   const handleInputClick = async () => {
-    console.log('click');
     if (myRepository.state === 'init') {
-      console.log('fetch');
       await myRepository.fetchRepos(user.repos_url);
     }
   };
