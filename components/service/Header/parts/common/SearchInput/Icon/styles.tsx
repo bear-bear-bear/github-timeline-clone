@@ -8,9 +8,9 @@ export const KeySlashSvg = styled.svg`
 `;
 export const KeySlashFirstPath = styled.path`
   fill: none;
-  stroke: ${({ theme }) => theme.color.serviceHeaderInputIconColor};
+  stroke: ${({ theme }) => theme.color['gray-4']};
   opacity: 0.4;
 `;
 export const KeySlashSecondPath = styled.path`
-  fill: ${({ theme }) => theme.color.serviceHeaderInputIconColor};
+  fill: ${({ theme }) => theme.color['gray-4']};
 `;

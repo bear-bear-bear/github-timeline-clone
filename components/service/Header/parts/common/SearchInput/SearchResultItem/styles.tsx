@@ -6,30 +6,27 @@ export const Item = styled.li`
 
   &:hover,
   &:focus {
-    background-color: ${({ theme }) =>
-      theme.color.serviceHeaderInputFocusedBorderColor};
+    background-color: ${({ theme }) => theme.color['blue-1']};
 
     svg {
       path {
-        fill: ${({ theme }) => theme.color.serviceHeaderTextColor};
+        fill: ${({ theme }) => theme.color['gray-1']};
       }
     }
 
     p.repository-item__name {
-      color: ${({ theme }) => theme.color.serviceHeaderTextColor};
+      color: ${({ theme }) => theme.color['gray-1']};
     }
 
     p.repository-item__tooltip {
       opacity: 1;
       visibility: visible;
-      border: 0.1px solid
-        ${({ theme }) => theme.color.serviceHeaderInputFocusedBorderColor};
+      border: 0.1px solid ${({ theme }) => theme.color['blue-1']};
     }
   }
 
   & + & {
-    border-top: 1px solid
-      ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
+    border-top: 1px solid ${({ theme }) => theme.color['gray-6']};
   }
 `;
 
@@ -45,14 +42,14 @@ export const IconWrapper = styled.section`
     font-size: 1.1rem;
 
     path {
-      fill: ${({ theme }) => theme.color.serviceHeaderInputIconColor};
+      fill: ${({ theme }) => theme.color['gray-4']};
     }
   }
 `;
 
 export const Name = styled.p`
   flex: 1;
-  color: ${({ theme }) => theme.color.textColor};
+  color: ${({ theme }) => theme.color['gray-2']};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -73,10 +70,10 @@ export const Tooltip = styled.p<TooltipVisible>`
   right: 1rem;
   transform: translateY(-50%);
   padding: 5px 5px 6px 5px;
-  border: 0.1px solid ${({ theme }) => theme.color.subTextColor};
+  border: 0.1px solid ${({ theme }) => theme.color['gray-5']};
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.color.serviceMainBgColor};
-  color: ${({ theme }) => theme.color.subTextColor};
+  background-color: ${({ theme }) => theme.color['gray-12']};
+  color: ${({ theme }) => theme.color['gray-5']};
   font-size: 12px;
   vertical-align: middle;
 

@@ -17,7 +17,7 @@ export const AppContainer = styled.div`
 */
 
 export const HeaderContainer = styled.section`
-  background-color: ${({ theme }) => theme.color.serviceHeaderBgColor};
+  background-color: ${({ theme }) => theme.color['gray-10']};
 `;
 
 export const DesktopHeaderWrapper = styled.section`
@@ -42,7 +42,7 @@ export const MainContainer = styled.section`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.color.serviceMainBgColor};
+  background-color: ${({ theme }) => theme.color['gray-12']};
   padding: 16px;
 
   ${media.md} {
@@ -55,8 +55,8 @@ export const MainLeftSection = styled.section`
   ${media.md} {
     flex: 1 1 auto;
     max-width: 350px;
-    background-color: ${({ theme }) => theme.color.loginBgColor};
-    border-right: 1px solid ${({ theme }) => theme.color.serviceMainBorderColor};
+    background-color: ${({ theme }) => theme.color['gray-11']};
+    border-right: 1px solid ${({ theme }) => theme.color['gray-8']};
   }
 `;
 

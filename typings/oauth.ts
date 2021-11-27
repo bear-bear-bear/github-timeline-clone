@@ -1,4 +1,4 @@
-import type { Endpoints } from '@octokit/types';
+// import type { Endpoints } from '@octokit/types';
 import { components } from '@octokit/openapi-types';
 
 export type FetchState = 'init' | 'loading' | 'done' | 'error';

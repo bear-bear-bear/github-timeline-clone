@@ -75,10 +75,10 @@ export default class StarredOrWatchedRepositoryStore {
       this.repos = yield Promise.all([
         getReposRequest('/starred'),
         getReposRequest('/subscriptions'),
-      ]).then(([starredRefositoriesByLatest, watchedRefositoriesByOldest]) => {
+      ]).then(([starredRepositoriesByLatest, watchedRepositoriesByOldest]) => {
         return uniqueBy([
-          ...starredRefositoriesByLatest,
-          ...watchedRefositoriesByOldest.reverse(),
+          ...starredRepositoriesByLatest,
+          ...watchedRepositoriesByOldest.reverse(),
         ]);
       });
       this.state = 'done';

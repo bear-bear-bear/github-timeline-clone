@@ -16,6 +16,6 @@ export const BurgerIcon = styled(GrMenu)`
   cursor: pointer;
 
   path {
-    stroke: ${({ theme }) => theme.color.serviceHeaderTextColor};
+    stroke: ${({ theme }) => theme.color['gray-1']};
   }
 `;

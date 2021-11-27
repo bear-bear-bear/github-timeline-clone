@@ -18,7 +18,7 @@ const loadingAnimation = keyframes`
 `;
 
 export const Loading = styled(ImSpinner2)<Props>`
-  color: ${({ color, theme }) => color || theme.color.subTextColor};
+  color: ${({ color, theme }) => color || theme.color['gray-5']};
   font-size: ${({ size }) => size || '1rem'};
   will-change: transform;
   animation: ${loadingAnimation} 1.5s ease-in infinite;

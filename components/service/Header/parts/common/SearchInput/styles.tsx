@@ -15,20 +15,19 @@ export const Input = styled.input`
   width: 100%;
   height: 2rem;
   outline: none;
-  border: 1px solid ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
-  color: ${({ theme }) => theme.color.serviceHeaderTextColor};
-  background-color: ${({ theme }) => theme.color.serviceMainBgColor};
+  border: 1px solid ${({ theme }) => theme.color['gray-6']};
+  color: ${({ theme }) => theme.color['gray-1']};
+  background-color: ${({ theme }) => theme.color['gray-12']};
   padding: 0 12px;
   border-radius: 6px;
 
   &:focus {
-    border: 1px solid
-      ${({ theme }) => theme.color.serviceHeaderInputFocusedBorderColor};
+    border: 1px solid ${({ theme }) => theme.color['blue-1']};
     border-bottom: none;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.color.serviceHeaderInputPlaceholderColor};
+    color: ${({ theme }) => theme.color['gray-3']};
     letter-spacing: 0.2px;
   }
 

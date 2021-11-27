@@ -19,7 +19,7 @@ export default class NotificationStateStore {
     return this.state === 'init' || this.state === 'loading';
   }
 
-  fetch = flow(function* (this: NotificationStateStore, user: User) {
+  fetch = flow(function* (this: NotificationStateStore) {
     this.state = 'loading';
 
     try {

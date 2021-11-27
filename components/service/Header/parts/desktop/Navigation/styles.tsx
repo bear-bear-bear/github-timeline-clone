@@ -8,7 +8,7 @@ export const Navigation = styled.nav`
   }
 
   a {
-    color: ${({ theme }) => theme.color.serviceHeaderTextColor};
+    color: ${({ theme }) => theme.color['gray-1']};
     font-weight: 500;
     font-size: 0.92rem;
 
@@ -27,7 +27,7 @@ export const Navigation = styled.nav`
 
     &:hover,
     &:focus {
-      color: ${({ theme }) => theme.color.serviceHeaderInputPlaceholderColor};
+      color: ${({ theme }) => theme.color['gray-3']};
     }
   }
 `;

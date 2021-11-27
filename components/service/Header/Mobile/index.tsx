@@ -18,7 +18,7 @@ const MobileHeader = observer(() => {
     <S.MobileHeader>
       <S.VisibleSection>
         <S.BurgerIcon onClick={handleBuggerIconClick} />
-        <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
+        <GithubIcon size="36px" color={theme.color['gray-1']} />
         <NotificationBell />
       </S.VisibleSection>
       {!menuHide && <Menu />}

@@ -10,7 +10,7 @@ const Layout: FC = ({ children }) => {
     <S.Layout>
       <S.Container>
         <S.Header>
-          <GithubIcon size="3.5rem" color={theme.color.textColor} />
+          <GithubIcon size="3.5rem" color={theme.color['gray-2']} />
           <h1>- timeline clone -</h1>
         </S.Header>
         <S.LoginBox>{children}</S.LoginBox>

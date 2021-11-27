@@ -66,7 +66,7 @@ const DesktopHeader = observer(() => {
   return (
     <S.DesktopHeader>
       <S.LeftSection>
-        <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
+        <GithubIcon size="36px" color={theme.color['gray-1']} />
         <SearchInput />
         <Navigation />
       </S.LeftSection>

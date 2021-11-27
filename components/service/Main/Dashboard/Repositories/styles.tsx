@@ -10,10 +10,10 @@ export const Repositories = styled(ArticleBox)`
 
 export const BoxStyle = ({ theme }: { theme: Theme }) => css`
   padding: 36px 8px 20px;
-  background-color: ${theme.color.serviceHeaderBgColor};
+  background-color: ${theme.color['gray-10']};
 
   ${media.sm} {
-    background-color: ${theme.color.loginBgColor};
+    background-color: ${theme.color['gray-11']};
   }
 
   ${media.md} {
@@ -28,20 +28,19 @@ export const SearchInput = styled.input`
   font-size: 14px;
   line-height: 20px;
   vertical-align: middle;
-  color: ${({ theme }) => theme.color.textColor};
-  background-color: ${({ theme }) => theme.color.serviceMainBgColor};
-  border: 1px solid ${({ theme }) => theme.color.loginBorderColor};
+  color: ${({ theme }) => theme.color['gray-2']};
+  background-color: ${({ theme }) => theme.color['gray-12']};
+  border: 1px solid ${({ theme }) => theme.color['gray-7']};
   border-radius: 6px;
   outline: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.color.subTextColor};
+    color: ${({ theme }) => theme.color['gray-5']};
   }
 
   &:focus {
-    border: 1px solid
-      ${({ theme }) => theme.color.serviceHeaderInputFocusedBorderColor};
-    box-shadow: rgb(12, 45, 107) 0 0 0 3px;
+    border: 1px solid ${({ theme }) => theme.color['blue-1']};
+    box-shadow: ${({ theme }) => theme.color['blue-2']} 0 0 0 3px;
   }
 `;
 
@@ -54,13 +53,13 @@ export const ShowMoreButton = styled.button`
   cursor: pointer;
   margin: 16px 0 0;
   padding: 16px 8px;
-  color: ${({ theme }) => theme.color.subTextColor};
-  border-top: 1px solid ${({ theme }) => theme.color.loginBorderColor};
+  color: ${({ theme }) => theme.color['gray-5']};
+  border-top: 1px solid ${({ theme }) => theme.color['gray-7']};
   font-size: 12px;
 
   :hover,
   :focus {
-    color: ${({ theme }) => theme.color.linkColor};
+    color: ${({ theme }) => theme.color['blue-0']};
   }
 `;
 
@@ -74,11 +73,11 @@ export const Item = styled.li`
 export const Link = styled.a`
   word-break: break-word;
   overflow-wrap: break-word;
-  color: ${({ theme }) => theme.color.textColor};
+  color: ${({ theme }) => theme.color['gray-2']};
   font-size: 14px;
 
   :hover,
   :focus {
-    color: ${({ theme }) => theme.color.linkColor};
+    color: ${({ theme }) => theme.color['blue-0']};
   }
 `;

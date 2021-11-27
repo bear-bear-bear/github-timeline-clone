@@ -3,27 +3,25 @@ import '@emotion/react';
 declare module '@emotion/react' {
   export interface Theme {
     color: {
-      // common
-      textColor: string;
-      subTextColor: string;
-      linkColor: string;
-      buttonBgColor: string;
-      buttonTextColor: string;
+      'gray-0': string;
+      'gray-1': string;
+      'gray-2': string;
+      'gray-3': string;
+      'gray-4': string;
+      'gray-5': string;
+      'gray-6': string;
+      'gray-7': string;
+      'gray-8': string;
+      'gray-9': string;
+      'gray-10': string;
+      'gray-11': string;
+      'gray-12': string;
 
-      // page 'login'
-      loginBgColor: string;
-      loginMainBgColor: string;
-      loginBorderColor: string;
+      'blue-0': string;
+      'blue-1': string;
+      'blue-2': string;
 
-      // page '/service'
-      serviceHeaderBgColor: string;
-      serviceHeaderTextColor: string;
-      serviceHeaderInputBorderColor: string;
-      serviceHeaderInputPlaceholderColor: string;
-      serviceHeaderInputFocusedBorderColor: string;
-      serviceHeaderInputIconColor: string;
-      serviceMainBgColor: string;
-      serviceMainBorderColor: string;
+      'green-0': string;
     };
   }
 }

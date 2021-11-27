@@ -21,7 +21,7 @@ const ButtonLink = observer<Props>(
       <S.ButtonLink fullWidth={fullWidth} {...rest}>
         {icon}
         {text}
-        {loading && <Loading color={theme.color.textColor} />}
+        {loading && <Loading color={theme.color['gray-2']} />}
       </S.ButtonLink>
     );
   },

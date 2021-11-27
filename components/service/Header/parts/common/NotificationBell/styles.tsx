@@ -11,11 +11,11 @@ export const Badge = styled.div`
   border-radius: 50%;
   background-image: linear-gradient(#54a3ff, #006eed);
   background-clip: padding-box;
-  border: 2px solid ${({ theme }) => theme.color.serviceHeaderBgColor};
+  border: 2px solid ${({ theme }) => theme.color['gray-10']};
 `;
 
 export const NotificationBell = styled(IoMdNotificationsOutline)`
   position: relative;
-  color: ${({ theme }) => theme.color.serviceHeaderTextColor};
+  color: ${({ theme }) => theme.color['gray-1']};
   font-size: 1.4rem;
 `;
