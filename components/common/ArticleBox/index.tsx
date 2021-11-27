@@ -1,21 +1,27 @@
+import type { FC, HTMLAttributes } from 'react';
 import { observer } from 'mobx-react-lite';
 import { SerializedStyles } from '@emotion/utils';
 import * as S from './styles';
 
-export interface Props {
-  label: string | React.FC;
+export interface Props extends HTMLAttributes<HTMLElement> {
+  BoxLabel: string | FC;
   boxStyle?: SerializedStyles | ((prop: any) => SerializedStyles);
 }
 
-const ArticleBox = observer<Props>(({ children, label, boxStyle }) => {
-  return (
-    <article>
-      {typeof label === 'string' && <S.DefaultTitle>{label}</S.DefaultTitle>}
-      {typeof label === 'function' && label}
+const ArticleBox = observer<Props>(
+  ({ children, BoxLabel, boxStyle, ...rest }) => {
+    return (
+      <article {...rest}>
+        {typeof BoxLabel === 'string' ? (
+          <S.DefaultTitle>{BoxLabel}</S.DefaultTitle>
+        ) : (
+          <BoxLabel />
+        )}
 
-      <S.Box boxStyle={boxStyle}>{children}</S.Box>
-    </article>
-  );
-});
+        <S.Box boxStyle={boxStyle}>{children}</S.Box>
+      </article>
+    );
+  },
+);
 
 export default ArticleBox;

@@ -6,6 +6,7 @@ import Avatar from '@components/common/Avatar';
 import Loading from '@components/common/Loading';
 import type { RepositoryInfo } from '@typings/oauth';
 import * as S from './styles';
+import { github } from '@lib/oauth';
 
 type RepoItemProps = {
   repo: RepositoryInfo;
@@ -40,6 +41,17 @@ const RepoList = observer<RepoListProps>(({ searchWord }) => {
   );
 });
 
+const BoxLabel = () => (
+  <S.BoxLabel>
+    <h2>Repositories</h2>
+    <S.TopButtonLink
+      text="New"
+      icon={<S.RepositoryIcon />}
+      href={`${github.HOST}/new`}
+    />
+  </S.BoxLabel>
+);
+
 const Repositories = observer(() => {
   const user = useUser();
   const { myRepository } = useStore();
@@ -61,7 +73,7 @@ const Repositories = observer(() => {
 
   if (myRepository.isNotFetched) return <Loading />;
   return (
-    <S.Repositories label="Repositories" boxStyle={S.BoxStyle}>
+    <S.Repositories BoxLabel={BoxLabel} boxStyle={S.BoxStyle}>
       <S.SearchInput
         placeholder="Find a repository..."
         onFocus={showMore}

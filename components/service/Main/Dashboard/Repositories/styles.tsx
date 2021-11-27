@@ -3,9 +3,50 @@ import ArticleBox from '@components/common/ArticleBox';
 import media from '@globalStyles/media';
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
+import { VscRepo } from 'react-icons/vsc';
+import ButtonLink from '@components/common/ButtonLink';
 
 export const Repositories = styled(ArticleBox)`
   margin: 12px 0 24px;
+
+  ${media.md} {
+    margin: initial;
+  }
+`;
+
+export const TopButtonLink = styled(ButtonLink)`
+  display: none;
+  padding: 4px 11px;
+  font-size: 12px;
+  line-height: 20px;
+
+  svg {
+    font-size: 18px;
+  }
+
+  ${media.md} {
+    display: flex;
+  }
+`;
+
+export const BoxLabel = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 4px;
+
+  h2 {
+    font-weight: 400;
+    color: ${({ theme }) => theme.color['gray-2']};
+    letter-spacing: 0.5px;
+
+    ${media.md} {
+      font-weight: 500;
+      letter-spacing: initial;
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
 `;
 
 export const BoxStyle = ({ theme }: { theme: Theme }) => css`
@@ -18,6 +59,8 @@ export const BoxStyle = ({ theme }: { theme: Theme }) => css`
 
   ${media.md} {
     background-color: inherit;
+    border: none;
+    padding: 0;
   }
 `;
 
@@ -35,12 +78,16 @@ export const SearchInput = styled.input`
   outline: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.color['gray-5']};
+    color: ${({ theme }) => theme.color['gray-6']};
   }
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.color['blue-1']};
     box-shadow: ${({ theme }) => theme.color['blue-2']} 0 0 0 3px;
+  }
+
+  ${media.md} {
+    margin: 0 0 16px;
   }
 `;
 
@@ -61,15 +108,25 @@ export const ShowMoreButton = styled.button`
   :focus {
     color: ${({ theme }) => theme.color['blue-0']};
   }
+
+  ${media.md} {
+    border-top: initial;
+    padding: initial;
+    margin-top: 16px;
+  }
 `;
 
 export const List = styled.ul``;
 export const Item = styled.li`
   display: flex;
   align-items: center;
-  gap: 0.33rem;
-  margin-top: 12px;
+  gap: 8px;
+
+  & + & {
+    margin-top: 12px;
+  }
 `;
+
 export const Link = styled.a`
   word-break: break-word;
   overflow-wrap: break-word;
@@ -80,4 +137,8 @@ export const Link = styled.a`
   :focus {
     color: ${({ theme }) => theme.color['blue-0']};
   }
+`;
+
+export const RepositoryIcon = styled(VscRepo)`
+  color: ${({ theme }) => theme.color['gray-0']};
 `;

@@ -3,12 +3,11 @@ import type { IconType } from 'react-icons';
 import { observer } from 'mobx-react-lite';
 import Loading from '@components/common/Loading';
 import { useTheme } from '@emotion/react';
-import { EmotionStyledIconType } from '@typings/custom';
 import * as S from './styles';
 
 export interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   text: string;
-  icon?: IconType | EmotionStyledIconType;
+  icon?: IconType | JSX.Element;
   fullWidth?: boolean;
   loading?: boolean;
 }
