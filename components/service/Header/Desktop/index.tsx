@@ -4,7 +4,6 @@ import { useTheme } from '@emotion/react';
 import GithubIcon from '@components/common/GithubIcon';
 import MoreButton from '@components/service/Header/parts/desktop/MoreButton';
 import Profile from '@components/service/Header/parts/desktop/Profile';
-import HeaderWrapper from '../parts/common/HeaderWrapper';
 import SearchInput from '../parts/common/SearchInput';
 import NotificationBell from '../parts/common/NotificationBell';
 import Navigation from '../parts/desktop/Navigation';
@@ -65,27 +64,25 @@ const DesktopHeader = observer(() => {
   });
 
   return (
-    <HeaderWrapper>
-      <S.DesktopHeader>
-        <S.LeftSection>
-          <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
-          <SearchInput />
-          <Navigation />
-        </S.LeftSection>
+    <S.DesktopHeader>
+      <S.LeftSection>
+        <GithubIcon size="36px" color={theme.color.serviceHeaderTextColor} />
+        <SearchInput />
+        <Navigation />
+      </S.LeftSection>
 
-        <S.RightSection>
-          <NotificationBell />
-          <MoreButton
-            isOpen={dropDownState.moreButton}
-            toggleDropDownState={toggleDropDownState}
-          />
-          <Profile
-            isOpen={dropDownState.profile}
-            toggleDropDownState={toggleDropDownState}
-          />
-        </S.RightSection>
-      </S.DesktopHeader>
-    </HeaderWrapper>
+      <S.RightSection>
+        <NotificationBell />
+        <MoreButton
+          isOpen={dropDownState.moreButton}
+          toggleDropDownState={toggleDropDownState}
+        />
+        <Profile
+          isOpen={dropDownState.profile}
+          toggleDropDownState={toggleDropDownState}
+        />
+      </S.RightSection>
+    </S.DesktopHeader>
   );
 });
 
