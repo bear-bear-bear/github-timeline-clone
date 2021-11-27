@@ -1,32 +1,21 @@
+import type { FC } from 'react';
+import type { StyledComponent } from '@emotion/styled';
+import type { Theme } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 import * as S from './styles';
 
-const Container = observer(({ children }) => {
-  return <S.Container>{children}</S.Container>;
-});
-
-const LeftSection = observer(({ children }) => {
-  return <S.LeftSection>{children}</S.LeftSection>;
-});
-
-const LeftSectionStickyWrapper = observer(({ children }) => {
-  return <S.LeftSectionStickyWrapper>{children}</S.LeftSectionStickyWrapper>;
-});
-
-const CenterSection = observer(({ children }) => {
-  return <S.CenterSection>{children}</S.CenterSection>;
-});
-
-const RightSection = observer(({ children }) => {
-  return <S.RightSection>{children}</S.RightSection>;
-});
+const withObserver = (Component: FC | StyledComponent<{ theme?: Theme }>) => {
+  return observer(({ children }) => {
+    return <Component>{children}</Component>;
+  });
+};
 
 const Layout = {
-  Container,
-  LeftSection,
-  LeftSectionStickyWrapper,
-  CenterSection,
-  RightSection,
+  Container: withObserver(S.Container),
+  LeftSection: withObserver(S.LeftSection),
+  LeftSectionStickyWrapper: withObserver(S.LeftSectionStickyWrapper),
+  CenterSection: withObserver(S.CenterSection),
+  RightSection: withObserver(S.RightSection),
 };
 
 export default Layout;
