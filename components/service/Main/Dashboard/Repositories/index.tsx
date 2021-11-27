@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useUser from '@hooks/useUser';
 import useStore from '@hooks/useStore';
-import Article from '@components/common/Article';
 import Avatar from '@components/common/Avatar';
 import Loading from '@components/common/Loading';
 import type { RepositoryInfo } from '@typings/oauth';
@@ -12,10 +11,14 @@ type RepoItemProps = {
   repo: RepositoryInfo;
 };
 const RepoItem = observer(({ repo }: RepoItemProps) => (
-  <S.ItemLink href={repo.html_url}>
-    <Avatar avatarUrl={repo.owner.avatar_url} />
-    <p>{repo.full_name}</p>
-  </S.ItemLink>
+  <S.Item>
+    <S.Link href={repo.html_url}>
+      <Avatar avatarUrl={repo.owner.avatar_url} size="17px" />
+    </S.Link>
+    <S.Link href={repo.html_url}>
+      <p>{repo.full_name}</p>
+    </S.Link>
+  </S.Item>
 ));
 
 type RepoListProps = {
@@ -58,14 +61,16 @@ const Repositories = observer(() => {
 
   if (myRepository.isNotFetched) return <Loading />;
   return (
-    <S.Repositories>
-      <Article title="Repositories">
-        <S.SearchInput onFocus={showMore} onChange={handleSearch} />
-        <RepoList searchWord={searchWord} />
-        {!myRepository.showMoreRepo && (
-          <S.ShowMoreButton onClick={showMore}>Show more</S.ShowMoreButton>
-        )}
-      </Article>
+    <S.Repositories label="Repositories" boxStyle={S.BoxStyle}>
+      <S.SearchInput
+        placeholder="Find a repository..."
+        onFocus={showMore}
+        onChange={handleSearch}
+      />
+      <RepoList searchWord={searchWord} />
+      {!myRepository.showMoreRepo && (
+        <S.ShowMoreButton onClick={showMore}>Show more</S.ShowMoreButton>
+      )}
     </S.Repositories>
   );
 });
