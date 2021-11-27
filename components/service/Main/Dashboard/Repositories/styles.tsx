@@ -87,7 +87,7 @@ export const SearchInput = styled.input`
   }
 
   ${media.md} {
-    margin: 0 0 16px;
+    margin: 0 0 18px;
   }
 `;
 
@@ -112,7 +112,7 @@ export const ShowMoreButton = styled.button`
   ${media.md} {
     border-top: initial;
     padding: initial;
-    margin-top: 16px;
+    margin: 20px 0 0;
   }
 `;
 
@@ -123,7 +123,7 @@ export const Item = styled.li`
   gap: 8px;
 
   & + & {
-    margin-top: 12px;
+    margin-top: 8px;
   }
 `;
 
@@ -132,6 +132,7 @@ export const Link = styled.a`
   overflow-wrap: break-word;
   color: ${({ theme }) => theme.color['gray-2']};
   font-size: 14px;
+  line-height: 21px;
 
   :hover,
   :focus {

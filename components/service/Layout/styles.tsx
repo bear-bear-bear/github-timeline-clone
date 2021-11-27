@@ -57,7 +57,6 @@ export const MainLeftSection = styled.section`
     max-width: 350px;
     height: 100vh;
     padding: 32px 32px 0;
-    overflow-y: auto;
     background-color: ${({ theme }) => theme.color['gray-11']};
     border-right: 1px solid ${({ theme }) => theme.color['gray-8']};
   }
