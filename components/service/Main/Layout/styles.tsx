@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import media from '@globalStyles/media';
 
-export const Layout = styled.section`
+export const Container = styled.section`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,21 @@ export const Layout = styled.section`
   }
 `;
 
+export const LeftSection = styled.section`
+  ${media.md} {
+    flex: 1 1 auto;
+    max-width: 350px;
+    border-right: 1px solid ${({ theme }) => theme.color.serviceMainBorderColor};
+  }
+`;
+
+export const LeftSectionStickyWrapper = styled.section`
+  ${media.md} {
+    position: sticky;
+    top: 0;
+  }
+`;
+
 export const CenterSection = styled.section`
   ${media.md} {
     // Temp css for styling -- start
@@ -19,5 +34,15 @@ export const CenterSection = styled.section`
     // Temp css for styling -- end
 
     flex: 1 1 auto;
+  }
+`;
+
+export const RightSection = styled.section`
+  display: none;
+
+  ${media.lg} {
+    flex: 1 1 auto;
+    display: block;
+    max-width: 350px;
   }
 `;
