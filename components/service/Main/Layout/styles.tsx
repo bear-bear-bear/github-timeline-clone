@@ -13,5 +13,11 @@ export const Layout = styled.section`
 `;
 
 export const CenterSection = styled.section`
-  flex: 1;
+  ${media.md} {
+    // Temp css for styling -- start
+    width: 400px;
+    // Temp css for styling -- end
+
+    flex: 1 1 auto;
+  }
 `;
