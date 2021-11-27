@@ -2,9 +2,6 @@ import styled from '@emotion/styled';
 import media from '@globalStyles/media';
 
 export const DesktopHeader = styled.header`
-  display: none;
-  background-color: ${({ theme }) => theme.color.serviceHeaderBgColor};
-
   ${media.md} {
     display: flex;
     justify-content: space-between;

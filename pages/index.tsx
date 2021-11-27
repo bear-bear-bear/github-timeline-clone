@@ -5,8 +5,11 @@ import { withIronSessionSsr } from 'iron-session/next';
 import { StoreProvider } from '@root/stores';
 import { sessionOptions } from '@lib/session';
 import { github } from '@lib/oauth';
-import AppContainer from '@components/service/AppContainer';
-import MainLayout from '@components/service/Main/Layout';
+import {
+  AppContainer,
+  HeaderLayout,
+  MainLayout,
+} from '@components/service/Layout';
 import DesktopHeader from '@components/service/Header/Desktop';
 import MobileHeader from '@components/service/Header/Mobile';
 import Dashboard from '@components/service/Main/Dashboard';
@@ -22,10 +25,15 @@ const Service = observer<{ user: User }>(({ user }) => {
     <StoreProvider>
       <UserContext.Provider value={user}>
         <AppContainer>
-          <>
-            <MobileHeader />
-            <DesktopHeader />
-          </>
+          <HeaderLayout.Container>
+            <HeaderLayout.MobileWrapper>
+              <MobileHeader />
+            </HeaderLayout.MobileWrapper>
+            <HeaderLayout.DesktopWrapper>
+              <DesktopHeader />
+            </HeaderLayout.DesktopWrapper>
+          </HeaderLayout.Container>
+
           <MainLayout.Container>
             <MainLayout.LeftSection>
               <MainLayout.LeftSectionStickyWrapper>
