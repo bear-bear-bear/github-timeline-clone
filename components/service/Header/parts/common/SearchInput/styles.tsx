@@ -12,6 +12,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   width: 18rem;
+  max-width: 40vw;
   height: 2rem;
   outline: none;
   border: 1px solid ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
