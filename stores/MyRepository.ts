@@ -1,5 +1,5 @@
 import { flow, makeAutoObservable } from 'mobx';
-import type { RepositoryInfos, FetchState } from '@typings/oauth';
+import type { RepositoryInfos, FetchState, User } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
 
@@ -7,6 +7,9 @@ export default class MyRepositoryStore {
   rootStore;
   repos: RepositoryInfos = [];
   state: FetchState = 'init';
+  RECENT_SHOWN_COUNT = 7;
+  MAX_SHOWN_COUNT = 50;
+  showMoreRepo = false;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -18,38 +21,33 @@ export default class MyRepositoryStore {
   }
 
   get recentRepos() {
-    const COUNT = 6;
-
-    return [...this.repos]
-      .sort((a, b) => {
-        const distantPast = new Date('1900-01-01');
-        const updateTimeA = new Date(a.updated_at || distantPast).getTime();
-        const updateTimeB = new Date(b.updated_at || distantPast).getTime();
-
-        return updateTimeB - updateTimeA;
-      })
-      .slice(0, COUNT + 1);
+    if (!this.showMoreRepo) {
+      return this.repos.slice(0, this.RECENT_SHOWN_COUNT);
+    }
+    return this.repos.slice(0, this.MAX_SHOWN_COUNT);
   }
 
   findRepos(searchWord: string) {
-    const tokens = searchWord.split('').filter((v) => v !== ' ');
-
-    return this.repos.filter((repo) => {
-      const isContainAllToken = (str: string) =>
-        tokens.every((token) => str.includes(token));
-
-      return isContainAllToken(repo.full_name);
-    });
+    return this.recentRepos.filter((repo) =>
+      repo.full_name.includes(searchWord),
+    );
   }
 
-  fetchRepos = flow(function* (this: MyRepositoryStore, fetchUrl: string) {
+  fetchRepos = flow(function* (this: MyRepositoryStore, user: User) {
     this.repos = [];
     this.state = 'loading';
 
+    const tempPastDate = '1900-01-01';
     try {
       this.repos = yield oauth2Axios
-        .get<RepositoryInfos>(fetchUrl)
-        .then(({ data }) => data);
+        .get<RepositoryInfos>(user.repos_url)
+        .then(({ data }) =>
+          data.sort(
+            (a, b) =>
+              new Date(b.updated_at ?? tempPastDate).getTime() -
+              new Date(a.updated_at ?? tempPastDate).getTime(),
+          ),
+        );
       this.state = 'done';
     } catch (error) {
       console.error(error);

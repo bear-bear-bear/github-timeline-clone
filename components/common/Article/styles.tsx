@@ -10,4 +10,5 @@ export const Box = styled.article`
   padding: 4px 8px;
   border: 1px solid ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
   border-radius: 6px;
+  background-color: ${({ theme }) => theme.color.loginBgColor};
 `;

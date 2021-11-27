@@ -43,8 +43,10 @@ export const MainContainer = styled.section`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.color.serviceMainBgColor};
+  padding: 16px;
 
   ${media.md} {
+    padding: 0;
     flex-direction: row;
   }
 `;
@@ -53,6 +55,7 @@ export const MainLeftSection = styled.section`
   ${media.md} {
     flex: 1 1 auto;
     max-width: 350px;
+    background-color: ${({ theme }) => theme.color.loginBgColor};
     border-right: 1px solid ${({ theme }) => theme.color.serviceMainBorderColor};
   }
 `;
