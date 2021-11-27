@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTheme } from '@emotion/react';
 import GithubIcon from '@components/common/GithubIcon';
 import MoreButton from '@components/service/Header/parts/desktop/MoreButton';
@@ -27,18 +27,42 @@ const DesktopHeader = observer(() => {
     profile: false,
   });
 
+  const allValueToFalse = useCallback(
+    (obj: DropDownState) =>
+      Object.keys(obj).reduce(
+        (acc, curr) => ({ ...acc, [curr]: false }),
+        {} as DropDownState,
+      ),
+    [],
+  );
+
   const toggleDropDownState = useCallback(
     (stateName: keyof DropDownState) => {
-      const falsyState = Object.fromEntries(
-        Object.entries(dropDownState).map(([key]) => [key, false]),
-      );
       setDropDownState((prevState) => ({
-        ...(falsyState as DropDownState),
+        ...allValueToFalse(prevState),
         [stateName]: !prevState[stateName],
       }));
     },
-    [dropDownState],
+    [allValueToFalse],
   );
+
+  useEffect(() => {
+    const closeDetails = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const closestDropDownEl = target.closest('details.dropdown');
+
+      if (closestDropDownEl === null) {
+        setDropDownState((prevState) => allValueToFalse(prevState));
+        return;
+      }
+    };
+
+    window.addEventListener('click', closeDetails, false);
+
+    return () => {
+      window.removeEventListener('click', closeDetails, false);
+    };
+  });
 
   return (
     <HeaderWrapper>

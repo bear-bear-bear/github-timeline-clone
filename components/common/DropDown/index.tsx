@@ -11,7 +11,7 @@ export interface Props extends DetailsHTMLAttributes<HTMLElement> {
 
 const DropDown = observer<Props>(
   ({ SvgIcon, menuFixedWidth, children, ...rest }) => (
-    <S.Details {...rest}>
+    <S.Details {...rest} className="dropdown">
       <summary>
         <SvgIcon />
         <S.DropdownIcon />

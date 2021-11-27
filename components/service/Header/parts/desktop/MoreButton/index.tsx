@@ -31,6 +31,7 @@ const MoreButton = observer<DropDownChildProps>(
   ({ isOpen, toggleDropDownState }) => {
     const handleClick = (e: React.MouseEvent<HTMLDetailsElement>) => {
       e.preventDefault();
+      e.stopPropagation();
       toggleDropDownState('moreButton');
     };
 

@@ -63,6 +63,7 @@ const Profile = observer<DropDownChildProps>(
 
     const handleClick = (e: React.MouseEvent<HTMLDetailsElement>) => {
       e.preventDefault();
+      e.stopPropagation();
       toggleDropDownState('profile');
     };
 
