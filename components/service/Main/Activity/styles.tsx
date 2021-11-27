@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Activity = styled.main`
   // Temp css for styling -- start
-  background: cornflowerblue;
+  border: 1px solid ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
   // Temp css for styling -- end
 `;
 
