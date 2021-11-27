@@ -78,7 +78,7 @@ export const SearchInput = styled.input`
   outline: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.color['gray-7']};
+    color: ${({ theme }) => theme.color['gray-6']};
   }
 
   &:focus {
