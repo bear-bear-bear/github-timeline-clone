@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import media from '@globalStyles/media';
 
 export const Container = styled.article`
   position: relative;
@@ -11,8 +12,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  width: 18rem;
-  max-width: 40vw;
+  width: 100%;
   height: 2rem;
   outline: none;
   border: 1px solid ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
@@ -20,10 +20,8 @@ export const Input = styled.input`
   background-color: ${({ theme }) => theme.color.serviceMainBgColor};
   padding: 0 12px;
   border-radius: 6px;
-  transition: width 0.2s ease-in-out;
 
   &:focus {
-    width: 33.875rem;
     border: 1px solid
       ${({ theme }) => theme.color.serviceHeaderInputFocusedBorderColor};
     border-bottom: none;
@@ -32,5 +30,21 @@ export const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.color.serviceHeaderInputPlaceholderColor};
     letter-spacing: 0.2px;
+  }
+
+  ${media.md} {
+    width: 18rem;
+    transition: width 0.2s ease-in-out;
+
+    &:focus {
+      width: 40vw;
+    }
+  }
+
+  ${media.lg} {
+    &:focus {
+      width: 45vw;
+      max-width: 33.875rem;
+    }
   }
 `;
