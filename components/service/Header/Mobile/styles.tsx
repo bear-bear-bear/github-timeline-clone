@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { HiOutlineMenu } from 'react-icons/hi';
+import { GrMenu } from 'react-icons/gr';
 
 export const MobileHeader = styled.header`
   padding: 1rem;
@@ -11,8 +11,11 @@ export const VisibleSection = styled.section`
   align-items: center;
 `;
 
-export const BurgerIcon = styled(HiOutlineMenu)`
-  color: ${({ theme }) => theme.color.serviceHeaderTextColor};
+export const BurgerIcon = styled(GrMenu)`
   font-size: 1.66rem;
   cursor: pointer;
+
+  path {
+    stroke: ${({ theme }) => theme.color.serviceHeaderTextColor};
+  }
 `;
