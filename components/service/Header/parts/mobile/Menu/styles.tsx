@@ -28,7 +28,14 @@ export const LinkItem = styled.a<{ withAvatar?: boolean }>`
   ${({ withAvatar }) => withAvatar && ItemWithAvatarStyle}
 `;
 
-export const SignOutItem = styled.div<{ withAvatar?: boolean }>`
+export const SignOutButton = styled.button<{ withAvatar?: boolean }>`
+  width: 100%;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  text-align: start;
+  cursor: pointer;
+
   ${ItemStyle}
   ${ItemWithAvatarStyle}
 `;

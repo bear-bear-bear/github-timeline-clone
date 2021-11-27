@@ -9,11 +9,16 @@ export const DropDownItemLink = styled.a`
 
 export const DevideLine = styled.div`
   height: 0.5px;
-  margin: 0.66rem 0;
+  margin: 8px 0;
   background-color: ${({ theme }) => theme.color.serviceHeaderInputBorderColor};
 `;
 
-export const LogoutButton = styled.div`
+export const LogoutButton = styled.button`
+  width: 100%;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  text-align: start;
   cursor: pointer;
 
   ${recommendedItemStyle}

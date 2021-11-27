@@ -57,10 +57,10 @@ const Menu = observer(() => {
         <Avatar avatarUrl={user.avatar_url} size="20px" />
         bear-bear-bear
       </S.LinkItem>
-      <S.SignOutItem>
+      <S.SignOutButton>
         <S.ExitIcon />
         Sign out
-      </S.SignOutItem>
+      </S.SignOutButton>
     </div>
   );
 });
