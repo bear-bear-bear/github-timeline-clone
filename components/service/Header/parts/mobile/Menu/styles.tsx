@@ -13,7 +13,7 @@ const ItemStyle = ({ theme }: { theme: Theme }) => css`
   font-size: 0.92rem;
   line-height: 1.5;
   color: ${theme.color['gray-1']};
-  border-top: 1px solid ${theme.color['gray-6']};
+  border-top: 1px solid ${theme.color['gray-7']};
 `;
 
 const ItemWithAvatarStyle = css`

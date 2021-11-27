@@ -56,7 +56,7 @@ export const MainLeftSection = styled.section`
     flex: 1 1 auto;
     max-width: 350px;
     background-color: ${({ theme }) => theme.color['gray-11']};
-    border-right: 1px solid ${({ theme }) => theme.color['gray-9']};
+    border-right: 1px solid ${({ theme }) => theme.color['gray-10']};
   }
 `;
 

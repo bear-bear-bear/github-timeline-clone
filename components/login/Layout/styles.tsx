@@ -30,7 +30,7 @@ export const Header = styled.header`
 
 export const LoginBox = styled.main`
   width: 300px;
-  border: 1px solid ${({ theme }) => theme.color['gray-7']};
+  border: 1px solid ${({ theme }) => theme.color['gray-8']};
   padding: 20px;
-  background-color: ${({ theme }) => theme.color['gray-9']};
+  background-color: ${({ theme }) => theme.color['gray-10']};
 `;

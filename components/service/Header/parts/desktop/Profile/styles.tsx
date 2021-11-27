@@ -10,7 +10,7 @@ export const DropDownItemLink = styled.a`
 export const DevideLine = styled.div`
   height: 0.5px;
   margin: 8px 0;
-  background-color: ${({ theme }) => theme.color['gray-6']};
+  background-color: ${({ theme }) => theme.color['gray-7']};
 `;
 
 export const LogoutButton = styled.button`

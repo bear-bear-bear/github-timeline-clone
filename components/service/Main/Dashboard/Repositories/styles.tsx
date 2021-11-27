@@ -73,12 +73,12 @@ export const SearchInput = styled.input`
   vertical-align: middle;
   color: ${({ theme }) => theme.color['gray-2']};
   background-color: ${({ theme }) => theme.color['gray-12']};
-  border: 1px solid ${({ theme }) => theme.color['gray-7']};
+  border: 1px solid ${({ theme }) => theme.color['gray-8']};
   border-radius: 6px;
   outline: none;
 
   &::placeholder {
-    color: ${({ theme }) => theme.color['gray-6']};
+    color: ${({ theme }) => theme.color['gray-7']};
   }
 
   &:focus {
@@ -101,7 +101,7 @@ export const ShowMoreButton = styled.button`
   margin: 16px 0 0;
   padding: 16px 8px;
   color: ${({ theme }) => theme.color['gray-5']};
-  border-top: 1px solid ${({ theme }) => theme.color['gray-7']};
+  border-top: 1px solid ${({ theme }) => theme.color['gray-8']};
   font-size: 12px;
 
   :hover,

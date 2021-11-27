@@ -27,7 +27,7 @@ export const DropdownMenu = styled.div<StyleProps>`
   margin: 4px 0 0;
   padding: 4px 0;
   background-color: ${({ theme }) => theme.color['gray-10']};
-  border: 1px solid ${({ theme }) => theme.color['gray-6']};
+  border: 1px solid ${({ theme }) => theme.color['gray-7']};
   border-radius: 6px;
 
   &::before {

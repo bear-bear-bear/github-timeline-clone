@@ -5,7 +5,7 @@ export const SearchList = styled.ul`
   position: absolute;
   z-index: 999;
   background-color: ${({ theme }) => theme.color['gray-12']};
-  border: 1px solid ${({ theme }) => theme.color['gray-6']}; ;
+  border: 1px solid ${({ theme }) => theme.color['gray-7']}; ;
 `;
 
 export const LoadingWrapper = styled.div`

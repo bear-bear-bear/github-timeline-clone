@@ -26,7 +26,7 @@ export const Item = styled.li`
   }
 
   & + & {
-    border-top: 1px solid ${({ theme }) => theme.color['gray-6']};
+    border-top: 1px solid ${({ theme }) => theme.color['gray-7']};
   }
 `;
 

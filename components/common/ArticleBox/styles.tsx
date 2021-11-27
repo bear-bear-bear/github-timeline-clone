@@ -8,7 +8,7 @@ export const DefaultTitle = styled.h2`
 `;
 
 export const Box = styled.div<Pick<Props, 'boxStyle'>>`
-  border: 1px solid ${({ theme }) => theme.color['gray-6']};
+  border: 1px solid ${({ theme }) => theme.color['gray-7']};
   border-radius: 6px;
   margin-top: 8px;
 
