@@ -22,6 +22,7 @@ declare module '@emotion/react' {
       'blue-2': string;
 
       'green-0': string;
+      'green-1': string;
     };
   }
 }

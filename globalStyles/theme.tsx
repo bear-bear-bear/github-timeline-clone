@@ -21,6 +21,7 @@ const theme: Theme = {
     'blue-2': '#0c2d6b',
 
     'green-0': '#238636',
+    'green-1': '#3FB950',
   },
 };
 
