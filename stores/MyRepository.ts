@@ -43,17 +43,10 @@ export default class MyRepositoryStore {
       sort: 'created',
       per_page: '100',
     });
-    const tempPastDate = '1900-01-01';
     try {
       this.repos = yield oauth2Axios
         .get<RepositoryInfo[]>(`${github.API_HOST}/user/repos?${query}`)
-        .then(({ data }) =>
-          data.sort(
-            (a, b) =>
-              new Date(b.updated_at ?? tempPastDate).getTime() -
-              new Date(a.updated_at ?? tempPastDate).getTime(),
-          ),
-        );
+        .then(({ data }) => data);
       this.state = 'done';
     } catch (error) {
       console.error(error);
