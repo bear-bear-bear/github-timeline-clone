@@ -18,4 +18,6 @@ export type RepositoryInfo = components['schemas']['minimal-repository'];
 
 export type Notification = components['schemas']['thread'];
 
+export type Event = components['schemas']['event'];
+
 export type User = components['schemas']['private-user'];
