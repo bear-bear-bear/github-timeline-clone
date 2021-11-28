@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import type { RepositoryInfo } from '@typings/oauth';
+import type { Repository } from '@typings/oauth';
 import { github } from '@lib/oauth';
 import Icon from '../Icon';
 import * as S from './styles';
@@ -27,7 +27,7 @@ const TopItem = observer(({ searchWord }: SearchInfo) => {
   );
 });
 
-const RepositoryItem = observer(({ item }: { item: RepositoryInfo }) => {
+const RepositoryItem = observer(({ item }: { item: Repository }) => {
   return (
     <S.Item>
       <S.LinkWrapper href={item.html_url} rel="noopener noreferrer">
