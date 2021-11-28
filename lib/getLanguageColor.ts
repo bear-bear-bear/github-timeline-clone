@@ -199,6 +199,8 @@ const colors = {
   nesC: '#94B0C7',
 };
 
-export default function getColor(key: keyof typeof colors) {
+export type Language = keyof typeof colors;
+
+export default function getColor(key: Language) {
   return colors[key];
 }
