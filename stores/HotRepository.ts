@@ -30,7 +30,7 @@ export default class HotRepositoryStore {
     this.state = 'loading';
 
     const Week = 7 * 24 * 60 * 60 * 1000;
-    const beforeWeek = new Date(Date.now() - Week).toDateString().split('T')[0];
+    const beforeWeek = new Date(Date.now() - Week).toISOString().split('T')[0];
     const query = qs.stringify({
       q: `created:>${beforeWeek}`,
       sort: 'stars',
@@ -40,8 +40,8 @@ export default class HotRepositoryStore {
 
     try {
       this.repos = yield oauth2Axios
-        .get<Repository[]>(`${github.API_HOST}/search/repositories?${query}`)
-        .then(({ data }) => data);
+        .get(`${github.API_HOST}/search/repositories?${query}`)
+        .then(({ data }) => data.items as Repository[]);
       this.state = 'done';
     } catch (error) {
       console.error(error);
