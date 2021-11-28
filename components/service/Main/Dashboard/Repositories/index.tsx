@@ -2,12 +2,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useUser from '@hooks/useUser';
 import useStore from '@hooks/useStore';
+import { github } from '@lib/oauth';
 import Avatar from '@components/common/Avatar';
 import Loading from '@components/common/Loading';
 import { RepositoryIcon } from '@components/service/Header/parts/common/SearchInput/Icon';
 import type { RepositoryInfo } from '@typings/oauth';
 import * as S from './styles';
-import { github } from '@lib/oauth';
 
 type RepoItemProps = {
   repo: RepositoryInfo;
@@ -68,7 +68,7 @@ const Repositories = observer(() => {
 
   useEffect(() => {
     if (myRepository.isNotFetched) {
-      myRepository.fetchRepos(user);
+      myRepository.fetchRepos();
     }
   });
 

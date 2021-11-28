@@ -1,7 +1,9 @@
+import qs from 'qs';
 import { flow, makeAutoObservable } from 'mobx';
 import type { RepositoryInfos, FetchState, User } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
+import { github } from '@lib/oauth';
 
 export default class MyRepositoryStore {
   rootStore;
@@ -33,14 +35,18 @@ export default class MyRepositoryStore {
     );
   }
 
-  fetchRepos = flow(function* (this: MyRepositoryStore, user: User) {
+  fetchRepos = flow(function* (this: MyRepositoryStore) {
     this.repos = [];
     this.state = 'loading';
 
+    const query = qs.stringify({
+      sort: 'created',
+      per_page: '100',
+    });
     const tempPastDate = '1900-01-01';
     try {
       this.repos = yield oauth2Axios
-        .get<RepositoryInfos>(user.repos_url)
+        .get<RepositoryInfos>(`${github.API_HOST}/user/repos?${query}`)
         .then(({ data }) =>
           data.sort(
             (a, b) =>

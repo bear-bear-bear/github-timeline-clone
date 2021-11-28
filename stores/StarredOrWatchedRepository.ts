@@ -2,6 +2,7 @@ import { flow, makeAutoObservable } from 'mobx';
 import type { RepositoryInfos, FetchState, User } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
+import { github } from '@lib/oauth';
 
 export default class StarredOrWatchedRepositoryStore {
   rootStore;
@@ -65,7 +66,7 @@ export default class StarredOrWatchedRepositoryStore {
 
     const getReposRequest = (endpoint: string) =>
       oauth2Axios
-        .get<RepositoryInfos>(user.url + endpoint)
+        .get<RepositoryInfos>(github.API_HOST + endpoint)
         .then(({ data }) => data);
 
     try {
@@ -73,8 +74,8 @@ export default class StarredOrWatchedRepositoryStore {
         arr.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
 
       this.repos = yield Promise.all([
-        getReposRequest('/starred'),
-        getReposRequest('/subscriptions'),
+        getReposRequest('/user/starred'),
+        getReposRequest('/user/subscriptions'),
       ]).then(([starredRepositoriesByLatest, watchedRepositoriesByOldest]) => {
         return uniqueBy([
           ...starredRepositoriesByLatest,
