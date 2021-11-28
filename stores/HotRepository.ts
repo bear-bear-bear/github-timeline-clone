@@ -22,7 +22,7 @@ export default class HotRepositoryStore {
   get hottestRepos() {
     const RETURN_COUNT = 3;
 
-    return this.repos.slice(0, RETURN_COUNT);
+    return this.repos.filter((repo) => !!repo.language).slice(0, RETURN_COUNT);
   }
 
   fetchRepos = flow(function* (this: HotRepositoryStore) {
