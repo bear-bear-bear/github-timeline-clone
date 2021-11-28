@@ -16,8 +16,10 @@ export const AppContainer = styled.div`
   App header
 */
 
+const trickHeight = '60px'; // 꼼수
 export const HeaderContainer = styled.section`
   background-color: ${({ theme }) => theme.color['gray-10']};
+  height: ${trickHeight};
 `;
 
 export const DesktopHeaderWrapper = styled.section`
@@ -66,7 +68,7 @@ export const MainLeftSectionStickyWrapper = styled.section`
     top: 0;
     height: 100vh;
     overflow-y: auto;
-    padding: 32px 32px 0;
+    padding: 32px;
   }
 `;
 
