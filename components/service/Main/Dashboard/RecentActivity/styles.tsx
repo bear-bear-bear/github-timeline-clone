@@ -8,7 +8,9 @@ export const RecentActivities = styled(Container)`
   margin: 12px 0 24px;
 
   ${media.md} {
-    margin: initial;
+    margin: 16px 0 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid ${({ theme }) => theme.color['gray-7']};
   }
 `;
 
