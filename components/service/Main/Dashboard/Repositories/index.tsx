@@ -5,11 +5,11 @@ import { github } from '@lib/oauth';
 import Avatar from '@components/common/Avatar';
 import Loading from '@components/common/Loading';
 import { RepositoryIcon } from '@components/service/Header/parts/common/SearchInput/Icon';
-import type { Repository } from '@typings/oauth';
+import type { SimpleRepository } from '@typings/oauth';
 import * as S from './styles';
 
 type RepoItemProps = {
-  repo: Repository;
+  repo: SimpleRepository;
 };
 const RepoItem = observer(({ repo }: RepoItemProps) => (
   <S.Item>

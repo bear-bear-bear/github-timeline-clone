@@ -1,13 +1,13 @@
 import qs from 'qs';
 import { flow, makeAutoObservable } from 'mobx';
-import type { Repository, FetchState } from '@typings/oauth';
+import type { SimpleRepository, FetchState } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
 import { github } from '@lib/oauth';
 
 export default class MyRepositoryStore {
   rootStore;
-  repos: Repository[] = [];
+  repos: SimpleRepository[] = [];
   state: FetchState = 'init';
   RECENT_SHOWN_COUNT = 7;
   MAX_SHOWN_COUNT = 50;
@@ -45,7 +45,7 @@ export default class MyRepositoryStore {
     });
     try {
       this.repos = yield oauth2Axios
-        .get<Repository[]>(`${github.API_HOST}/user/repos?${query}`)
+        .get<SimpleRepository[]>(`${github.API_HOST}/user/repos?${query}`)
         .then(({ data }) => data);
       this.state = 'done';
     } catch (error) {

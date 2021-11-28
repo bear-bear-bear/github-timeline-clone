@@ -4,10 +4,10 @@ import RecentActivity from './RecentActivity';
 
 const Dashboard = observer(() => {
   return (
-    <article>
+    <aside>
       <Repositories />
       <RecentActivity />
-    </article>
+    </aside>
   );
 });
 

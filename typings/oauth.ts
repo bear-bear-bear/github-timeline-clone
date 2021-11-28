@@ -33,7 +33,12 @@ export type ParsedGetAccessTokenResponseQuery =
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
-export type Repositories = Endpoints['GET /user/repos']['response']['data'];
+export type SimpleRepositories =
+  Endpoints['GET /user/repos']['response']['data'];
+export type SimpleRepository = Unpacked<SimpleRepositories>;
+
+export type Repositories =
+  Endpoints['GET /search/repositories']['response']['data'];
 export type Repository = Unpacked<Repositories>;
 
 export type Notifications = Endpoints['GET /notifications']['response']['data'];

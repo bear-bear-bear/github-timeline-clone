@@ -1,12 +1,12 @@
 import { flow, makeAutoObservable } from 'mobx';
-import type { Repository, FetchState, User } from '@typings/oauth';
+import type { SimpleRepository, FetchState, User } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
 import { github } from '@lib/oauth';
 
 export default class StarredOrWatchedRepositoryStore {
   rootStore;
-  repos: Repository[] = [];
+  repos: SimpleRepository[] = [];
   state: FetchState = 'init';
   login: User['login'] = '';
   SEARCH_RESULT_COUNT = 7;
@@ -66,7 +66,7 @@ export default class StarredOrWatchedRepositoryStore {
 
     const getReposRequest = (endpoint: string) =>
       oauth2Axios
-        .get<Repository[]>(github.API_HOST + endpoint)
+        .get<SimpleRepository[]>(github.API_HOST + endpoint)
         .then(({ data }) => data);
 
     try {
