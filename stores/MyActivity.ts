@@ -34,7 +34,9 @@ export default class MyActivityStore {
 
     try {
       this.activities = yield oauth2Axios
-        .get<Event[]>(`${github.API_HOST}/user/${user.login}/events`)
+        .get<Event[]>(
+          `${github.API_HOST}/user/${user.login}/events?per_page=100`,
+        )
         .then(({ data }) => data);
       this.state = 'done';
     } catch (error) {

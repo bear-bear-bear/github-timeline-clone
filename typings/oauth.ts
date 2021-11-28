@@ -1,5 +1,4 @@
-// import type { Endpoints } from '@octokit/types';
-import { components } from '@octokit/openapi-types';
+import type { Endpoints } from '@octokit/types';
 
 export type FetchState = 'init' | 'loading' | 'done' | 'error';
 
@@ -14,10 +13,16 @@ export type ParsedGetAccessTokenResponseQuery =
       error_description: string;
     };
 
-export type RepositoryInfo = components['schemas']['minimal-repository'];
+type Unpacked<T> = T extends (infer U)[] ? U : T;
 
-export type Notification = components['schemas']['thread'];
+export type Repositories = Endpoints['GET /user/repos']['response']['data'];
+export type Repository = Unpacked<Repositories>;
 
-export type Event = components['schemas']['event'];
+export type Notifications = Endpoints['GET /notifications']['response']['data'];
+export type Notification = Unpacked<Notifications>;
 
-export type User = components['schemas']['private-user'];
+export type Events =
+  Endpoints['GET /users/{username}/events']['response']['data'];
+export type Event = Unpacked<Events>;
+
+export type User = Endpoints['GET /user']['response']['data'];
