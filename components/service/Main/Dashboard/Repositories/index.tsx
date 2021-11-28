@@ -70,7 +70,7 @@ const Repositories = observer(() => {
     }
   });
 
-  if (myRepository.isNotFetched) return <Loading />;
+  if (myRepository.isNotFetched) return <Loading size="32px" withWrapper />;
   return (
     <S.Repositories BoxLabel={BoxLabel} boxStyle={S.BoxStyle}>
       <S.SearchInput

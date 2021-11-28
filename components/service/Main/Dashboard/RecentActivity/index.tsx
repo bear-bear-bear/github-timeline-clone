@@ -54,7 +54,7 @@ const RecentActivity = observer(() => {
     }
   });
 
-  if (myActivity.isNotFetched) return <Loading />;
+  if (myActivity.isNotFetched) return <Loading size="32px" withWrapper />;
   return (
     <S.RecentActivities BoxLabel={BoxLabel} boxStyle={S.BoxStyle}>
       <div>

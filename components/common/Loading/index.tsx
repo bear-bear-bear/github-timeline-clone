@@ -5,10 +5,17 @@ import * as S from './styles';
 export type Props = {
   color?: SVGAttributes<HTMLOrSVGElement>['color'];
   size?: SVGAttributes<HTMLOrSVGElement>['fontSize'];
+  withWrapper?: boolean;
 };
 
-const Loading = observer<Props>(({ size, color }) => {
-  return <S.Loading size={size} color={color} />;
+const Loading = observer<Props>(({ size, color, withWrapper }) => {
+  return withWrapper ? (
+    <S.Wrapper>
+      <S.Loading size={size} color={color} />
+    </S.Wrapper>
+  ) : (
+    <S.Loading size={size} color={color} />
+  );
 });
 
 export default Loading;

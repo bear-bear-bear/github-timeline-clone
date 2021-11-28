@@ -23,3 +23,9 @@ export const Loading = styled(ImSpinner2)<Props>`
   will-change: transform;
   animation: ${loadingAnimation} 1.5s ease-in infinite;
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+`;
