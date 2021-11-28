@@ -19,23 +19,30 @@ export default class MyActivityStore {
   }
 
   get recentActivities() {
-    const COUNT = 3;
+    const RETURN_COUNT = 3;
+    const hiddenEvents = ['CreateEvent', 'PushEvent', 'WatchEvent'];
+
+    const WEEK = 7 * 24 * 60 * 60 * 1000;
+    const before3Weeks = new Date(Date.now() - 3 * WEEK);
 
     return this.activities
-      .filter((activity) => {
-        return activity.type !== 'PushEvent' && activity.type !== 'WatchEvent';
-      })
-      .slice(0, COUNT);
+      .filter(
+        (activity) =>
+          activity.type &&
+          !hiddenEvents.includes(activity.type) &&
+          new Date(activity.created_at as string) > before3Weeks,
+      )
+      .slice(0, RETURN_COUNT);
   }
 
-  fetchRepos = flow(function* (this: MyActivityStore, user: User) {
+  fetchActivities = flow(function* (this: MyActivityStore, user: User) {
     this.activities = [];
     this.state = 'loading';
 
     try {
       this.activities = yield oauth2Axios
         .get<Event[]>(
-          `${github.API_HOST}/user/${user.login}/events?per_page=100`,
+          `${github.API_HOST}/users/${user.login}/events?per_page=100`,
         )
         .then(({ data }) => data);
       this.state = 'done';
