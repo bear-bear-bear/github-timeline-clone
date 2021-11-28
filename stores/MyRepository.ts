@@ -1,13 +1,13 @@
 import qs from 'qs';
 import { flow, makeAutoObservable } from 'mobx';
-import type { RepositoryInfos, FetchState, User } from '@typings/oauth';
+import type { RepositoryInfo, FetchState } from '@typings/oauth';
 import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
 import { github } from '@lib/oauth';
 
 export default class MyRepositoryStore {
   rootStore;
-  repos: RepositoryInfos = [];
+  repos: RepositoryInfo[] = [];
   state: FetchState = 'init';
   RECENT_SHOWN_COUNT = 7;
   MAX_SHOWN_COUNT = 50;
@@ -46,7 +46,7 @@ export default class MyRepositoryStore {
     const tempPastDate = '1900-01-01';
     try {
       this.repos = yield oauth2Axios
-        .get<RepositoryInfos>(`${github.API_HOST}/user/repos?${query}`)
+        .get<RepositoryInfo[]>(`${github.API_HOST}/user/repos?${query}`)
         .then(({ data }) =>
           data.sort(
             (a, b) =>
