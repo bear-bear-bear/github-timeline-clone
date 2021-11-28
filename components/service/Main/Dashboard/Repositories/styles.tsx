@@ -22,10 +22,12 @@ export const TopButtonLink = styled(ButtonLink)`
 
   svg {
     font-size: 18px;
+    fill: ${({ theme }) => theme.color['gray-0']};
   }
 
   ${media.md} {
     display: flex;
+    align-items: center;
   }
 `;
 
