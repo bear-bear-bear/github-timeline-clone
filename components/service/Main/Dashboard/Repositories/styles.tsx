@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { VscRepo } from 'react-icons/vsc';
 import type { Theme } from '@emotion/react';
 import ButtonLink from '@components/common/ButtonLink';
 import media from '@globalStyles/media';
@@ -39,8 +38,12 @@ export const BoxLabel = styled.header`
 
   h2 {
     font-weight: 400;
-    color: ${({ theme }) => theme.color['gray-2']};
+    color: ${({ theme }) => theme.color['gray-1']};
     letter-spacing: 0.5px;
+
+    ${media.sm} {
+      color: ${({ theme }) => theme.color['gray-2']};
+    }
 
     ${media.md} {
       font-weight: 500;
@@ -132,7 +135,7 @@ export const Item = styled.li`
 export const Link = styled.a`
   word-break: break-word;
   overflow-wrap: break-word;
-  color: ${({ theme }) => theme.color['gray-2']};
+  color: ${({ theme }) => theme.color['gray-1']};
   font-size: 14px;
   line-height: 21px;
 
@@ -140,8 +143,8 @@ export const Link = styled.a`
   :focus {
     color: ${({ theme }) => theme.color['blue-0']};
   }
-`;
 
-export const RepositoryIcon = styled(VscRepo)`
-  color: ${({ theme }) => theme.color['gray-0']};
+  ${media.sm} {
+    color: ${({ theme }) => theme.color['gray-2']};
+  }
 `;

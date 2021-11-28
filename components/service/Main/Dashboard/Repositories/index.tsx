@@ -1,16 +1,15 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import useUser from '@hooks/useUser';
 import useStore from '@hooks/useStore';
 import { github } from '@lib/oauth';
 import Avatar from '@components/common/Avatar';
 import Loading from '@components/common/Loading';
 import { RepositoryIcon } from '@components/service/Header/parts/common/SearchInput/Icon';
-import type { RepositoryInfo } from '@typings/oauth';
+import type { Repository } from '@typings/oauth';
 import * as S from './styles';
 
 type RepoItemProps = {
-  repo: RepositoryInfo;
+  repo: Repository;
 };
 const RepoItem = observer(({ repo }: RepoItemProps) => (
   <S.Item>
@@ -54,7 +53,6 @@ const BoxLabel = observer(() => (
 ));
 
 const Repositories = observer(() => {
-  const user = useUser();
   const { myRepository } = useStore();
   const [searchWord, setSearchWord] = useState<string>('');
 
