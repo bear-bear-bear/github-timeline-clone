@@ -8,7 +8,7 @@ export interface Props extends HTMLAttributes<HTMLElement> {
   boxStyle?: SerializedStyles | ((prop: any) => SerializedStyles);
 }
 
-const ArticleBox = observer<Props>(
+const Container = observer<Props>(
   ({ children, BoxLabel, boxStyle, ...rest }) => {
     return (
       <article {...rest}>
@@ -24,4 +24,4 @@ const ArticleBox = observer<Props>(
   },
 );
 
-export default ArticleBox;
+export default Container;

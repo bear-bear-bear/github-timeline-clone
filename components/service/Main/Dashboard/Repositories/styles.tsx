@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-import ArticleBox from '@components/common/ArticleBox';
-import media from '@globalStyles/media';
 import { css } from '@emotion/react';
-import type { Theme } from '@emotion/react';
 import { VscRepo } from 'react-icons/vsc';
+import type { Theme } from '@emotion/react';
 import ButtonLink from '@components/common/ButtonLink';
+import media from '@globalStyles/media';
+import Container from '../parts/Container';
 
-export const Repositories = styled(ArticleBox)`
+export const Repositories = styled(Container)`
   margin: 12px 0 24px;
 
   ${media.md} {

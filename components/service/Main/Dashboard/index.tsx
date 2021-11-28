@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react-lite';
-import * as S from './styles';
-import Repositories from '@components/service/Main/Dashboard/Repositories';
+import Repositories from './Repositories';
+import RecentActivity from './RecentActivity';
 
 const Dashboard = observer(() => {
   return (
-    <S.Dashboard>
+    <article>
       <Repositories />
-    </S.Dashboard>
+      <RecentActivity />
+    </article>
   );
 });
 
