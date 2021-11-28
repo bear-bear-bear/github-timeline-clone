@@ -4,7 +4,7 @@ import { SerializedStyles } from '@emotion/utils';
 import * as S from './styles';
 
 export interface Props extends HTMLAttributes<HTMLElement> {
-  BoxLabel: string | FC;
+  BoxLabel: FC;
   boxStyle?: SerializedStyles | ((prop: any) => SerializedStyles);
 }
 
@@ -12,12 +12,7 @@ const Container = observer<Props>(
   ({ children, BoxLabel, boxStyle, ...rest }) => {
     return (
       <article {...rest}>
-        {typeof BoxLabel === 'string' ? (
-          <S.DefaultTitle>{BoxLabel}</S.DefaultTitle>
-        ) : (
-          <BoxLabel />
-        )}
-
+        <BoxLabel />
         <S.Box boxStyle={boxStyle}>{children}</S.Box>
       </article>
     );
