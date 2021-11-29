@@ -4,7 +4,7 @@ import * as S from './styles';
 const Activity = observer(() => {
   return (
     <S.Activity>
-      <S.TempList>가운데</S.TempList>
+      <S.Title>All activity</S.Title>
     </S.Activity>
   );
 });

@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
 
-export const Activity = styled.main`
-  // Temp css for styling -- start
-  border: 1px solid ${({ theme }) => theme.color['gray-7']};
-  // Temp css for styling -- end
-`;
+export const Activity = styled.main``;
 
-// Temp css for styling -- start
-export const TempList = styled.ul`
-  height: 3000px;
+export const Title = styled.h2`
+  padding-top: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  overflow-wrap: break-word;
+  color: ${({ theme }) => theme.color['gray-2']};
 `;
-// Temp css for styling -- end

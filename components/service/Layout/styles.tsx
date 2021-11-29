@@ -68,11 +68,9 @@ export const MainLeftSection = styled.section`
 
 export const MainCenterSection = styled.section`
   ${media.md} {
-    // Temp css for styling -- start
-    width: 400px;
-    // Temp css for styling -- end
-
     flex: 1 1 auto;
+    margin-top: 16px;
+    padding: 0 32px;
   }
 `;
 
