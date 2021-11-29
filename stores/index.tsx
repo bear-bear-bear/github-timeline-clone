@@ -5,6 +5,7 @@ import StarredOrWatchedRepositoryStore from './StarredOrWatchedRepository';
 import NotificationStateStore from './NotificationState';
 import MyActivityStore from './MyActivity';
 import HotRepositoryStore from './HotRepository';
+import OthersActivityStore from './OthersActivity';
 
 export class RootStore {
   myRepository;
@@ -12,6 +13,7 @@ export class RootStore {
   notificationState;
   myActivity;
   hotRepository;
+  othersActivity;
 
   constructor() {
     this.myRepository = new MyRepositoryStore(this);
@@ -19,6 +21,7 @@ export class RootStore {
     this.notificationState = new NotificationStateStore(this);
     this.myActivity = new MyActivityStore(this);
     this.hotRepository = new HotRepositoryStore(this);
+    this.othersActivity = new OthersActivityStore(this);
   }
 }
 export const rootStore = new RootStore();
