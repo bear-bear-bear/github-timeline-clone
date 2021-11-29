@@ -10,6 +10,7 @@ export const AppContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `;
 
 /*
@@ -44,11 +45,11 @@ export const MainContainer = styled.section`
   flex-direction: column;
   background-color: ${({ theme }) => theme.color['gray-12']};
   padding: 16px;
-  overflow: auto;
 
   ${media.md} {
     padding: 0;
     flex-direction: row;
+    overflow: auto;
   }
 `;
 
@@ -76,12 +77,13 @@ export const MainCenterSection = styled.section`
 
 export const MainRightSection = styled.section`
   display: none;
-  transition: margin-right 0.2s ease-in-out;
 
   ${media.lg} {
     flex: 1 1 auto;
     display: block;
     max-width: 350px;
+    will-change: margin-right;
+    transition: margin-right 0.2s ease-in-out;
   }
 
   @media only screen and (min-width: 1400px) {
