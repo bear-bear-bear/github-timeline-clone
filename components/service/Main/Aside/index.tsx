@@ -1,8 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import * as S from './styles';
+import ExploreRepositories from './ExploreRepositories';
 
 const Aside = observer(() => {
-  return <S.Aside>오른쪽</S.Aside>;
+  return (
+    <aside>
+      <ExploreRepositories />
+    </aside>
+  );
 });
 
 export default Aside;

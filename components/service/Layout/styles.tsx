@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import media from '@globalStyles/media';
+import media, { mediaBreakpoints } from '@globalStyles/media';
 
 /*
   App base container
@@ -16,10 +16,8 @@ export const AppContainer = styled.div`
   App header
 */
 
-const trickHeight = '60px'; // 꼼수
 export const HeaderContainer = styled.section`
   background-color: ${({ theme }) => theme.color['gray-10']};
-  height: ${trickHeight};
 `;
 
 export const DesktopHeaderWrapper = styled.section`
@@ -84,10 +82,19 @@ export const MainCenterSection = styled.section`
 
 export const MainRightSection = styled.section`
   display: none;
+  transition: margin-right 0.2s ease-in-out;
 
   ${media.lg} {
     flex: 1 1 auto;
     display: block;
     max-width: 350px;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    margin-right: 5vw;
+  }
+
+  @media only screen and (min-width: 1600px) {
+    margin-right: 10vw;
   }
 `;
