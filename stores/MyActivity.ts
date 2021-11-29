@@ -1,12 +1,12 @@
 import { flow, makeAutoObservable } from 'mobx';
 import oauth2Axios from '@lib/axios';
 import { github } from '@lib/oauth';
-import type { Event, FetchState, User } from '@typings/oauth';
+import type { MyEvent, FetchState, User } from '@typings/oauth';
 import type { RootStore } from './index';
 
 export default class MyActivityStore {
   rootStore;
-  activities: Event[] = [];
+  activities: MyEvent[] = [];
   state: FetchState = 'init';
 
   constructor(rootStore: RootStore) {
@@ -41,7 +41,7 @@ export default class MyActivityStore {
 
     try {
       this.activities = yield oauth2Axios
-        .get<Event[]>(
+        .get<MyEvent[]>(
           `${github.API_HOST}/users/${user.login}/events?per_page=100`,
         )
         .then(({ data }) => data);

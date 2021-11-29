@@ -1,22 +1,19 @@
 import '@octokit/types';
 import type { Endpoints } from '@octokit/types';
-import { CustomEvent } from '@octokit/types';
 
-declare module '@octokit/types' {
-  export type CustomEvent = {
-    payload: {
-      // 응답엔 있지만 타입 선언엔 누락된 타입들 임시 보완
-      pull_request?: {
-        title: string;
-        html_url: string;
-      };
-      review?: {
-        title: string;
-        html_url: string;
-      };
+type CustomEvent = {
+  payload: {
+    // 응답엔 있지만 타입 선언엔 누락된 타입들 임시 보완
+    pull_request?: {
+      title: string;
+      html_url: string;
+    };
+    review?: {
+      title: string;
+      html_url: string;
     };
   };
-}
+};
 
 export type FetchState = 'init' | 'loading' | 'done' | 'error';
 
@@ -37,15 +34,24 @@ export type SimpleRepositories =
   Endpoints['GET /user/repos']['response']['data'];
 export type SimpleRepository = Unpacked<SimpleRepositories>;
 
-export type Repositories =
+export type OwnerRepository =
+  Endpoints['GET /repos/{owner}/{repo}']['response']['data'];
+export type SearchedRepositories =
   Endpoints['GET /search/repositories']['response']['data']['items'];
-export type Repository = Unpacked<Repositories>;
+export type Repository = Unpacked<SearchedRepositories> | OwnerRepository;
 
 export type Notifications = Endpoints['GET /notifications']['response']['data'];
 export type Notification = Unpacked<Notifications>;
 
-export type Events =
+export type MyEvents =
   Endpoints['GET /users/{username}/events']['response']['data'];
-export type Event = Unpacked<Events> & CustomEvent;
+export type MyEvent = Unpacked<MyEvents> & CustomEvent;
+
+export type OthersEvents =
+  Endpoints['GET /users/{username}/received_events']['response']['data'];
+export type OthersEvent = Unpacked<OthersEvents>;
+export type CustomOthersEvent = Unpacked<OthersEvents> & {
+  repo: Repository;
+};
 
 export type User = Endpoints['GET /user']['response']['data'];
