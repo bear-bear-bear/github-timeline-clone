@@ -11,10 +11,12 @@ export const github = {
   API_HOST: 'https://api.github.com',
 
   get AUTHORIZATION_URI() {
+    const scope = ['read:user', 'public_repo', 'notifications'];
+
     return `${this.HOST}/login/oauth/authorize?${qs.stringify({
       client_id: NEXT_PUBLIC_CLIENT_ID,
       redirect_uri: NEXT_PUBLIC_REDIRECT_URI,
-      scope: 'read:user notifications',
+      scope: scope.join(' '),
     })}`;
   },
 
