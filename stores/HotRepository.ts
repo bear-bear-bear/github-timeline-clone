@@ -1,13 +1,13 @@
 import { flow, makeAutoObservable } from 'mobx';
 import oauth2Axios from '@lib/axios';
 import { github } from '@lib/oauth';
-import type { Repository, FetchState } from '@typings/oauth';
+import type { SearchedRepository, FetchState } from '@typings/oauth';
 import type { RootStore } from './index';
 import qs from 'qs';
 
 export default class HotRepositoryStore {
   rootStore;
-  repos: Repository[] = [];
+  repos: SearchedRepository[] = [];
   state: FetchState = 'init';
 
   constructor(rootStore: RootStore) {
@@ -41,7 +41,7 @@ export default class HotRepositoryStore {
     try {
       this.repos = yield oauth2Axios
         .get(`${github.API_HOST}/search/repositories?${query}`)
-        .then(({ data }) => data.items as Repository[]);
+        .then(({ data }) => data.items as SearchedRepository[]);
       this.state = 'done';
     } catch (error) {
       console.error(error);

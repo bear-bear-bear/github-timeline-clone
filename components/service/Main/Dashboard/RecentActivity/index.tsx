@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import Loading from '@components/common/Loading';
-import type { Event } from '@typings/oauth';
+import type { MyEvent } from '@typings/oauth';
 import * as S from './styles';
 import { useEffect } from 'react';
 import useUser from '@hooks/useUser';
@@ -17,7 +17,7 @@ const sliceItemContent = (str: string) => {
 };
 
 type ActivityItemProps = {
-  activity: Event;
+  activity: MyEvent;
 };
 const ActivityItem = observer(({ activity }: ActivityItemProps) => {
   const eventType = (activity.type as string).includes('Pull') // 야매.. 깃허브에서 이벤트 유니온 타입을 제공하지 않음

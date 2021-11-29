@@ -5,11 +5,11 @@ import Loading from '@components/common/Loading';
 import Star from '@components/common/Star';
 import Language from '@components/common/Language';
 import type { Language as LanguageType } from '@lib/getLanguageColor';
-import type { Repository } from '@typings/oauth';
+import type { SearchedRepository } from '@typings/oauth';
 import * as S from './styles';
 
 type RepoItemProps = {
-  repo: Repository;
+  repo: SearchedRepository;
 };
 const RepoItem = observer<RepoItemProps>(({ repo }) => (
   <S.Item>
