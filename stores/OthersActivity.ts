@@ -1,28 +1,14 @@
+import qs from 'qs';
 import { flow, makeAutoObservable } from 'mobx';
 import oauth2Axios from '@lib/axios';
-import { github } from '@lib/oauth';
-import type {
-  OthersEvent,
-  FetchState,
-  User,
-  OwnerRepository,
-  EventType,
-} from '@typings/oauth';
+import type { OthersEvent, FetchState, User, EventType } from '@typings/oauth';
 import type { RootStore } from './index';
-import qs from 'qs';
-
-type ActivityIndex = number;
-
-function assertFulfilled<T>(
-  item: PromiseSettledResult<T>,
-): item is PromiseFulfilledResult<T> {
-  return item.status === 'fulfilled';
-}
 
 export default class OthersActivityStore {
   rootStore;
   activities: OthersEvent[] = [];
   state: FetchState = 'init';
+  initialFetchDone = false;
   isFetchedAllData = false;
   currentPage = 1;
   PER_PAGE = 100;
@@ -88,9 +74,10 @@ export default class OthersActivityStore {
         this.isFetchedAllData = true;
       }
 
-      this.activities = receivedActivities;
+      this.activities = [...this.activities, ...receivedActivities];
       this.state = 'done';
-      this.currentPage += 1;
+      this.initialFetchDone = true;
+      this.currentPage++;
     } catch (error) {
       console.error(error);
       this.state = 'error';

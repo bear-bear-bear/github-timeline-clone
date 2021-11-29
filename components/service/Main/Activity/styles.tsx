@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Activity = styled.main`
   // temp style
-  & * {
+  p {
     color: ${({ theme }) => theme.color['gray-2']};
   }
   // temp style
