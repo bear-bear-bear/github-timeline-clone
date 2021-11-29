@@ -13,7 +13,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   width: 100%;
-  height: 2rem;
+  height: 30px;
   outline: none;
   border: 1px solid ${({ theme }) => theme.color['gray-7']};
   color: ${({ theme }) => theme.color['gray-1']};
@@ -32,7 +32,7 @@ export const Input = styled.input`
   }
 
   ${media.md} {
-    width: 18rem;
+    width: 272px;
     transition: width 0.2s ease-in-out;
 
     &:focus {

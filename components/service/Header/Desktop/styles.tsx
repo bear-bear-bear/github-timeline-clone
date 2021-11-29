@@ -17,7 +17,7 @@ export const DesktopHeader = styled.header`
 export const LeftSection = styled.section`
   display: flex;
   align-items: center;
-  gap: 0.66rem;
+  gap: 0.95rem;
 `;
 
 export const RightSection = styled.section`

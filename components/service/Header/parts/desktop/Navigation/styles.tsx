@@ -20,7 +20,7 @@ export const Navigation = styled.nav`
       }
       ${media.lg} {
         ::after {
-          content: ' Requests';
+          content: ' requests';
         }
       }
     }
