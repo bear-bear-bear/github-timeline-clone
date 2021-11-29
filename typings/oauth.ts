@@ -38,7 +38,7 @@ export type SimpleRepositories =
 export type SimpleRepository = Unpacked<SimpleRepositories>;
 
 export type Repositories =
-  Endpoints['GET /search/repositories']['response']['data'];
+  Endpoints['GET /search/repositories']['response']['data']['items'];
 export type Repository = Unpacked<Repositories>;
 
 export type Notifications = Endpoints['GET /notifications']['response']['data'];
