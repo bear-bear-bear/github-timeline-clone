@@ -11,9 +11,17 @@ import type {
 import type { RootStore } from './index';
 import qs from 'qs';
 
+type ActivityIndex = number;
+
+function assertFulfilled<T>(
+  item: PromiseSettledResult<T>,
+): item is PromiseFulfilledResult<T> {
+  return item.status === 'fulfilled';
+}
+
 export default class OthersActivityStore {
   rootStore;
-  activities: (OthersEvent | OthersEvent[])[] = [];
+  activities: OthersEvent[] = [];
   state: FetchState = 'init';
   isFetchedAllData = false;
   currentPage = 1;
@@ -28,15 +36,46 @@ export default class OthersActivityStore {
     return this.state === 'init' || this.state === 'loading';
   }
 
-  fetchNextActivities = flow(function* (
-    this: OthersActivityStore,
-    user: User,
-    page: number,
-  ) {
+  get processedActivities() {
+    const passTypes: EventType[] = ['PushEvent', 'CreateEvent', 'WatchEvent'];
+
+    return this.activities.reduce((acc, currActivity) => {
+      const currType = currActivity.type;
+      const currActorId = currActivity.actor.id;
+
+      if (!passTypes.includes(currType)) {
+        return acc; // type 필터링
+      }
+
+      const lastItem = acc.pop();
+      if (!lastItem) {
+        return [currActivity]; // 순환의 시작
+      }
+
+      // type과 actor가 같은 항목끼리 배열로 래핑
+      if (!Array.isArray(lastItem)) {
+        if (
+          !(lastItem.type === currType && lastItem.actor.id === currActorId)
+        ) {
+          return [...acc, lastItem, currActivity];
+        }
+        return [...acc, [lastItem, currActivity]];
+      }
+
+      if (
+        !(lastItem[0].type === currType && lastItem[0].actor.id === currActorId)
+      ) {
+        return [...acc, lastItem, currActivity];
+      }
+      return [...acc, [...lastItem, currActivity]];
+    }, [] as (OthersEvent | OthersEvent[])[]);
+  }
+
+  fetchNextActivities = flow(function* (this: OthersActivityStore, user: User) {
     this.state = 'loading';
 
     const query = qs.stringify({
-      page,
+      page: this.currentPage,
       per_page: this.PER_PAGE,
     });
 
@@ -49,60 +88,7 @@ export default class OthersActivityStore {
         this.isFetchedAllData = true;
       }
 
-      const repoDetailInfoRequests = receivedActivities.map(({ repo }) =>
-        oauth2Axios
-          .get<OwnerRepository>(`${github.API_HOST}/repos/${repo.name}`)
-          .then(({ data }) => data),
-      );
-
-      const repoDetailInfos: OwnerRepository[] = yield Promise.all(
-        repoDetailInfoRequests,
-      ).then((results) => results);
-
-      const activitiesWithDetailRepoInfo: OthersEvent[] =
-        receivedActivities.map((activity, i) => ({
-          ...activity,
-          repo: repoDetailInfos[i],
-        }));
-
-      const passTypes: EventType[] = ['PushEvent', 'CreateEvent', 'WatchEvent'];
-      const processedActivities = activitiesWithDetailRepoInfo.reduce(
-        (acc, currActivity) => {
-          const currType = currActivity.type;
-          const currActorId = currActivity.actor.id;
-
-          if (!passTypes.includes(currType)) {
-            return acc; // type 필터링
-          }
-
-          const lastItem = acc[acc.length - 1];
-
-          // type과 actor가 같은 항목끼리 배열로 래핑
-          if (!Array.isArray(lastItem)) {
-            if (
-              !(lastItem.type === currType && lastItem.actor.id === currActorId)
-            ) {
-              return acc.concat(currActivity);
-            }
-            const nextItem = [acc.pop() as OthersEvent, currActivity];
-            return acc.concat(nextItem);
-          }
-
-          if (
-            !(
-              lastItem[0].type === currType &&
-              lastItem[0].actor.id === currActorId
-            )
-          ) {
-            return acc.concat(currActivity);
-          }
-          const nextItem = [...(acc.pop() as OthersEvent[]), currActivity];
-          return acc.concat(nextItem);
-        },
-        [] as (OthersEvent | OthersEvent[])[],
-      );
-
-      this.activities.concat(processedActivities);
+      this.activities = receivedActivities;
       this.state = 'done';
       this.currentPage += 1;
     } catch (error) {
