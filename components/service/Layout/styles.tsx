@@ -44,6 +44,7 @@ export const MainContainer = styled.section`
   flex-direction: column;
   background-color: ${({ theme }) => theme.color['gray-12']};
   padding: 16px;
+  overflow: auto;
 
   ${media.md} {
     padding: 0;
@@ -53,20 +54,15 @@ export const MainContainer = styled.section`
 
 export const MainLeftSection = styled.section`
   ${media.md} {
-    flex: 1 1 auto;
     max-width: 350px;
-    background-color: ${({ theme }) => theme.color['gray-11']};
-    border-right: 1px solid ${({ theme }) => theme.color['gray-10']};
-  }
-`;
-
-export const MainLeftSectionStickyWrapper = styled.section`
-  ${media.md} {
+    flex: 1 1 auto;
+    justify-self: flex-start;
     position: sticky;
     top: 0;
-    height: 100vh;
     overflow-y: auto;
     padding: 32px;
+    background-color: ${({ theme }) => theme.color['gray-11']};
+    border-right: 1px solid ${({ theme }) => theme.color['gray-10']};
   }
 `;
 

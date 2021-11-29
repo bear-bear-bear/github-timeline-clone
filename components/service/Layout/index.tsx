@@ -4,15 +4,13 @@ import type { Theme } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 import * as S from './styles';
 
-const LeftSectionStickyWrapper: FC = ({ children }) => {
+const MainLeftSection: FC = ({ children }) => {
   const handleScroll = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
   };
 
   return (
-    <S.MainLeftSectionStickyWrapper onScroll={handleScroll}>
-      {children}
-    </S.MainLeftSectionStickyWrapper>
+    <S.MainLeftSection onScroll={handleScroll}>{children}</S.MainLeftSection>
   );
 };
 
@@ -32,8 +30,7 @@ export const HeaderLayout = {
 
 export const MainLayout = {
   Container: withObserver(S.MainContainer),
-  LeftSection: withObserver(S.MainLeftSection),
-  LeftSectionStickyWrapper: withObserver(LeftSectionStickyWrapper),
+  LeftSection: withObserver(MainLeftSection),
   CenterSection: withObserver(S.MainCenterSection),
   RightSection: withObserver(S.MainRightSection),
 };

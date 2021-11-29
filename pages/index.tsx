@@ -36,9 +36,7 @@ const Service = observer<{ user: User }>(({ user }) => {
 
           <MainLayout.Container>
             <MainLayout.LeftSection>
-              <MainLayout.LeftSectionStickyWrapper>
-                <Dashboard />
-              </MainLayout.LeftSectionStickyWrapper>
+              <Dashboard />
             </MainLayout.LeftSection>
             <MainLayout.CenterSection>
               <Activity />
