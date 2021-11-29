@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Footer = styled.footer`
   // Temp css for styling -- start
-  background-color: deeppink;
+  margin-top: 1rem;
+  background-color: ${({ theme }) => theme.color['gray-10']};
   min-height: 20rem;
-  // Temp css for styling -- end
 `;
