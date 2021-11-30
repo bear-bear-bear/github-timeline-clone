@@ -19,7 +19,7 @@ export default class OthersActivityStore {
   initialFetchDone = false;
   isFetchedAllData = false;
   currentPage = 1;
-  PER_PAGE = 60;
+  PER_PAGE = 5;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
