@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import media, { mediaBreakpoints } from '@globalStyles/media';
+import media from '@globalStyles/media';
 
 /*
   App base container
@@ -83,7 +83,7 @@ export const MainRightSection = styled.section`
     display: block;
     max-width: 350px;
     will-change: margin-right;
-    transition: margin-right 0.2s ease-in-out;
+    transition: margin-right 0.1s ease-in-out;
   }
 
   @media only screen and (min-width: 1400px) {
