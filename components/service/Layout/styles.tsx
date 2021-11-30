@@ -1,5 +1,18 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import media from '@globalStyles/media';
+
+const scrollbarStyle = () => css`
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: #424242;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #7b7b7b;
+    box-shadow: inset 0 0 4px #424242;
+  }
+`;
 
 /*
   App base container
@@ -11,6 +24,8 @@ export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  ${scrollbarStyle}
 `;
 
 /*
@@ -51,6 +66,8 @@ export const MainContainer = styled.section`
     flex-direction: row;
     overflow: auto;
   }
+
+  ${scrollbarStyle}
 `;
 
 export const MainLeftSection = styled.section`
@@ -64,6 +81,8 @@ export const MainLeftSection = styled.section`
     padding: 32px;
     background-color: ${({ theme }) => theme.color['gray-11']};
     border-right: 1px solid ${({ theme }) => theme.color['gray-9']};
+
+    ${scrollbarStyle}
   }
 `;
 
