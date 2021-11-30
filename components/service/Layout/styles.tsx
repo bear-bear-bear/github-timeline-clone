@@ -69,7 +69,7 @@ export const MainLeftSection = styled.section`
 
 export const MainCenterSection = styled.section`
   ${media.md} {
-    flex: 1 2.5 auto;
+    flex: 2 2.5 auto;
     margin-top: 16px;
     padding: 0 32px;
   }
@@ -81,16 +81,17 @@ export const MainRightSection = styled.section`
   ${media.lg} {
     flex: 1 1 auto;
     display: block;
+    width: 350px;
     max-width: 350px;
     will-change: margin-right;
     transition: margin-right 0.1s ease-in-out;
   }
 
   @media only screen and (min-width: 1400px) {
-    margin-right: 100px;
+    margin-right: 6vw;
   }
 
   @media only screen and (min-width: 1600px) {
-    margin-right: 200px;
+    margin-right: 8vw;
   }
 `;
