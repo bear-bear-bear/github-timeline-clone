@@ -1,9 +1,16 @@
-import oauth2Axios from '@lib/axios';
-import { observer } from 'mobx-react-lite';
-import { FormEventHandler, useCallback, useEffect, useState } from 'react';
-import * as S from './styles';
-import useToken from '@hooks/useToken';
+import {
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import axios from 'axios';
+import { observer } from 'mobx-react-lite';
+import oauth2Axios from '@lib/axios';
+import useToken from '@hooks/useToken';
+import * as S from './styles';
 
 export type Method =
   | 'get'
@@ -37,30 +44,55 @@ type Props = {
     on: JSX.Element;
     off: JSX.Element;
   };
+  target?: string;
 };
 
-const ToggleButton = observer<Props>(({ api, word, Icon }) => {
+const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
   const accessToken = useToken();
   const [clickedButton, setClickedButton] = useState<boolean>(false);
   const [stateDeterminationDone, setStateDeterminationDone] =
     useState<boolean>(false);
+  const debounceRef = useRef<NodeJS.Timer | null>(null);
+  const cachedClickedState = useRef<boolean>(clickedButton);
+
+  const action = useMemo(
+    () => (clickedButton ? api.off.url : api.on.url),
+    [api.off.url, api.on.url, clickedButton],
+  );
+  const method = useMemo(
+    () => (clickedButton ? api.off.method : api.on.method),
+    [api.off.method, api.on.method, clickedButton],
+  );
+
+  const request = useCallback(async () => {
+    try {
+      console.log({ method, action });
+      await oauth2Axios[method](action);
+    } catch (err) {
+      // console.error(err);
+    }
+  }, [action, method]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
     async (e) => {
       e.preventDefault();
-      const action = e.currentTarget.getAttribute('action') as string;
-      const method = e.currentTarget
-        .getAttribute('method')
-        ?.toLowerCase() as Method;
+      e.currentTarget.querySelector('button')?.blur();
 
-      try {
-        await oauth2Axios[method](action);
-        setClickedButton((prev) => prev);
-      } catch (err) {
-        console.error(err);
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+        debounceRef.current = null;
       }
+      debounceRef.current = setTimeout(async () => {
+        if (cachedClickedState.current === clickedButton) {
+          return;
+        }
+        cachedClickedState.current = clickedButton;
+        await request();
+      }, 2000);
+
+      setClickedButton((prev) => !prev);
     },
-    [],
+    [clickedButton, request],
   );
 
   useEffect(() => {
@@ -83,12 +115,13 @@ const ToggleButton = observer<Props>(({ api, word, Icon }) => {
   });
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      action={clickedButton ? api.off.url : api.on.url}
-      method={clickedButton ? api.off.method : api.on.method}
-    >
-      <S.ToggleButton type="submit">
+    <form onSubmit={handleSubmit} action={action} method={method}>
+      <S.ToggleButton
+        type="submit"
+        title={`${clickedButton ? word.off : word.on}${
+          target ? ` ${target}` : ''
+        }`}
+      >
         {Icon && (clickedButton ? Icon.off : Icon.on)}
         {clickedButton ? word.off : word.on}
       </S.ToggleButton>

@@ -9,10 +9,6 @@ import * as S from './styles';
 type Props = {
   activity: OthersEvent;
 };
-type API = {
-  method: Method;
-  url: string;
-};
 
 export const RepositoryContent = observer<Props>(({ activity }) => {
   const { repo } = activity;
@@ -30,6 +26,7 @@ export const RepositoryContent = observer<Props>(({ activity }) => {
         }}
         word={{ on: 'Star', off: 'Unstar' }}
         Icon={{ on: <S.OutlineStarIcon />, off: <S.FillStarIcon /> }}
+        target={repo.full_name || repo.name}
       />
       <S.Name>
         <S.Link href={repo.html_url}>{repo.full_name || repo.name}</S.Link>
