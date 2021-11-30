@@ -5,11 +5,12 @@ import type {
   OthersEvent,
   FetchState,
   User,
-  EventType,
   OwnerRepository,
 } from '@typings/oauth';
 import type { RootStore } from './index';
 import axios from 'axios';
+
+export type PassedEventType = 'WatchEvent' | 'CreateEvent';
 
 export default class OthersActivityStore {
   rootStore;
@@ -18,7 +19,7 @@ export default class OthersActivityStore {
   initialFetchDone = false;
   isFetchedAllData = false;
   currentPage = 1;
-  PER_PAGE = 100;
+  PER_PAGE = 60;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -30,11 +31,12 @@ export default class OthersActivityStore {
   }
 
   get processedActivities() {
-    const passTypes: EventType[] = ['PushEvent', 'CreateEvent', 'WatchEvent'];
+    const passTypes = ['CreateEvent', 'WatchEvent'];
 
     return this.activities.reduce((acc, currActivity) => {
       const currType = currActivity.type;
       const currActorId = currActivity.actor.id;
+      const currRepo = currActivity.repo.id;
 
       if (!passTypes.includes(currType)) {
         return acc; // type 필터링
@@ -45,20 +47,32 @@ export default class OthersActivityStore {
         return [currActivity]; // 순환의 시작
       }
 
-      // type과 actor가 같은 항목끼리 배열로 래핑
+      // 타입과 액터가 같은 항목끼리 배열로 래핑
       if (!Array.isArray(lastItem)) {
+        // 같은 타입 + 같은 액터가 아니라면
         if (
           !(lastItem.type === currType && lastItem.actor.id === currActorId)
         ) {
           return [...acc, lastItem, currActivity];
         }
+        // 같은 타입 + 같은 액터 + 같은 레포라면 (완전히 같은 이벤트라면)
+        if (lastItem.repo.id === currRepo) {
+          return [...acc, lastItem];
+        }
+        // 같은 레포는 아니지만 같은 타입 + 같은 액터라면
         return [...acc, [lastItem, currActivity]];
       }
 
       if (
-        !(lastItem[0].type === currType && lastItem[0].actor.id === currActorId)
+        !(
+          lastItem[lastItem.length - 1].type === currType &&
+          lastItem[lastItem.length - 1].actor.id === currActorId
+        )
       ) {
         return [...acc, lastItem, currActivity];
+      }
+      if (lastItem[lastItem.length - 1].repo.id === currRepo) {
+        return [...acc, lastItem];
       }
       return [...acc, [...lastItem, currActivity]];
     }, [] as (OthersEvent | OthersEvent[])[]);
