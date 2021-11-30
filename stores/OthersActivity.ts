@@ -9,6 +9,7 @@ import type {
   OwnerRepository,
 } from '@typings/oauth';
 import type { RootStore } from './index';
+import axios from 'axios';
 
 export default class OthersActivityStore {
   rootStore;
@@ -63,7 +64,11 @@ export default class OthersActivityStore {
     }, [] as (OthersEvent | OthersEvent[])[]);
   }
 
-  fetchNextActivities = flow(function* (this: OthersActivityStore, user: User) {
+  fetchNextActivities = flow(function* (
+    this: OthersActivityStore,
+    user: User,
+    accessToken: string,
+  ) {
     this.state = 'loading';
 
     const query = qs.stringify({
@@ -81,7 +86,14 @@ export default class OthersActivityStore {
       }
 
       const repoDetailInfoRequests = receivedActivities.map(({ repo }) =>
-        oauth2Axios.get<OwnerRepository>(repo.url).then(({ data }) => data),
+        axios
+          .get<OwnerRepository>(repo.url, {
+            headers: {
+              accept: 'application/vnd.github.v3+json',
+              Authorization: `token ${accessToken}`,
+            }, // 인터셉터를 거쳐 헤더를 세팅하면 토큰 인증 과정에서 수십개 요청이 직렬처리되어 엄청 느려짐
+          })
+          .then(({ data }) => data),
       );
 
       const repoDetailInfosSettledResult = yield Promise.allSettled(

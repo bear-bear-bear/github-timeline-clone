@@ -18,35 +18,40 @@ import Aside from '@components/service/Main/Aside';
 import Footer from '@components/service/Main/Footer';
 import type { User } from '@typings/oauth';
 
-export const UserContext = createContext<User>({} as User);
+type Props = { user: User; accessToken: string };
 
-const Service = observer<{ user: User }>(({ user }) => {
+export const UserContext = createContext<User>({} as User);
+export const TokenContext = createContext<string>('');
+
+const Service = observer<Props>(({ user, accessToken }) => {
   return (
     <StoreProvider>
       <UserContext.Provider value={user}>
-        <AppContainer>
-          <HeaderLayout.Container>
-            <HeaderLayout.MobileWrapper>
-              <MobileHeader />
-            </HeaderLayout.MobileWrapper>
-            <HeaderLayout.DesktopWrapper>
-              <DesktopHeader />
-            </HeaderLayout.DesktopWrapper>
-          </HeaderLayout.Container>
+        <TokenContext.Provider value={accessToken}>
+          <AppContainer>
+            <HeaderLayout.Container>
+              <HeaderLayout.MobileWrapper>
+                <MobileHeader />
+              </HeaderLayout.MobileWrapper>
+              <HeaderLayout.DesktopWrapper>
+                <DesktopHeader />
+              </HeaderLayout.DesktopWrapper>
+            </HeaderLayout.Container>
 
-          <MainLayout.Container>
-            <MainLayout.LeftSection>
-              <Dashboard />
-            </MainLayout.LeftSection>
-            <MainLayout.CenterSection>
-              <Activity />
-              <Footer />
-            </MainLayout.CenterSection>
-            <MainLayout.RightSection>
-              <Aside />
-            </MainLayout.RightSection>
-          </MainLayout.Container>
-        </AppContainer>
+            <MainLayout.Container>
+              <MainLayout.LeftSection>
+                <Dashboard />
+              </MainLayout.LeftSection>
+              <MainLayout.CenterSection>
+                <Activity />
+                <Footer />
+              </MainLayout.CenterSection>
+              <MainLayout.RightSection>
+                <Aside />
+              </MainLayout.RightSection>
+            </MainLayout.Container>
+          </AppContainer>
+        </TokenContext.Provider>
       </UserContext.Provider>
     </StoreProvider>
   );
@@ -67,7 +72,10 @@ export const getServerSideProps = withIronSessionSsr(async function ({ req }) {
     const user = await github.USER_GET_REQUEST(authInfo.accessToken);
 
     return {
-      props: { user },
+      props: {
+        user,
+        accessToken: authInfo.accessToken,
+      },
     };
   } catch (err) {
     console.error(err);
