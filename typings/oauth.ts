@@ -71,6 +71,7 @@ export type OthersEvents =
 export type OthersEvent = Unpacked<OthersEvents> & {
   type: EventType;
   repo: OwnerRepository;
+  created_at: string;
 };
 
 export type User = Endpoints['GET /user']['response']['data'];
