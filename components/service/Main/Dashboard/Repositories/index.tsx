@@ -14,7 +14,7 @@ type RepoItemProps = {
 const RepoItem = observer(({ repo }: RepoItemProps) => (
   <S.Item>
     <S.Link href={repo.html_url}>
-      <Avatar avatarUrl={repo.owner.avatar_url} size="17px" />
+      <Avatar avatarUrl={repo.owner.avatar_url} size="16px" />
     </S.Link>
     <S.Link href={repo.html_url}>
       <p>{repo.full_name}</p>
