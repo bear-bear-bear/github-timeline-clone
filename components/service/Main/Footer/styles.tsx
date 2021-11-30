@@ -4,7 +4,8 @@ import media from '@globalStyles/media';
 
 export const Footer = styled.footer`
   width: 100%;
-  margin: 32px 0;
+  margin-top: 32px;
+  padding-bottom: 32px;
   display: flex;
 `;
 
