@@ -7,7 +7,7 @@ export const Wrapper = styled.section`
     color: ${({ theme }) => theme.color['gray-5']};
     font-size: 12px;
 
-    :nth-child(2) {
+    :nth-of-type(2) {
       margin: 8px 0;
     }
   }
