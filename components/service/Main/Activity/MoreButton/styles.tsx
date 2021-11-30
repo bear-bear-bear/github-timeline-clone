@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import media from '@globalStyles/media';
 
 export const Button = styled.button`
   width: 100%;
@@ -6,7 +7,7 @@ export const Button = styled.button`
   margin-top: 20px;
   font-weight: 600;
   color: ${({ theme }) => theme.color['blue-0']};
-  background-color: ${({ theme }) => theme.color['gray-11']};
+  background-color: ${({ theme }) => theme.color['gray-10']};
   border: 1px solid ${({ theme }) => theme.color['gray-7']};
   border-radius: 6px;
   overflow-wrap: break-word;
@@ -17,5 +18,9 @@ export const Button = styled.button`
   :hover,
   :focus {
     background-color: ${({ theme }) => theme.color['gray-10']};
+  }
+
+  ${media.sm} {
+    background-color: ${({ theme }) => theme.color['gray-11']};
   }
 `;

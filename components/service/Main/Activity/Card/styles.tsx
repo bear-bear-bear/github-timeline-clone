@@ -38,10 +38,15 @@ export const Box = styled.div`
   min-height: 60px;
   margin: 8px 0 0;
   padding: 16px;
-  color: ${({ theme }) => theme.color['gray-2']};
-  background-color: ${({ theme }) => theme.color['gray-11']};
+  color: ${({ theme }) => theme.color['gray-1']};
+  background-color: ${({ theme }) => theme.color['gray-10']};
   border: 1px solid ${({ theme }) => theme.color['gray-7']};
   border-radius: 6px;
+
+  ${media.sm} {
+    color: ${({ theme }) => theme.color['gray-2']};
+    background-color: ${({ theme }) => theme.color['gray-11']};
+  }
 `;
 
 export const Avatar = styled(_Avatar)`

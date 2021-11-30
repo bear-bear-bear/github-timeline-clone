@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import media from '@globalStyles/media';
 
 export const Activity = styled.main``;
 
@@ -8,7 +9,11 @@ export const Title = styled.h2`
   font-size: 16px;
   line-height: 24px;
   overflow-wrap: break-word;
-  color: ${({ theme }) => theme.color['gray-2']};
+  color: ${({ theme }) => theme.color['gray-1']};
+
+  ${media.sm} {
+    color: ${({ theme }) => theme.color['gray-2']};
+  }
 `;
 
 export const CatLoading = styled.div`
