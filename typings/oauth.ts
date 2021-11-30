@@ -1,5 +1,6 @@
 import '@octokit/types';
 import type { Endpoints } from '@octokit/types';
+import { Language } from '@lib/getLanguageColor';
 
 export type FetchState = 'init' | 'loading' | 'done' | 'error';
 export type EventType =
@@ -18,8 +19,7 @@ export type EventType =
   | 'PushEvent'
   | 'ReleaseEvent'
   | 'SponsorshipEvent'
-  | 'WatchEvent'
-  | null;
+  | 'WatchEvent';
 
 export type ParsedGetAccessTokenResponseQuery =
   | {
@@ -40,10 +40,14 @@ export type SimpleRepository = Unpacked<SimpleRepositories>;
 
 export type SearchedRepositories =
   Endpoints['GET /search/repositories']['response']['data']['items'];
-export type SearchedRepository = Unpacked<SearchedRepositories>;
+export type SearchedRepository = Unpacked<SearchedRepositories> & {
+  language: Language;
+};
 
 export type Notifications = Endpoints['GET /notifications']['response']['data'];
-export type Notification = Unpacked<Notifications>;
+export type Notification = Unpacked<Notifications> & {
+  language: Language;
+};
 
 export type MyEvents =
   Endpoints['GET /users/{username}/events']['response']['data'];
@@ -64,13 +68,16 @@ export type MyEvent = Unpacked<MyEvents> & {
 export type OwnerRepository =
   Endpoints['GET /repos/{owner}/{repo}']['response']['data'] & {
     type: EventType;
+    language: Language;
   };
 
 export type OthersEvents =
   Endpoints['GET /users/{username}/received_events']['response']['data'];
 export type OthersEvent = Unpacked<OthersEvents> & {
   type: EventType;
-  repo: OwnerRepository;
+  repo: OwnerRepository & {
+    language: Language;
+  };
   created_at: string;
 };
 
