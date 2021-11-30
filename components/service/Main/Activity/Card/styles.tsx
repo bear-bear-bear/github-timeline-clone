@@ -2,11 +2,17 @@ import styled from '@emotion/styled';
 import _Avatar from '@components/common/Avatar';
 import { Fold, UnFold } from '@components/service/Main/Activity/FoldIcon';
 import { css, Theme } from '@emotion/react';
+import media from '@globalStyles/media';
 
 export const Card = styled.article`
   display: flex;
   width: 100%;
   padding: 16px 0;
+  border-bottom: 1px solid ${({ theme }) => theme.color['gray-7']};
+
+  ${media.sm} {
+    border-bottom: 1px solid ${({ theme }) => theme.color['gray-9']};
+  }
 `;
 
 export const Ago = styled.span`
