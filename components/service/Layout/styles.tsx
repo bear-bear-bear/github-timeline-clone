@@ -63,13 +63,13 @@ export const MainLeftSection = styled.section`
     overflow-y: auto;
     padding: 32px;
     background-color: ${({ theme }) => theme.color['gray-11']};
-    border-right: 1px solid ${({ theme }) => theme.color['gray-10']};
+    border-right: 1px solid ${({ theme }) => theme.color['gray-9']};
   }
 `;
 
 export const MainCenterSection = styled.section`
   ${media.md} {
-    flex: 1 1 auto;
+    flex: 1 2.5 auto;
     margin-top: 16px;
     padding: 0 32px;
   }
@@ -87,10 +87,10 @@ export const MainRightSection = styled.section`
   }
 
   @media only screen and (min-width: 1400px) {
-    margin-right: 5vw;
+    margin-right: 100px;
   }
 
   @media only screen and (min-width: 1600px) {
-    margin-right: 10vw;
+    margin-right: 200px;
   }
 `;
