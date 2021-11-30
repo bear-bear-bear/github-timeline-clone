@@ -20,7 +20,6 @@ export const Link = styled.a`
 
 export const LinkifyDescription = styled(Linkify)`
   margin-top: 4px;
-  margin-bottom: 10px;
   hyphens: auto;
   font-size: 14px;
   word-break: break-word;
@@ -35,6 +34,7 @@ export const BottomSection = styled.section`
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-top: 8px;
   color: ${({ theme }) => theme.color['gray-5']};
 `;
 
