@@ -6,7 +6,8 @@ import useToken from '@hooks/useToken';
 import Loading from '@components/common/Loading';
 import MoreButton from './MoreButton';
 import CardHeaderSentence from './CardHeaderSentence';
-import { MultiCard, SingleCard } from '@components/service/Main/Activity/Card';
+import { MultiCard, SingleCard } from './Card';
+import TipSection from './TipSection';
 import * as S from './styles';
 
 const Activity = observer(() => {
@@ -53,6 +54,7 @@ const Activity = observer(() => {
         );
       })}
       <MoreButton />
+      <TipSection />
     </S.Activity>
   );
 });
