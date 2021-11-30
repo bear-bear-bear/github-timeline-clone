@@ -1,52 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
+import useToken from '@hooks/useToken';
 import Loading from '@components/common/Loading';
-import { OthersEvent } from '@typings/oauth';
+import MoreButton from './MoreButton';
+import CardHeaderSentence from './CardHeaderSentence';
+import { MultiCard, SingleCard } from '@components/service/Main/Activity/Card';
 import * as S from './styles';
-
-type CardProps = {
-  activity: OthersEvent;
-};
-const Card = observer<CardProps>(({ activity }) => {
-  return (
-    <div key={activity.id}>
-      <p>{activity.actor.login + activity.id}</p>
-    </div>
-  );
-});
-const TempCard = observer<CardProps>(({ activity }) => {
-  return (
-    <div key={activity.id}>
-      <p style={{ fontWeight: 700 }}>{activity.actor.login + activity.id}</p>
-    </div>
-  );
-});
-
-const MoreButton = observer(() => {
-  const user = useUser();
-  const { othersActivity } = useStore();
-
-  const handleClickMoreButton = async () => {
-    await othersActivity.fetchNextActivities(user);
-  };
-
-  if (othersActivity.isFetchedAllData) return null;
-  if (othersActivity.isNotFetched) {
-    return <Loading size="32px" withWrapper />;
-  }
-  return <button onClick={handleClickMoreButton}>More</button>;
-});
 
 const Activity = observer(() => {
   const user = useUser();
   const { othersActivity } = useStore();
+  const accessToken = useToken();
 
   useEffect(() => {
     if (othersActivity.initialFetchDone) return;
     (async () => {
-      await othersActivity.fetchNextActivities(user);
+      await othersActivity.fetchNextActivities(user, accessToken);
     })();
   });
 
@@ -58,11 +29,28 @@ const Activity = observer(() => {
       <S.Title>All activity</S.Title>
       {othersActivity.processedActivities.map((activity) => {
         if (Array.isArray(activity)) {
-          return activity.map((item) => (
-            <TempCard activity={item} key={item.id} />
-          ));
+          return (
+            <MultiCard
+              activities={activity}
+              HeaderSentence={
+                <CardHeaderSentence
+                  activity={activity[0]}
+                  cardCount={activity.length}
+                />
+              }
+              key={activity[0].id + activity[1]?.id}
+            />
+          );
         }
-        return <Card activity={activity} key={activity.id} />;
+        return (
+          <SingleCard
+            activity={activity}
+            HeaderSentence={
+              <CardHeaderSentence activity={activity} cardCount={1} />
+            }
+            key={activity.id}
+          />
+        );
       })}
       <MoreButton />
     </S.Activity>
