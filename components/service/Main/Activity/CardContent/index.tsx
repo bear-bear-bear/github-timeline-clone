@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { github } from '@lib/oauth';
 import Language from '@components/common/Language';
 import Star from '@components/common/Star';
-import ToggleButton, { Method } from '../ToggleButton';
+import ToggleButton from '../ToggleButton';
 import type { OthersEvent } from '@typings/oauth';
 import * as S from './styles';
 

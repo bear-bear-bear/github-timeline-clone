@@ -37,7 +37,7 @@ const MoreButton = observer<DropDownChildProps>(
 
     return (
       <DropDown
-        SvgIcon={S.MoreIcon}
+        SvgIcon={() => <S.MoreIcon />}
         menuFixedWidth="160px"
         open={isOpen}
         onClick={handleClick}

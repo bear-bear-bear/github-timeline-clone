@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import type { DetailsHTMLAttributes, CSSProperties } from 'react';
 import type { IconType } from 'react-icons';
-import { EmotionStyledIconType } from '@typings/custom';
 import * as S from './styles';
 
 export interface Props extends DetailsHTMLAttributes<HTMLElement> {
-  SvgIcon: EmotionStyledIconType | IconType;
+  SvgIcon: IconType;
   menuFixedWidth?: CSSProperties['width'];
 }
 
