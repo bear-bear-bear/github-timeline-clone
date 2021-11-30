@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
 import useToken from '@hooks/useToken';
-import Loading from '@components/common/Loading';
 import MoreButton from './MoreButton';
 import CardHeaderSentence from './CardHeaderSentence';
 import { MultiCard, SingleCard } from './Card';
@@ -23,7 +23,17 @@ const Activity = observer(() => {
   });
 
   if (!othersActivity.initialFetchDone) {
-    return <Loading size="32px" withWrapper />;
+    return (
+      <S.CatLoading>
+        <Image
+          src="/mona-loading-dark.gif"
+          alt="cat loading"
+          width="48px"
+          height="48px"
+        />
+        One moment please...
+      </S.CatLoading>
+    );
   }
   return (
     <S.Activity>

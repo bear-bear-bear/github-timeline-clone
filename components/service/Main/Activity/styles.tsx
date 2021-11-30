@@ -10,3 +10,16 @@ export const Title = styled.h2`
   overflow-wrap: break-word;
   color: ${({ theme }) => theme.color['gray-2']};
 `;
+
+export const CatLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0 8px;
+  padding: 16px 0;
+
+  color: ${({ theme }) => theme.color['gray-5']};
+  font-size: 14px;
+`;
