@@ -19,7 +19,7 @@ export default class OthersActivityStore {
   initialFetchDone = false;
   isFetchedAllData = false;
   currentPage = 1;
-  PER_PAGE = 60;
+  PER_PAGE = 5;
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -38,8 +38,8 @@ export default class OthersActivityStore {
       const currActorId = currActivity.actor.id;
       const currRepo = currActivity.repo.id;
 
-      if (!passTypes.includes(currType)) {
-        return acc; // type 필터링
+      if (!passTypes.includes(currType) || !currActivity.repo.full_name) {
+        return acc; // type 필터링, 404 repo 필터링
       }
 
       const lastItem = acc.pop();
