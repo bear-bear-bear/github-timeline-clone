@@ -1,7 +1,13 @@
 import qs from 'qs';
 import { flow, makeAutoObservable } from 'mobx';
 import oauth2Axios from '@lib/axios';
-import type { OthersEvent, FetchState, User, EventType } from '@typings/oauth';
+import type {
+  OthersEvent,
+  FetchState,
+  User,
+  EventType,
+  OwnerRepository,
+} from '@typings/oauth';
 import type { RootStore } from './index';
 
 export default class OthersActivityStore {
@@ -74,7 +80,25 @@ export default class OthersActivityStore {
         this.isFetchedAllData = true;
       }
 
-      this.activities = [...this.activities, ...receivedActivities];
+      const repoDetailInfoRequests = receivedActivities.map(({ repo }) =>
+        oauth2Axios.get<OwnerRepository>(repo.url).then(({ data }) => data),
+      );
+
+      const repoDetailInfosSettledResult = yield Promise.allSettled(
+        repoDetailInfoRequests,
+      );
+
+      const activitiesWithDetailRepoInfo: OthersEvent[] =
+        receivedActivities.map((activity, i) => {
+          const currDetailRepo = repoDetailInfosSettledResult[i];
+          if (currDetailRepo.status === 'rejected') return activity;
+          return {
+            ...activity,
+            repo: currDetailRepo.value as OwnerRepository,
+          };
+        });
+
+      this.activities = [...this.activities, ...activitiesWithDetailRepoInfo];
       this.state = 'done';
       this.initialFetchDone = true;
       this.currentPage++;
