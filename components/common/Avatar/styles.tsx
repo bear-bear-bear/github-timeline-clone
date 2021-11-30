@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import type { Props } from './index';
 
-const sizeStyle = ({ size }: Props) => {
+const sizeStyle = ({ size }: Pick<Props, 'size'>) => {
   if (!size) {
     return css`
       width: 15px;
@@ -15,10 +15,10 @@ const sizeStyle = ({ size }: Props) => {
   `;
 };
 
-export const Avatar = styled.div<Props>`
+export const Avatar = styled.img`
   border-radius: 50%;
-  background: ${({ avatarUrl }) =>
-    `url(${avatarUrl}) center/contain no-repeat`};
+  object-fit: contain;
+  vertical-align: middle;
 
   ${sizeStyle}
 `;

@@ -8,8 +8,8 @@ export type Props = {
   size?: CSSProperties['width'];
 };
 
-const Avatar = observer<Props>((props) => {
-  return <S.Avatar {...props} />;
+const Avatar = observer<Props>(({ avatarUrl, size }) => {
+  return <S.Avatar src={avatarUrl} alt="avatar" size={size} />;
 });
 
 export default Avatar;
