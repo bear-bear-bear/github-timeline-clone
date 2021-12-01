@@ -17,18 +17,24 @@ export const Input = styled.input`
   outline: none;
   border: 1px solid ${({ theme }) => theme.color['gray-7']};
   color: ${({ theme }) => theme.color['gray-1']};
-  background-color: ${({ theme }) => theme.color['gray-12']};
-  padding: 0 12px;
+  background-color: ${({ theme }) => theme.color['gray-11']};
+  padding-left: 12px;
+  padding-right: 36px;
   border-radius: 6px;
-
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.color['blue-1']};
-    border-bottom: none;
-  }
 
   &::placeholder {
     color: ${({ theme }) => theme.color['gray-3']};
     letter-spacing: 0.2px;
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.color['gray-10']};
+    border: 1px solid ${({ theme }) => theme.color['blue-1']};
+    border-bottom: none;
+
+    &::placeholder {
+      color: ${({ theme }) => theme.color['gray-5']};
+    }
   }
 
   ${media.md} {
