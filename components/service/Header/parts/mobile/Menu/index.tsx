@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import useUser from '@hooks/useUser';
 import { github } from '@lib/oauth';
@@ -42,6 +44,12 @@ const navItems = [
 
 const Menu = observer(() => {
   const user = useUser();
+  const router = useRouter();
+
+  const logout = async () => {
+    await axios.get('/api/auth/logout');
+    router.replace('/login');
+  };
 
   return (
     <div>
@@ -57,7 +65,7 @@ const Menu = observer(() => {
         <Avatar avatarUrl={user.avatar_url} size="20px" />
         bear-bear-bear
       </S.LinkItem>
-      <S.SignOutButton>
+      <S.SignOutButton onClick={logout}>
         <S.ExitIcon />
         Sign out
       </S.SignOutButton>
