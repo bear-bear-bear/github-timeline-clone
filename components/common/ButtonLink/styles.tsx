@@ -7,6 +7,7 @@ export const ButtonLink = styled.a<StyleProps>`
   display: flex;
   gap: 0.33rem;
   justify-content: center;
+  align-items: center;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'fit-content')};
   background-color: ${({ theme }) => theme.color['green-0']};
   color: ${({ theme }) => theme.color['gray-0']};
