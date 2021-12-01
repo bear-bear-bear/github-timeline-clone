@@ -7,7 +7,6 @@ export const Layout = styled.section`
 `;
 
 export const Container = styled.section`
-  width: 500px;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -30,6 +29,7 @@ export const Header = styled.header`
 
 export const LoginBox = styled.main`
   width: 300px;
+  max-width: 100%;
   border: 1px solid ${({ theme }) => theme.color['gray-8']};
   padding: 20px;
   background-color: ${({ theme }) => theme.color['gray-10']};
