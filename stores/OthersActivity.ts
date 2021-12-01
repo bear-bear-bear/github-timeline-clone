@@ -32,6 +32,7 @@ export default class OthersActivityStore {
 
   get processedActivities() {
     const passTypes = ['CreateEvent', 'WatchEvent'];
+    const cacheForDeduplicate: string[] = [];
 
     return this.activities.reduce((acc, currActivity) => {
       const currType = currActivity.type;
@@ -41,6 +42,12 @@ export default class OthersActivityStore {
       if (!passTypes.includes(currType) || !currActivity.repo.full_name) {
         return acc; // type 필터링, 404 repo 필터링
       }
+
+      const currActivityCache = `${currType}${currActorId}${currRepo}`;
+      if (cacheForDeduplicate.includes(currActivityCache)) {
+        return acc; // 중복 이벤트 필터링
+      }
+      cacheForDeduplicate.push(currActivityCache);
 
       const lastItem = acc.pop();
       if (!lastItem) {
