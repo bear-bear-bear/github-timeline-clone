@@ -17,7 +17,7 @@ export const RepositoryContent = observer<Props>(({ activity }) => {
   const updatedAt = repo.updated_at || repo.created_at;
 
   return (
-    <S.Wrapper>
+    <div>
       <ToggleButton
         api={{
           on: { method: 'put', url: starAPIUrl },
@@ -28,9 +28,11 @@ export const RepositoryContent = observer<Props>(({ activity }) => {
         Icon={{ on: <S.OutlineStarIcon />, off: <S.FillStarIcon /> }}
         target={repo.full_name || repo.name}
       />
-      <S.Name>
-        <S.Link href={repo.html_url}>{repo.full_name || repo.name}</S.Link>
-      </S.Name>
+      <div>
+        <S.ActorLink href={repo.html_url}>
+          {repo.full_name || repo.name}
+        </S.ActorLink>
+      </div>
       {repo.description && (
         <S.LinkifyDescription tagName="p">
           {repo.description}
@@ -46,6 +48,6 @@ export const RepositoryContent = observer<Props>(({ activity }) => {
             new Date(updatedAt).toString().split(' ').slice(1, 3).join(' ')}
         </S.UpdatedDate>
       </S.BottomSection>
-    </S.Wrapper>
+    </div>
   );
 });

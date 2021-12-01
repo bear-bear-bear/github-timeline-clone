@@ -3,10 +3,7 @@ import Linkify from 'linkify-react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { css, Theme } from '@emotion/react';
 
-export const Wrapper = styled.div``;
-export const Name = styled.div``;
-
-export const Link = styled.a`
+export const ActorLink = styled.a`
   color: ${({ theme }) => theme.color['gray-2']};
   font-weight: 600;
   font-size: 16px;
