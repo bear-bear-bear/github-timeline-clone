@@ -21,7 +21,7 @@ export default class StarredOrWatchedRepositoryStore {
   }
 
   get recentRepos() {
-    const MY_REPO_COUNT = 2;
+    const MY_REPO_COUNT = 1;
 
     const myRepos = this.repos
       .filter((repo) => repo.owner.login === this.login)
