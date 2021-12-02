@@ -9,18 +9,18 @@ type Props = {
 };
 
 const SearchResultItems = observer(({ searchWord }: Props) => {
-  const { starredOrWatchedRepository } = useStore();
+  const { starredOrSubscribedRepository } = useStore();
 
   return (
     <>
       {!searchWord &&
-        starredOrWatchedRepository.recentRepos.map((repo) => (
+        starredOrSubscribedRepository.recentRepos.map((repo) => (
           <SearchResultItem.Repository item={repo} key={repo.html_url} />
         ))}
       {searchWord && (
         <>
           <SearchResultItem.Top searchWord={searchWord} />
-          {starredOrWatchedRepository
+          {starredOrSubscribedRepository
             .findReposByCharTokens(searchWord)
             .map((repo) => (
               <SearchResultItem.Repository item={repo} key={repo.html_url} />
@@ -32,16 +32,16 @@ const SearchResultItems = observer(({ searchWord }: Props) => {
 });
 
 const SearchResultList = observer((props: Props) => {
-  const { starredOrWatchedRepository } = useStore();
+  const { starredOrSubscribedRepository } = useStore();
 
   return (
     <S.SearchList>
-      {starredOrWatchedRepository.isNotFetched && (
+      {starredOrSubscribedRepository.isNotFetched && (
         <S.LoadingWrapper>
           <Loading size="1.66rem" />
         </S.LoadingWrapper>
       )}
-      {starredOrWatchedRepository.state === 'done' && (
+      {starredOrSubscribedRepository.state === 'done' && (
         <SearchResultItems {...props} />
       )}
     </S.SearchList>

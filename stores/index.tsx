@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import type { FC } from 'react';
 import MyRepositoryStore from './MyRepository';
-import StarredOrWatchedRepositoryStore from './StarredOrWatchedRepository';
+import StarredOrSubscribedRepositoryStore from './StarredOrSubscribedRepository';
 import NotificationStateStore from './NotificationState';
 import MyActivityStore from './MyActivity';
 import HotRepositoryStore from './HotRepository';
@@ -9,7 +9,7 @@ import OthersActivityStore from './OthersActivity';
 
 export class RootStore {
   myRepository;
-  starredOrWatchedRepository;
+  starredOrSubscribedRepository;
   notificationState;
   myActivity;
   hotRepository;
@@ -17,7 +17,9 @@ export class RootStore {
 
   constructor() {
     this.myRepository = new MyRepositoryStore(this);
-    this.starredOrWatchedRepository = new StarredOrWatchedRepositoryStore(this);
+    this.starredOrSubscribedRepository = new StarredOrSubscribedRepositoryStore(
+      this,
+    );
     this.notificationState = new NotificationStateStore(this);
     this.myActivity = new MyActivityStore(this);
     this.hotRepository = new HotRepositoryStore(this);

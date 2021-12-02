@@ -8,7 +8,7 @@ import * as S from './styles';
 
 const SearchInput = observer(() => {
   const user = useUser();
-  const { starredOrWatchedRepository } = useStore();
+  const { starredOrSubscribedRepository } = useStore();
   const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -21,8 +21,8 @@ const SearchInput = observer(() => {
   }, []);
 
   const handleInputClick = async () => {
-    if (starredOrWatchedRepository.state === 'init') {
-      await starredOrWatchedRepository.fetchRepos(user);
+    if (starredOrSubscribedRepository.state === 'init') {
+      await starredOrSubscribedRepository.fetchRepos(user);
     }
   };
 

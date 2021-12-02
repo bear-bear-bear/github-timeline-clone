@@ -4,7 +4,7 @@ import oauth2Axios from '@lib/axios';
 import type { RootStore } from './index';
 import { github } from '@lib/oauth';
 
-export default class StarredOrWatchedRepositoryStore {
+export default class StarredOrSubscribedRepositoryStore {
   rootStore;
   repos: SimpleRepository[] = [];
   state: FetchState = 'init';
@@ -57,7 +57,7 @@ export default class StarredOrWatchedRepositoryStore {
   }
 
   fetchRepos = flow(function* (
-    this: StarredOrWatchedRepositoryStore,
+    this: StarredOrSubscribedRepositoryStore,
     user: User,
   ) {
     this.login = user.login;
@@ -76,12 +76,14 @@ export default class StarredOrWatchedRepositoryStore {
       this.repos = yield Promise.all([
         getReposRequest('/user/starred'),
         getReposRequest('/user/subscriptions'),
-      ]).then(([starredRepositoriesByLatest, watchedRepositoriesByOldest]) => {
-        return uniqueBy([
-          ...starredRepositoriesByLatest,
-          ...watchedRepositoriesByOldest.reverse(),
-        ]);
-      });
+      ]).then(
+        ([starredRepositoriesByLatest, subscribedRepositoriesByOldest]) => {
+          return uniqueBy([
+            ...starredRepositoriesByLatest,
+            ...subscribedRepositoriesByOldest.reverse(),
+          ]);
+        },
+      );
       this.state = 'done';
     } catch (error) {
       console.error(error);
