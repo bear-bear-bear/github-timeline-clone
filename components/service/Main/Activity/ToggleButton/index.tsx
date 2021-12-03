@@ -66,10 +66,9 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
 
   const request = useCallback(async () => {
     try {
-      console.log({ method, action });
       await oauth2Axios[method](action);
     } catch (err) {
-      // console.warn(err);
+      /* */
     }
   }, [action, method]);
 
