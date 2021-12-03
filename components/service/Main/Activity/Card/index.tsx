@@ -69,9 +69,9 @@ export const MultiCard = observer<MultiCardProps>(
             )}
           </S.Header>
           {activities.map((activity, i) => {
-            if (isFold && i > 0) return null;
+            const isFirstActivity = i === 0;
             return (
-              <S.Box key={activity.id}>
+              <S.Box key={activity.id} isHide={isFold && !isFirstActivity}>
                 <RepositoryContent activity={activity} />
               </S.Box>
             );

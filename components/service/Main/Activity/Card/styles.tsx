@@ -34,7 +34,8 @@ export const Content = styled.div`
   padding-top: 3px;
 `;
 
-export const Box = styled.div`
+export const Box = styled.div<{ isHide?: boolean }>`
+  display: ${({ isHide }) => (isHide ? 'none' : 'block')};
   min-height: 60px;
   margin: 8px 0 0;
   padding: 16px;
