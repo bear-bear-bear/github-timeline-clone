@@ -10,7 +10,7 @@ type Props = {
   activity: OthersEvent;
 };
 
-export const RepositoryContent = observer<Props>(({ activity }) => {
+const RepositoryContent = observer<Props>(({ activity }) => {
   const { repo } = activity;
 
   const starAPIUrl = `${github.API_HOST}/user/starred/${repo.full_name}`;
@@ -51,3 +51,9 @@ export const RepositoryContent = observer<Props>(({ activity }) => {
     </div>
   );
 });
+
+const CardContent = {
+  Repository: RepositoryContent,
+};
+
+export default CardContent;

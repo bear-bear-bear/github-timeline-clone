@@ -10,8 +10,6 @@ import type {
 import type { RootStore } from './index';
 import axios from 'axios';
 
-export type PassedEventType = 'WatchEvent' | 'CreateEvent';
-
 export default class OthersActivityStore {
   rootStore;
   activities: OthersEvent[] = [];

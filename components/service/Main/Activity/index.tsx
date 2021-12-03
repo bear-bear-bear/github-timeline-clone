@@ -5,7 +5,6 @@ import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
 import useToken from '@hooks/useToken';
 import MoreButton from './MoreButton';
-import CardHeaderSentence from './CardHeaderSentence';
 import { MultiCard, SingleCard } from './Card';
 import TipSection from './TipSection';
 import * as S from './styles';
@@ -43,25 +42,11 @@ const Activity = observer(() => {
           return (
             <MultiCard
               activities={activity}
-              HeaderSentence={
-                <CardHeaderSentence
-                  activity={activity[0]}
-                  cardCount={activity.length}
-                />
-              }
               key={activity[0].id + activity[1]?.id}
             />
           );
         }
-        return (
-          <SingleCard
-            activity={activity}
-            HeaderSentence={
-              <CardHeaderSentence activity={activity} cardCount={1} />
-            }
-            key={activity.id}
-          />
-        );
+        return <SingleCard activity={activity} key={activity.id} />;
       })}
       <MoreButton />
       <TipSection />
