@@ -72,6 +72,7 @@ const RepositoryContent = observer<Props>(({ activity }) => {
         )}
         {updatedAt && (
           <S.UpdatedDate>
+            Updated{' '}
             {new Date(updatedAt).toString().split(' ').slice(1, 3).join(' ')}
           </S.UpdatedDate>
         )}
