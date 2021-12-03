@@ -32,7 +32,7 @@ export const Item = styled.li`
 
 export const LinkWrapper = styled.a`
   display: flex;
-  padding: 1rem 7rem 1rem 1rem;
+  padding: 0.66rem 7rem 0.66rem 1rem;
   gap: 1rem;
   min-width: 0;
 `;
@@ -53,6 +53,7 @@ export const Name = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
 `;
 
 type TooltipVisible = { alwaysOn?: boolean };
@@ -69,7 +70,7 @@ export const Tooltip = styled.p<TooltipVisible>`
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
-  padding: 5px 5px 6px 5px;
+  padding: 3px 4px 5px;
   border: 0.1px solid ${({ theme }) => theme.color['gray-5']};
   border-radius: 6px;
   background-color: ${({ theme }) => theme.color['gray-12']};

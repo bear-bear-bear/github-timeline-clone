@@ -31,6 +31,8 @@ export const Input = styled.input`
     background-color: ${({ theme }) => theme.color['gray-10']};
     border: 1px solid ${({ theme }) => theme.color['blue-1']};
     border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 
     &::placeholder {
       color: ${({ theme }) => theme.color['gray-5']};
