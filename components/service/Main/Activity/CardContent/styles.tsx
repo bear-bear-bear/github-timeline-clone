@@ -33,9 +33,18 @@ export const BottomSection = styled.section`
   gap: 16px;
   margin-top: 8px;
   color: ${({ theme }) => theme.color['gray-5']};
+
+  a {
+    line-height: 0;
+    color: ${({ theme }) => theme.color['gray-5']};
+
+    :hover {
+      color: ${({ theme }) => theme.color['blue-0']};
+    }
+  }
 `;
 
-export const UpdatedDate = styled.div`
+export const UpdatedDate = styled.span`
   font-size: 12px;
   color: ${({ theme }) => theme.color['gray-5']};
 `;

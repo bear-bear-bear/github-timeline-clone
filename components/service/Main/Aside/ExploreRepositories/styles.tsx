@@ -43,5 +43,6 @@ export const Item = styled.article`
     display: flex;
     align-items: center;
     gap: 8px;
+    color: ${({ theme }) => theme.color['gray-5']};
   }
 `;

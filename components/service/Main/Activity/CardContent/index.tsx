@@ -41,12 +41,15 @@ const RepositoryContent = observer<Props>(({ activity }) => {
       <S.BottomSection>
         {repo.language && <Language language={repo.language} />}
         {repo.stargazers_count > 0 && (
-          <Star stargazersCount={repo.stargazers_count} />
+          <a href={repo.html_url + '/stargazers'}>
+            <Star stargazersCount={repo.stargazers_count} />
+          </a>
         )}
-        <S.UpdatedDate>
-          {updatedAt &&
-            new Date(updatedAt).toString().split(' ').slice(1, 3).join(' ')}
-        </S.UpdatedDate>
+        {updatedAt && (
+          <S.UpdatedDate>
+            {new Date(updatedAt).toString().split(' ').slice(1, 3).join(' ')}
+          </S.UpdatedDate>
+        )}
       </S.BottomSection>
     </div>
   );
