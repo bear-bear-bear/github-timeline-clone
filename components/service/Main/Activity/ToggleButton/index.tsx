@@ -69,7 +69,7 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
       console.log({ method, action });
       await oauth2Axios[method](action);
     } catch (err) {
-      // console.error(err);
+      // console.warn(err);
     }
   }, [action, method]);
 
@@ -83,10 +83,15 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
         debounceRef.current = null;
       }
       debounceRef.current = setTimeout(async () => {
-        if (cachedClickedState.current === clickedButton) {
+        const willChangeButtonState = !clickedButton;
+        if (cachedClickedState.current === willChangeButtonState) {
+          console.log('같아서 요청 발생 안함', {
+            cachedClickedState: cachedClickedState.current,
+            clickedButton,
+          });
           return;
         }
-        cachedClickedState.current = clickedButton;
+        cachedClickedState.current = willChangeButtonState;
         await request();
       }, 2000);
 
