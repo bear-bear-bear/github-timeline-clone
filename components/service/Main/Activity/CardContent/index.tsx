@@ -3,6 +3,7 @@ import { github } from '@lib/oauth';
 import Language from '@components/common/Language';
 import Star from '@components/common/Star';
 import ToggleButton from '../ToggleButton';
+import useIssueCount from './useIssueCount';
 import type { OthersEvent } from '@typings/oauth';
 import * as S from './styles';
 
@@ -12,9 +13,13 @@ type Props = {
 
 const RepositoryContent = observer<Props>(({ activity }) => {
   const { repo } = activity;
-
   const starAPIUrl = `${github.API_HOST}/user/starred/${repo.full_name}`;
   const updatedAt = repo.updated_at || repo.created_at;
+  let issueCount = 0;
+
+  if (activity.type === 'ForkEvent') {
+    issueCount = useIssueCount(activity);
+  }
 
   return (
     <div>
@@ -28,6 +33,14 @@ const RepositoryContent = observer<Props>(({ activity }) => {
         Icon={{ on: <S.OutlineStarIcon />, off: <S.FillStarIcon /> }}
         target={repo.full_name || repo.name}
       />
+      {activity.type === 'ForkEvent' && (
+        <S.ForkedBySection>
+          <span>Forked to</span>
+          <a href={activity.payload.forkee?.html_url}>
+            {activity.payload.forkee?.full_name}
+          </a>
+        </S.ForkedBySection>
+      )}
       <div>
         <S.ActorLink href={repo.html_url}>
           {repo.full_name || repo.name}
@@ -43,6 +56,18 @@ const RepositoryContent = observer<Props>(({ activity }) => {
         {repo.stargazers_count > 0 && (
           <a href={repo.html_url + '/stargazers'}>
             <Star stargazersCount={repo.stargazers_count} />
+          </a>
+        )}
+        {issueCount > 0 && (
+          <a
+            href={
+              repo.html_url +
+              `/issues?q=${encodeURIComponent(
+                'label:"help wanted" is:open is:issue',
+              )}`
+            }
+          >
+            {issueCount} issues need help
           </a>
         )}
         {updatedAt && (

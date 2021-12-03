@@ -34,6 +34,9 @@ export type ParsedGetAccessTokenResponseQuery =
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
+export type SearchedIssues =
+  Endpoints['GET /search/issues']['response']['data'];
+
 export type SimpleRepositories =
   Endpoints['GET /user/repos']['response']['data'];
 export type SimpleRepository = Unpacked<SimpleRepositories>;
@@ -77,6 +80,12 @@ export type OthersEvent = Unpacked<OthersEvents> & {
   type: EventType;
   repo: OwnerRepository & {
     language: Language;
+  };
+  payload: {
+    forkee?: {
+      full_name: string;
+      html_url: string;
+    };
   };
   created_at: string;
 };

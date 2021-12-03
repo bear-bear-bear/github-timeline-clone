@@ -3,6 +3,22 @@ import Linkify from 'linkify-react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { css, Theme } from '@emotion/react';
 
+export const ForkedBySection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 10px;
+  font-size: 12px;
+
+  span {
+    color: ${({ theme }) => theme.color['gray-5']};
+  }
+
+  a {
+    color: ${({ theme }) => theme.color['blue-0']};
+  }
+`;
+
 export const ActorLink = styled.a`
   color: ${({ theme }) => theme.color['gray-2']};
   font-weight: 600;
@@ -33,6 +49,7 @@ export const BottomSection = styled.section`
   gap: 16px;
   margin-top: 8px;
   color: ${({ theme }) => theme.color['gray-5']};
+  font-size: 12px;
 
   a {
     line-height: 0;

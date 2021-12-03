@@ -29,7 +29,7 @@ export default class OthersActivityStore {
   }
 
   get processedActivities() {
-    const passTypes = ['CreateEvent', 'WatchEvent'];
+    const passTypes = ['CreateEvent', 'WatchEvent', 'ForkEvent'];
     const cacheForDeduplicate: string[] = [];
 
     return this.activities.reduce((acc, currActivity) => {

@@ -6,42 +6,44 @@ import * as S from './styles';
 const getActivityPredicate = (
   activity: OthersEvent,
   cardCount: number,
-): JSX.Element => {
+): JSX.Element | void => {
   const predicateMap = {
     WatchEvent: {
       single: (
         <>
           <span>starred</span>
-          <a href={`${github.HOST}/${activity.repo.name}`}>
-            {activity.repo.name}
-          </a>
+          <a href={`${activity.repo.html_url}`}>{activity.repo.full_name}</a>
         </>
       ),
-      multi: (
-        <>
-          <span>starred {cardCount} repositories</span>
-        </>
-      ),
+      multi: <span>starred {cardCount} repositories</span>,
     },
     CreateEvent: {
       single: (
         <>
           <span>created a repository</span>
-          <a href={`${github.HOST}/${activity.repo.name}`}>
-            {activity.repo.name}
+          <a href={`${activity.repo.html_url}`}>{activity.repo.full_name}</a>
+        </>
+      ),
+      multi: <span>created {cardCount} repositories</span>,
+    },
+    ForkEvent: {
+      single: (
+        <>
+          <span>forked</span>
+          <a href={`${activity.repo.html_url}`}>{activity.repo.full_name}</a>
+          <span>from</span>
+          <a href={`${activity.payload.forkee?.html_url}`}>
+            {activity.payload.forkee?.full_name}
           </a>
         </>
       ),
-      multi: (
-        <>
-          <span>created {cardCount} repositories</span>
-        </>
-      ),
+      multi: <span>forked {cardCount} repositories</span>,
     },
   };
 
   if (!Object.keys(predicateMap).includes(activity.type)) {
     console.error('헤더 컴포넌트에 등록되지 않은 activity type 입니다.');
+    return;
   }
 
   const isMulti = cardCount > 1;
