@@ -53,7 +53,7 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
   const [stateDeterminationDone, setStateDeterminationDone] =
     useState<boolean>(false);
   const debounceRef = useRef<NodeJS.Timer | null>(null);
-  const cachedClickedState = useRef<boolean>(clickedButton);
+  const cachedClickedState = useRef<boolean | undefined>();
 
   const action = useMemo(
     () => (clickedButton ? api.off.url : api.on.url),
@@ -65,38 +65,40 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
   );
 
   const request = useCallback(async () => {
-    try {
-      await oauth2Axios[method](action);
-    } catch (err) {
-      /* */
+    if (!stateDeterminationDone) {
+      alert('이전 상태를 받아오는 중입니다 :) 잠시 후 다시 시도해주세요.');
+      return;
     }
-  }, [action, method]);
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
+    }
+    debounceRef.current = setTimeout(async () => {
+      const willChangeButtonState = !clickedButton;
+      if (cachedClickedState.current === willChangeButtonState) {
+        return;
+      }
+      cachedClickedState.current = willChangeButtonState;
+
+      try {
+        await oauth2Axios[method](action);
+      } catch (err) {
+        /* */
+      }
+    }, 500);
+
+    setClickedButton((prev) => !prev);
+  }, [action, clickedButton, method, stateDeterminationDone]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
     async (e) => {
       e.preventDefault();
       e.currentTarget.querySelector('button')?.blur();
 
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-        debounceRef.current = null;
-      }
-      debounceRef.current = setTimeout(async () => {
-        const willChangeButtonState = !clickedButton;
-        if (cachedClickedState.current === willChangeButtonState) {
-          console.log('같아서 요청 발생 안함', {
-            cachedClickedState: cachedClickedState.current,
-            clickedButton,
-          });
-          return;
-        }
-        cachedClickedState.current = willChangeButtonState;
-        await request();
-      }, 2000);
-
-      setClickedButton((prev) => !prev);
+      await request();
     },
-    [clickedButton, request],
+    [request],
   );
 
   useEffect(() => {
@@ -111,11 +113,14 @@ const ToggleButton = observer<Props>(({ api, word, Icon, target }) => {
           },
         });
         setClickedButton(true);
+        cachedClickedState.current = true;
       } catch (err) {
+        // Github determination API's 404 response is mean by that check result is 'false'
         setClickedButton(false);
+        cachedClickedState.current = false;
       }
+      setStateDeterminationDone(true);
     })();
-    setStateDeterminationDone(true);
   });
 
   return (

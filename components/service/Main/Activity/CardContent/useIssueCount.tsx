@@ -13,7 +13,7 @@ export default function useForkContentState(activity: OthersEvent): IssueCount {
     if (issueCountReqDone) {
       return;
     }
-    console.log('이슈 패치 발생');
+
     try {
       (async () => {
         await axios
