@@ -12,24 +12,24 @@ dayjs.extend(relativeTime);
 type SingleCardProps = {
   activity: OthersEvent;
 };
-export const SingleCard = observer<SingleCardProps>(({ activity }) => {
-  return (
-    <S.Card>
+export const SingleCard = observer<SingleCardProps>(({ activity }) => (
+  <S.Card>
+    <a href={activity.actor.login}>
       <S.Avatar size="32px" avatarUrl={activity.actor.avatar_url} />
-      <S.Content>
-        <CardHeader activity={activity} cardCount={1} />
-        <S.Ago title={new Date(activity.created_at).toLocaleString('ko-KR')}>
-          {dayjs(activity.created_at)
-            .fromNow()
-            .replaceAll('a day ago', 'yesterday')}
-        </S.Ago>
-        <S.Box>
-          <CardContent.Repository activity={activity} />
-        </S.Box>
-      </S.Content>
-    </S.Card>
-  );
-});
+    </a>
+    <S.Content>
+      <CardHeader activity={activity} cardCount={1} />
+      <S.Ago title={new Date(activity.created_at).toLocaleString('ko-KR')}>
+        {dayjs(activity.created_at)
+          .fromNow()
+          .replaceAll('a day ago', 'yesterday')}
+      </S.Ago>
+      <S.Box>
+        <CardContent.Repository activity={activity} />
+      </S.Box>
+    </S.Content>
+  </S.Card>
+));
 
 type MultiCardProps = {
   activities: OthersEvent[];
@@ -43,7 +43,9 @@ export const MultiCard = observer<MultiCardProps>(({ activities }) => {
 
   return (
     <S.Card>
-      <S.Avatar size="32px" avatarUrl={activities[0].actor.avatar_url} />
+      <a href={activities[0].actor.login}>
+        <S.Avatar size="32px" avatarUrl={activities[0].actor.avatar_url} />
+      </a>
       <S.Content>
         <S.Header>
           <div>
