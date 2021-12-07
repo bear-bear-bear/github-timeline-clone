@@ -4,6 +4,7 @@ import useStore from '@hooks/useStore';
 import Loading from '@components/common/Loading';
 import Star from '@components/common/Star';
 import Language from '@components/common/Language';
+import { github } from '@lib/oauth';
 import type { Language as LanguageType } from '@lib/getLanguageColor';
 import type { SearchedRepository } from '@typings/oauth';
 import * as S from './styles';
@@ -38,6 +39,9 @@ const ExploreRepositories = observer(() => {
       {hotRepository.hottestRepos.map((repo) => (
         <RepoItem repo={repo} key={repo.id} />
       ))}
+      <S.BottomLink href={github.HOST + '/explore'}>
+        Explore more →
+      </S.BottomLink>
     </S.Container>
   );
 });

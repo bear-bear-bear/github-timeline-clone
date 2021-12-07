@@ -46,3 +46,15 @@ export const Item = styled.article`
     color: ${({ theme }) => theme.color['gray-5']};
   }
 `;
+
+export const BottomLink = styled.a`
+  word-break: break-all;
+  overflow-wrap: break-word;
+  font-size: 12px;
+  color: ${({ theme }) => theme.color['gray-5']};
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.color['blue-0']};
+  }
+`;
