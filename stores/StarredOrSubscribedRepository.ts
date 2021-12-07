@@ -69,16 +69,17 @@ export default class StarredOrSubscribedRepositoryStore {
         .get<SimpleRepository[]>(github.API_HOST + endpoint)
         .then(({ data }) => data);
 
-    try {
-      const uniqueBy = (arr: any[]) =>
-        arr.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
+    const uniqueBy = <T extends { id: number }>(arr: T[]) => {
+      return arr.filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i);
+    };
 
+    try {
       this.repos = yield Promise.all([
         getReposRequest('/user/starred'),
         getReposRequest('/user/subscriptions'),
       ]).then(
         ([starredRepositoriesByLatest, subscribedRepositoriesByOldest]) => {
-          return uniqueBy([
+          return uniqueBy<SimpleRepository>([
             ...starredRepositoriesByLatest,
             ...subscribedRepositoriesByOldest.reverse(),
           ]);
