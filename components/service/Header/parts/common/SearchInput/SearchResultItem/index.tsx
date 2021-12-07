@@ -3,22 +3,25 @@ import type { SimpleRepository } from '@typings/oauth';
 import { github } from '@lib/oauth';
 import Icon from '../Icon';
 import * as S from './styles';
+import useStore from '@hooks/useStore';
 
-type SearchInfo = {
-  searchWord: string;
-};
+const TopItem = observer(() => {
+  const { starredOrSubscribedRepository } = useStore();
 
-const TopItem = observer(({ searchWord }: SearchInfo) => {
   return (
     <S.Item>
       <S.LinkWrapper
-        href={`${github.HOST}/search?q=${encodeURIComponent(searchWord)}`}
+        href={`${github.HOST}/search?q=${encodeURIComponent(
+          starredOrSubscribedRepository.searchWord,
+        )}`}
         rel="noopener noreferrer"
       >
         <S.IconWrapper>
           <Icon.Search />
         </S.IconWrapper>
-        <S.Name className="repository-item__name">{searchWord}</S.Name>
+        <S.Name className="repository-item__name">
+          {starredOrSubscribedRepository.searchWord}
+        </S.Name>
         <S.Tooltip className="repository-item__tooltip" alwaysOn>
           All Github
         </S.Tooltip>

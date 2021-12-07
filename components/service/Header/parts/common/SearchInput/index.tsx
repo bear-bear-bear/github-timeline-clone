@@ -1,4 +1,5 @@
 import { ChangeEvent, FocusEvent, useCallback, useState } from 'react';
+import { runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
@@ -11,11 +12,12 @@ const SearchInput = observer(() => {
   const { starredOrSubscribedRepository } = useStore();
   const [isInputSpread, setIsInputSpread] = useState(false);
   const [isMouseOnResultList, setIsMouseOnResultList] = useState(false);
-  const [searchWord, setSearchWord] = useState('');
 
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setSearchWord(e.target.value);
-  }, []);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    runInAction(
+      () => (starredOrSubscribedRepository.searchWord = e.target.value),
+    );
+  };
 
   const handleInputClick = async () => {
     if (starredOrSubscribedRepository.state === 'init') {
@@ -53,13 +55,12 @@ const SearchInput = observer(() => {
           onBlur={handleInputBlur}
           onChange={handleInputChange}
           onClick={handleInputClick}
-          value={searchWord}
+          value={starredOrSubscribedRepository.searchWord}
         />
         {!isInputSpread && <Icon.KeySlash />}
       </S.Label>
       {isInputSpread && (
         <SearchResultList
-          searchWord={searchWord}
           onMouseEnter={toggleResultListHoverState}
           onMouseLeave={toggleResultListHoverState}
         />

@@ -9,6 +9,7 @@ export default class StarredOrSubscribedRepositoryStore {
   repos: SimpleRepository[] = [];
   state: FetchState = 'init';
   login: User['login'] = '';
+  searchWord = '';
   SEARCH_RESULT_COUNT = 7;
 
   constructor(rootStore: RootStore) {
@@ -33,8 +34,8 @@ export default class StarredOrSubscribedRepositoryStore {
     return [...myRepos, ...othersRepos];
   }
 
-  findReposByCharTokens(searchWord: string) {
-    const charTokens = searchWord.split('').filter((v) => v !== ' ');
+  get reposByCharTokens() {
+    const charTokens = this.searchWord.split('').filter((v) => v !== ' ');
 
     return this.repos
       .filter((repo) => {
