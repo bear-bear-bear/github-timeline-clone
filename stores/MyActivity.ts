@@ -23,14 +23,14 @@ export default class MyActivityStore {
     const hiddenEvents = ['CreateEvent', 'PushEvent', 'WatchEvent'];
 
     const WEEK = 7 * 24 * 60 * 60 * 1000;
-    const before3Weeks = new Date(Date.now() - 3 * WEEK);
+    const before6Weeks = new Date(Date.now() - 6 * WEEK);
 
     return this.activities
       .filter(
         (activity) =>
           activity.type &&
           !hiddenEvents.includes(activity.type) &&
-          new Date(activity.created_at as string) > before3Weeks,
+          new Date(activity.created_at as string) > before6Weeks,
       )
       .slice(0, RETURN_COUNT);
   }
