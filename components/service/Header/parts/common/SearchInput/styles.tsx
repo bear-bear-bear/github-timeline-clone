@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import media from '@globalStyles/media';
+import { css } from '@emotion/react';
+import type { Theme } from '@emotion/react';
 
 export const Container = styled.article`
   position: relative;
@@ -11,7 +13,28 @@ export const Label = styled.label`
   align-items: center;
 `;
 
-export const Input = styled.input`
+const inputSpreadStyle = ({ theme }: { theme: Theme }) => css`
+  background-color: ${theme.color['gray-10']};
+  border: 1px solid ${theme.color['blue-1']};
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &::placeholder {
+    color: ${theme.color['gray-5']};
+  }
+
+  ${media.md} {
+    width: 40vw;
+  }
+
+  ${media.lg} {
+    width: 45vw;
+    max-width: 33.875rem;
+  }
+`;
+
+export const Input = styled.input<{ isSpread: boolean }>`
   width: 100%;
   height: 30px;
   outline: none;
@@ -27,31 +50,10 @@ export const Input = styled.input`
     letter-spacing: 0.2px;
   }
 
-  &:focus {
-    background-color: ${({ theme }) => theme.color['gray-10']};
-    border: 1px solid ${({ theme }) => theme.color['blue-1']};
-    border-bottom: none;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-
-    &::placeholder {
-      color: ${({ theme }) => theme.color['gray-5']};
-    }
-  }
-
   ${media.md} {
     width: 272px;
     transition: width 0.2s ease-in-out;
-
-    &:focus {
-      width: 40vw;
-    }
   }
 
-  ${media.lg} {
-    &:focus {
-      width: 45vw;
-      max-width: 33.875rem;
-    }
-  }
+  ${({ isSpread }) => isSpread && inputSpreadStyle}
 `;

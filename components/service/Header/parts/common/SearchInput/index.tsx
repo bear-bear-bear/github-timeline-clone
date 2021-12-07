@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FocusEvent, useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStore from '@hooks/useStore';
 import useUser from '@hooks/useUser';
@@ -9,15 +9,12 @@ import * as S from './styles';
 const SearchInput = observer(() => {
   const user = useUser();
   const { starredOrSubscribedRepository } = useStore();
-  const [isInputFocus, setIsInputFocus] = useState<boolean>(false);
-  const [searchWord, setSearchWord] = useState<string>('');
+  const [isInputSpread, setIsInputSpread] = useState(false);
+  const [isMouseOnResultList, setIsMouseOnResultList] = useState(false);
+  const [searchWord, setSearchWord] = useState('');
 
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchWord(e.target.value);
-  }, []);
-
-  const toggleInputFocusState = useCallback(() => {
-    setIsInputFocus((prev) => !prev);
   }, []);
 
   const handleInputClick = async () => {
@@ -26,20 +23,47 @@ const SearchInput = observer(() => {
     }
   };
 
+  const handleInputFocus = useCallback(() => {
+    setIsInputSpread(true);
+  }, []);
+
+  const handleInputBlur = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      if (isMouseOnResultList) {
+        e.currentTarget.focus();
+        return;
+      }
+
+      setIsInputSpread(false);
+    },
+    [isMouseOnResultList],
+  );
+
+  const toggleResultListHoverState = useCallback(() => {
+    setIsMouseOnResultList((prev) => !prev);
+  }, []);
+
   return (
     <S.Container>
       <S.Label>
         <S.Input
           placeholder="Search or jump to…"
-          onFocus={toggleInputFocusState}
-          onBlur={toggleInputFocusState}
+          isSpread={isInputSpread}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           onChange={handleInputChange}
           onClick={handleInputClick}
           value={searchWord}
         />
-        {!isInputFocus && <Icon.KeySlash />}
+        {!isInputSpread && <Icon.KeySlash />}
       </S.Label>
-      {isInputFocus && <SearchResultList searchWord={searchWord} />}
+      {isInputSpread && (
+        <SearchResultList
+          searchWord={searchWord}
+          onMouseEnter={toggleResultListHoverState}
+          onMouseLeave={toggleResultListHoverState}
+        />
+      )}
     </S.Container>
   );
 });
